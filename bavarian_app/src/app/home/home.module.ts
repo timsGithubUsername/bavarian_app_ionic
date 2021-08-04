@@ -18,6 +18,7 @@ import {TranslateModule} from "@ngx-translate/core";
     TranslateModule,
     TranslateModule,
     TranslateModule,
+    TranslateModule,
     TranslateModule
   ],
   declarations: [HomePage]

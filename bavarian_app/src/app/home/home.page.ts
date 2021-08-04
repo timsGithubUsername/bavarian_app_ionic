@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +7,7 @@ import {TranslateModule} from "@ngx-translate/core";
 })
 
 export class HomePage {
-  image: string = 'https://www.ntb.de/wp-content/uploads/2019/11/placeholder-image-icon-21.jpg';
+  image: string = 'https://www.ntb.de/wp-content/uploads/2019/11/placeholder-image-icon-21.jpg'; //todo mock
   constructor() {
   }
 

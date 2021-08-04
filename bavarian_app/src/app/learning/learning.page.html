@@ -1,9 +1,59 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>learning</ion-title>
+    <ion-title>{{ 'LEARNING.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div>
+    <ion-img [src]="image"></ion-img>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          <h2>{{ bayrisch }}</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          {{ deutsch }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" size="large" shape="round">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" size="small" shape="round" fill="outline">
+          <ion-icon slot="icon-only" name="play-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" size="small" shape="round" fill="outline">
+          <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-progress-bar value="0.75"></ion-progress-bar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
