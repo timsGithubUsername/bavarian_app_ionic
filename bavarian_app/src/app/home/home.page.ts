@@ -35,6 +35,6 @@ export class HomePage {
   //todo get array of vocable elements
   //todo this is for core, this should be modified later to get array of lectures!
   responseTest(){
-    this.router.navigate(['test'])
+    this.router.navigate(['quiz'])
   }
 }

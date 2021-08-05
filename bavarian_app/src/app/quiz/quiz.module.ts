@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TestPageRoutingModule } from './test-routing.module';
+import { QuizPageRoutingModule } from './quiz-routing.module';
 
-import { TestPage } from './test.page';
+import { QuizPage } from './quiz.page';
 import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
@@ -14,9 +14,9 @@ import {TranslateModule} from "@ngx-translate/core";
         CommonModule,
         FormsModule,
         IonicModule,
-        TestPageRoutingModule,
+        QuizPageRoutingModule,
         TranslateModule
     ],
-  declarations: [TestPage]
+  declarations: [QuizPage]
 })
-export class TestPageModule {}
+export class QuizPageModule {}
