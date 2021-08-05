@@ -1,10 +1,13 @@
 {
   "HOME": {
-    "TITLE": "Willkommen in Bayern!",
+    "TITLE": "Welcome to Bavaria!",
     "LEARNING_BTN": "Lernen",
     "TEST_BTN": "Abfragen"
   },
   "LEARNING": {
     "TITLE": "Lernen"
+  },
+  "TEST": {
+    "TITLE": "Test"
   }
 }

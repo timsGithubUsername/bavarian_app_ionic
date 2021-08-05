@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./learning.page.scss'],
 })
 export class LearningPage implements OnInit {
-  image: string = 'https://www.ntb.de/wp-content/uploads/2019/11/placeholder-image-icon-21.jpg'; //todo mock
+  image: string = 'assets/img/img_not_found.jpg'; //todo mock
   bayrisch: string = 'servus'; //todo mock
   deutsch: string = 'hallo'; //todo mock
+  count: string = '8/12'; //todo mock
   constructor() { }
 
   ngOnInit() {
