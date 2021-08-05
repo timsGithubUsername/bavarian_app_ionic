@@ -1,0 +1,7 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "bavarian_app",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+  "linuxAndroidStudioPath": "/home/tim/idea-IU-202.7660.26/bin/idea.sh"
+}
