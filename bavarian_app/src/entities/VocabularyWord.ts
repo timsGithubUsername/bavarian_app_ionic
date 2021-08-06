@@ -32,6 +32,11 @@ export interface VocabularyWord {
    * Returns the category of the vocabulary.
    */
   getCategory():Category;
+
+  /**
+   * Returns the annotation of the vocabulary
+   */
+  getAnnotation():string;
 }
 
 export interface VocabularyWordMutable extends VocabularyWord{
