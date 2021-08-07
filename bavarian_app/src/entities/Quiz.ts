@@ -47,7 +47,7 @@ export interface Quiz{
 }
 
 
-export interface QuizMutable {
+export interface QuizMutable extends Quiz{
 
   /**
    * Sets all questions

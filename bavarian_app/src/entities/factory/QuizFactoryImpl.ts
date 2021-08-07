@@ -1,0 +1,94 @@
+import {QuizFactory} from "./QuizFactory.js";
+import {VocabularyWord} from "../VocabularyWord.js";
+import {QuizMutable} from "../Quiz.js";
+import {Category} from "../Category.js";
+import {Dialect} from "../Dialect.js";
+import {QuizWord} from "../QuizWord.js";
+import {QuizWordFactory} from "./QuizWordFactory.js";
+
+export class QuizFactoryImpl implements QuizFactory{
+
+  createQuiz(words: VocabularyWord[],quizWordFactory:QuizWordFactory): QuizMutable {
+    return new QuizImpl(words,4,quizWordFactory);
+  }
+
+}
+
+class QuizImpl implements QuizMutable{
+
+  private quizWords:QuizWord[];
+
+  private correctAnswers : number
+  private incorrectAnswers : number
+
+  constructor(words:VocabularyWord[],numberOfAnswers:number,quizWordFactory:QuizWordFactory) {
+
+    if(numberOfAnswers > words.length)numberOfAnswers = words.length;
+
+    this.correctAnswers = 0;
+    this.incorrectAnswers = 0;
+
+    /*
+    Create a QuizWord object for each word passed.
+     */
+    words.forEach((value ,index)  => {
+
+      let possibleWords = words;
+      let answerOptions:VocabularyWord[] = [];
+
+      possibleWords.splice(index,1,);
+
+      for(let i = numberOfAnswers-1;i > 0;i--) {
+        let randomIndex = Math.random() * possibleWords.length
+        answerOptions.push(possibleWords[randomIndex]);
+        possibleWords.splice(randomIndex,1);
+      }
+
+      answerOptions.push(value);
+      let currentQuizWord = quizWordFactory.createQuizWord(value,answerOptions)
+      currentQuizWord.shuffle();
+      this.quizWords.push(currentQuizWord);
+    })
+
+  }
+
+  getCategory(): Category {
+    return this.quizWords[0].getWord().getCategory();
+  }
+
+  getDialect(): Dialect {
+    return this.quizWords[0].getWord().getDialectWord().getDialect();
+  }
+
+  getNumberOfCorrectAnswers(): number {
+    return this.correctAnswers;
+  }
+
+  getNumberOfFalseAnswers(): number {
+    return this.incorrectAnswers;
+  }
+
+  getNumberOfRemainingQuestions(): number {
+    return this.quizWords.length - (this.correctAnswers + this.incorrectAnswers);
+  }
+
+  getPercentage(): number {
+    if(this.correctAnswers === 0){
+      return 0;
+    }else{
+      return this.correctAnswers / (this.correctAnswers + this.incorrectAnswers);
+    }
+  }
+
+  getQuizWords(): QuizWord[] {
+    return this.quizWords;
+  }
+
+  getSize(): number {
+    return this.quizWords.length;
+  }
+
+  setQuizWords(quizWords: QuizWord[]): void {
+    this.quizWords = quizWords;
+  }
+}
