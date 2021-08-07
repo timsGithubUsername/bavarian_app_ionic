@@ -29,12 +29,12 @@ export interface InteractorRequester {
    * Requests progress in a category
    * @param cat
    */
-  requestProgress(cat:Category):void;
+  requestProgressFromCategory(cat:Category):void;
 
   /**
    * Requests progress in all categories
    */
-  requestProgress()
+  requestProgressFromAllCategories();
 
   setCategoriesResponse(response:InteractorResponseCategories):void;
 
