@@ -36,6 +36,13 @@ export interface InteractorRequester {
    */
   requestProgressFromAllCategories();
 
+  /**
+   * Stores a new progress value for a certain category
+   * @param cat - Category for which the progress needs to be saved
+   * @param value - New progress to be saved
+   */
+  saveProgress(cat:Category,value:number);
+
   setCategoriesResponse(response:InteractorResponseCategories):void;
 
   setStudyResponse(response:InteractorResponseStudy):void;
