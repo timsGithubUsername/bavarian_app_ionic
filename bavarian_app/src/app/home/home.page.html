@@ -14,13 +14,13 @@
     <ion-grid>
       <ion-row>
         <ion-col class="ion-text-center">
-          <ion-button expand="block" (click)="requestLearning()">
+          <ion-button expand="block" (click)="requestCategories(0)">
             <ion-icon slot="start" name="school"></ion-icon>
             {{ 'HOME.LEARNING_BTN' | translate }}
           </ion-button>
         </ion-col>
         <ion-col class="ion-text-center">
-          <ion-button expand="block" (click)="requestTest()">
+          <ion-button expand="block" (click)="requestCategories(1)">
             <ion-icon slot="start" name="ear"></ion-icon>
             {{ 'HOME.TEST_BTN' | translate }}
           </ion-button>

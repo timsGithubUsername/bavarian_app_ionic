@@ -21,36 +21,32 @@ export class Controller {
   }
 
   //Response Objects
-  private responseStudyImpl: ResponseStudyImpl;
-  private responseCategoriesImpl: ResponseCategoriesImpl;
-  private responseProgressImpl: ResponseProgressImpl;
-  private responseQuizImpl: ResponseQuizImpl;
+  private responseStudyImpl = new ResponseStudyImpl();
+  private responseCategoriesImpl = new ResponseCategoriesImpl();
+  private responseProgressImpl = new ResponseProgressImpl();
+  private responseQuizImpl = new ResponseQuizImpl();
 
   constructor() {
-    //declare responser objects
-    this.responseStudyImpl = new ResponseStudyImpl();
-    this.responseCategoriesImpl = new ResponseCategoriesImpl();
-    this.responseProgressImpl = new ResponseProgressImpl();
-    this.responseQuizImpl = new ResponseQuizImpl();
   }
 
-  public requestAllCategories(){
-    Controller.interactorRequester.requestAllCategories();
+  public static requestAllCategories(){
+    // todo
+    // Controller.interactorRequester.requestAllCategories();
   }
 
-  public requestStudy(cat:Category){
+  public static requestStudy(cat:Category){
     Controller.interactorRequester.requestStudy(cat);
   }
 
-  public requestQuiz(cat:Category){
+  public static requestQuiz(cat:Category){
     Controller.interactorRequester.requestQuiz(cat);
   }
 
-  public requestProgressFromCategory(cat:Category){
+  public static requestProgressFromCategory(cat:Category){
       Controller.interactorRequester.requestProgressFromCategory(cat);
   }
 
-  public requestProgressFromAllCategories(){
+  public static requestProgressFromAllCategories(){
     Controller.interactorRequester.requestProgressFromAllCategories();
   }
 }
