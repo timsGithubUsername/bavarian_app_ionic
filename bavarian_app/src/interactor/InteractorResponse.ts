@@ -1,6 +1,6 @@
-import {Category} from "../entities/Category";
-import {VocabularyWord} from "../entities/VocabularyWord";
-import {Quiz} from "../entities/Quiz";
+import {Category} from "../entities/Category.js";
+import {VocabularyWord} from "../entities/VocabularyWord.js";
+import {Quiz} from "../entities/Quiz.js";
 
 export interface InteractorResponseCategories {
 

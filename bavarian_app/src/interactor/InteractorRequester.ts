@@ -1,10 +1,10 @@
-import {Category} from "../entities/Category";
+import {Category} from "../entities/Category.js";
 import {
   InteractorResponseCategories,
   InteractorResponseProgress,
   InteractorResponseQuiz,
   InteractorResponseStudy
-} from "./InteractorResponse";
+} from "./InteractorResponse.js";
 
 export interface InteractorRequester {
 
@@ -34,7 +34,14 @@ export interface InteractorRequester {
   /**
    * Requests progress in all categories
    */
-  requestProgress()
+  requestProgress();
+
+  /**
+   * Stores a new progress value for a certain category
+   * @param cat - Category for which the progress needs to be saved
+   * @param value - New progress to be saved
+   */
+  saveProgress(cat:Category,value:number);
 
   setCategoriesResponse(response:InteractorResponseCategories):void;
 
