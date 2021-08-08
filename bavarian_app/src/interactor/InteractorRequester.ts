@@ -1,40 +1,41 @@
 import {Category} from "../entities/Category";
-import {
-  InteractorResponseCategories,
-  InteractorResponseProgress,
-  InteractorResponseQuiz,
-  InteractorResponseStudy
-} from "./InteractorResponse";
+import {VocabularyWord} from "../entities/VocabularyWord";
+import {Quiz} from "../entities/Quiz";
 
 export interface InteractorRequester {
 
   /**
    * Requests all categories in the database
+   * @param response Called as soon as the request of a spezific study is finished
    */
-  requestAllCategories():void;
+  requestAllCategories(response:((cats:Category[]) => void)):void;
 
   /**
    * Requests the study for a category
    * @param cat
+   * @param response Called as soon as the request of a spezific study is finished
    */
-  requestStudy(cat:Category):void;
+  requestStudy(cat:Category, response:((study:VocabularyWord[]) => void)):void;
 
   /**
    * Requests a quiz for a category
    * @param cat
+   * @param response Called as soon as the request of a spezific quiz is finished
    */
-  requestQuiz(cat:Category):void;
+  requestQuiz(cat:Category, response:((quiz:Quiz)=>void)):void;
 
   /**
    * Requests progress in a category
    * @param cat
+   * @param response Called as soon as the request of the progress of a category is completed
    */
-  requestProgressFromCategory(cat:Category):void;
+  requestProgressFromCategory(cat:Category,response:((progress:number) => void)):void;
 
   /**
    * Requests progress in all categories
+   * @param response Called as soon as the request of the progress of all categories is completed
    */
-  requestProgressFromAllCategories();
+  requestProgressFromAllCategories(response:((progress:Map<Category,number>) => void));
 
   /**
    * Stores a new progress value for a certain category
@@ -42,12 +43,4 @@ export interface InteractorRequester {
    * @param value - New progress to be saved
    */
   saveProgress(cat:Category,value:number);
-
-  setCategoriesResponse(response:InteractorResponseCategories):void;
-
-  setStudyResponse(response:InteractorResponseStudy):void;
-
-  setQuizResponse(response:InteractorResponseQuiz):void;
-
-  setProgressResponse(response:InteractorResponseProgress):void;
 }
