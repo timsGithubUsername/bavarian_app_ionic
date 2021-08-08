@@ -4,6 +4,10 @@
     "LEARNING_BTN": "Lernen",
     "TEST_BTN": "Abfragen"
   },
+  "CATEGORIES": {
+    "TITLE": "Wähle eine Kategorie zum Lernen",
+    "LEVELPREFIX": "Level:"
+  },
   "LEARNING": {
     "TITLE": "Lernen"
   },

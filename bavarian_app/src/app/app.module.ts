@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -6,13 +6,14 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strings/', '.json');
 }
+export let AppInjector: Injector;
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,4 +50,11 @@ If i forget to delete it, you find this and the app is running fine ... delete i
   bootstrap: [AppComponent]
 })
 */
-export class AppModule {}
+
+export class AppModule {
+
+  constructor(private injector: Injector) {
+    //to get the Injector everywhere to use Services in Controller
+    AppInjector = this.injector;
+  }
+}
