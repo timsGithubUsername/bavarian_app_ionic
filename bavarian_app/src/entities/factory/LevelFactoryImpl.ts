@@ -1,5 +1,5 @@
-import {LevelFactory} from "./LevelFactory.js";
-import {LevelMutable} from "../Level.js";
+import {LevelFactory} from "./LevelFactory";
+import {LevelMutable} from "../Level";
 
 export class LevelFactoryImpl implements LevelFactory{
 
@@ -49,6 +49,10 @@ class LevelImpl implements LevelMutable {
    */
   setId(id: number): void {
     this.id = id;
+  }
+
+  getValues(): { id: number; iconPath: string } {
+    return {iconPath: this.getIconPath(), id: this.getId()};
   }
 
 }

@@ -1,4 +1,4 @@
-import {Level} from "./Level.js";
+import {Level} from "./Level";
 
 export interface Category{
 
@@ -16,6 +16,18 @@ export interface Category{
    * Returns the level of the category
    */
   getLevel():Level;
+
+  /**
+   * Returns the Values of the Category as an Object
+   */
+  getValues():{
+    name:string,
+    iconPath:string,
+    level:{
+      id:number,
+      iconPath:string
+    }
+  }
 
 }
 

@@ -1,5 +1,5 @@
 import {DialectWordFactory} from "./DialectWordFactory";
-import {Dialect} from "../Dialect";
+import {Dialect, Gender} from "../Dialect";
 import {DialectWordMutable} from "../DialectWord";
 
 export class DialectWordFactoryImpl implements DialectWordFactory{
@@ -65,6 +65,23 @@ class DialectWordImpl implements DialectWordMutable {
    */
   setWord(w: string): void {
     this.word = w;
+  }
+
+  getValues(): {
+    word: string;
+    dialect: {
+      name: string;
+      color: number;
+      gender: Gender;
+      info: string
+    };
+    pronunciationPath: string
+  } {
+    return {
+      dialect: this.getDialect().getValues(),
+      pronunciationPath: this.getPronunciationPath(),
+      word: this.getWord()
+    };
   }
 
 }

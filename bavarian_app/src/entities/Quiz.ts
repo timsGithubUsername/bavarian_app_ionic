@@ -1,4 +1,4 @@
-import {Category} from "./Category.js";
+import {Category} from "./Category";
 import {Dialect} from "./Dialect";
 import {QuizWord} from "./QuizWord";
 
@@ -44,6 +44,19 @@ export interface Quiz{
    */
   getQuizWords():QuizWord[];
 
+  /**
+   * Returns the values of Quiz as an Object.
+   */
+  getValues():{
+    size:number,
+    dialect:Dialect,
+    category:Category,
+    percentage:number,
+    numberOfCorrectAnswers:number,
+    numberOfIncorrectAnswers:number,
+    numberOfRemainingQuestions:number,
+    quizWords:QuizWord[]
+  };
 }
 
 
