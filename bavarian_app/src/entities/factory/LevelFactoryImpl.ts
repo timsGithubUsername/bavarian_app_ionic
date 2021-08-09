@@ -1,5 +1,5 @@
 import {LevelFactory} from "./LevelFactory";
-import {LevelMutable} from "../Level";
+import {LevelMutable, LevelValue} from "../Level";
 
 export class LevelFactoryImpl implements LevelFactory{
 
@@ -51,7 +51,7 @@ class LevelImpl implements LevelMutable {
     this.id = id;
   }
 
-  getValues(): { id: number; iconPath: string } {
+  getValues(): LevelValue {
     return {iconPath: this.getIconPath(), id: this.getId()};
   }
 

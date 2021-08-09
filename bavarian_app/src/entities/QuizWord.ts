@@ -1,4 +1,4 @@
-import {VocabularyWord} from "./VocabularyWord";
+import {VocabularyWord, VocabularyWordValue} from "./VocabularyWord";
 
 export interface QuizWord{
 
@@ -26,10 +26,12 @@ export interface QuizWord{
   /**
    * Returns the values of QuizWord as an Object.
    */
-  getValues():{
-    word:VocabularyWord,
-    answerOptions:VocabularyWord[]
-  };
+  getValues():QuizWordValue;
+}
+
+export interface QuizWordValue{
+  word:VocabularyWordValue,
+  answerOptions:VocabularyWordValue[]
 }
 
 export interface QuizWordMutable extends QuizWord {

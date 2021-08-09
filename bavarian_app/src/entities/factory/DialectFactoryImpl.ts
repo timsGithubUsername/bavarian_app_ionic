@@ -1,5 +1,5 @@
 import {DialectFactory} from "./DialectFactory";
-import {DialectMutable, Gender} from "../Dialect";
+import {DialectMutable, DialectValue, Gender} from "../Dialect";
 
 export class DialectFactoryImpl implements DialectFactory{
 
@@ -81,12 +81,7 @@ class DialectImpl implements DialectMutable {
     this.name = name;
   }
 
-  getValues(): {
-    name: string;
-    color: number;
-    gender: Gender;
-    info: string }
-  {
+  getValues(): DialectValue {
     return {
       color: this.getColor(),
       gender: this.getGender(),

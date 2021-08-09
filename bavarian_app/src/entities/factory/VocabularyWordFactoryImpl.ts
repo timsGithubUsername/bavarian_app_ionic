@@ -1,9 +1,8 @@
-import {VocabularyWordMutable} from "../VocabularyWord";
+import {VocabularyWordMutable, VocabularyWordValue} from "../VocabularyWord";
 import {Category} from "../Category";
 import {DialectWord} from "../DialectWord";
 import {TranslationWord} from "../TranslationWord";
 import {VocabularyWordFactory} from "./VocabularyWordFactory";
-import {Gender} from "../Dialect";
 
 export class VocabularyWordFactoryImpl implements VocabularyWordFactory {
 
@@ -136,33 +135,7 @@ class VocabularyWordImpl implements VocabularyWordMutable {
     this.annotation = a;
   }
 
-  getValues(): {
-    id: number;
-    dialectWord: {
-      word: string;
-      dialect: {
-        name: string;
-        color: number;
-        gender: Gender;
-        info: string };
-      pronunciationPath: string };
-    german: string;
-    translationWord: {
-      word: string;
-      language: {
-        word: string;
-        iconPath: string }
-    };
-    picturePath: string;
-    category: {
-      name: string;
-      iconPath: string;
-      level: {
-        id: number;
-        iconPath: string }
-    };
-    annotation: string
-  } {
+  getValues(): VocabularyWordValue{
     return {
       annotation: this.getAnnotation(),
       category: this.getCategory().getValues(),

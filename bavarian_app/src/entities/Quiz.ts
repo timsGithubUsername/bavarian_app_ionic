@@ -1,6 +1,6 @@
-import {Category} from "./Category";
-import {Dialect} from "./Dialect";
-import {QuizWord} from "./QuizWord";
+import {Category, CategoryValue} from "./Category";
+import {Dialect, DialectValue} from "./Dialect";
+import {QuizWord, QuizWordValue} from "./QuizWord";
 
 export interface Quiz{
 
@@ -47,16 +47,18 @@ export interface Quiz{
   /**
    * Returns the values of Quiz as an Object.
    */
-  getValues():{
-    size:number,
-    dialect:Dialect,
-    category:Category,
-    percentage:number,
-    numberOfCorrectAnswers:number,
-    numberOfIncorrectAnswers:number,
-    numberOfRemainingQuestions:number,
-    quizWords:QuizWord[]
-  };
+  getValues():QuizValue;
+}
+
+export interface QuizValue{
+  size:number,
+  dialect:DialectValue,
+  category:CategoryValue,
+  percentage:number,
+  numberOfCorrectAnswers:number,
+  numberOfIncorrectAnswers:number,
+  numberOfRemainingQuestions:number,
+  quizWords:QuizWordValue[]
 }
 
 
