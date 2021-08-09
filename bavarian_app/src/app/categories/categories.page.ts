@@ -12,6 +12,8 @@ export class CategoriesPage implements OnInit {
   //in which mode this page is opened. 0: learning, 1: quiz
   mode: number;
   categoryLevelMap: Map<Level, Category[]>;
+  levelData;
+  categoryData;
 
 
   constructor(private categoryService: CategoryService) { }
@@ -41,17 +43,14 @@ export class CategoriesPage implements OnInit {
     return this.categoryLevelMap.get(lvl);
   }
 
-  getIdFromLevel(lvl:Level){
-    return lvl.getId();
+  setLevelData(lvl:Level){
+    this.levelData = lvl.getValues();
   }
 
-  getNameFromCategory(cat:Category){
-    return cat.getName();
+  setCategoryData(cat:Category){
+    this.categoryData = cat.getValues();
   }
 
-  getIconPathFromCategory(cat:Category){
-    return cat.getIconPath();
-  }
 }
 
 
