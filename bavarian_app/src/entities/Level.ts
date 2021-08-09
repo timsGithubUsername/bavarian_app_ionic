@@ -10,6 +10,13 @@ export interface Level {
    */
   getIconPath():string;
 
+  /**
+   * Returns the values of Level as an Object.
+   */
+  getValues():{
+    id:number,
+    iconPath:string
+  };
 }
 
 export interface LevelMutable extends Level {

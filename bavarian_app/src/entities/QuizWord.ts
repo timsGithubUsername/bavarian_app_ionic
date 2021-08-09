@@ -1,4 +1,4 @@
-import {VocabularyWord} from "./VocabularyWord.js";
+import {VocabularyWord} from "./VocabularyWord";
 
 export interface QuizWord{
 
@@ -23,6 +23,13 @@ export interface QuizWord{
    */
   testAnswer(word:VocabularyWord):boolean;
 
+  /**
+   * Returns the values of QuizWord as an Object.
+   */
+  getValues():{
+    word:VocabularyWord,
+    answerOptions:VocabularyWord[]
+  };
 }
 
 export interface QuizWordMutable extends QuizWord {

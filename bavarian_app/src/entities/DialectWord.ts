@@ -1,4 +1,4 @@
-import {Dialect} from "./Dialect.js";
+import {Dialect, Gender} from "./Dialect";
 
 export interface DialectWord{
 
@@ -16,6 +16,20 @@ export interface DialectWord{
    * Returns the path of the sound file with the pronunciation of the word
    */
   getPronunciationPath():string;
+
+  /**
+   * Returns the values of DialectWord as an Object.
+   */
+  getValues():{
+    word:string,
+    dialect:{
+      name:string,
+      color:number,
+      gender:Gender,
+      info:string
+    },
+    pronunciationPath:string
+  };
 
 }
 

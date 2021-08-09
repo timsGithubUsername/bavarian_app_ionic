@@ -1,5 +1,5 @@
-import {Language} from "../Language.js";
-import {TranslationWordMutable} from "../TranslationWord.js";
+import {Language} from "../Language";
+import {TranslationWordMutable} from "../TranslationWord";
 
 export interface TranslationWordFactory {
 

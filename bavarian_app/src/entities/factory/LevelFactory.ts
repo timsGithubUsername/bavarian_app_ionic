@@ -1,4 +1,4 @@
-import {LevelMutable} from "../Level.js";
+import {LevelMutable} from "../Level";
 
 export interface LevelFactory {
 

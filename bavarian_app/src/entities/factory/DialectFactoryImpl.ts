@@ -1,5 +1,5 @@
-import {DialectFactory} from "./DialectFactory.js";
-import {DialectMutable, Gender} from "../Dialect.js";
+import {DialectFactory} from "./DialectFactory";
+import {DialectMutable, Gender} from "../Dialect";
 
 export class DialectFactoryImpl implements DialectFactory{
 
@@ -79,6 +79,20 @@ class DialectImpl implements DialectMutable {
    */
   setName(name: string): void {
     this.name = name;
+  }
+
+  getValues(): {
+    name: string;
+    color: number;
+    gender: Gender;
+    info: string }
+  {
+    return {
+      color: this.getColor(),
+      gender: this.getGender(),
+      info: this.getInfo(),
+      name: this.getName()
+    };
   }
 
 }

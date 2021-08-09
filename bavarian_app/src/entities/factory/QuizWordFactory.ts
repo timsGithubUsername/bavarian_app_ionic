@@ -1,5 +1,5 @@
-import {QuizWordMutable} from "../QuizWord.js";
-import {VocabularyWord} from "../VocabularyWord.js";
+import {QuizWordMutable} from "../QuizWord";
+import {VocabularyWord} from "../VocabularyWord";
 
 export interface QuizWordFactory {
 

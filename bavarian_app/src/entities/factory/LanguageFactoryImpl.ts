@@ -49,4 +49,8 @@ class LanguageImpl implements LanguageMutable {
     this.name = name;
   }
 
+  getValues(): { word: string; iconPath: string } {
+    return {iconPath: this.getIconPath(), word: this.getName()};
+  }
+
 }

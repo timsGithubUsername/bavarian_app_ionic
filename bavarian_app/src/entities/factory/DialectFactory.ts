@@ -1,4 +1,4 @@
-import {DialectMutable, Gender} from "../Dialect.js";
+import {DialectMutable, Gender} from "../Dialect";
 
 export interface DialectFactory {
 

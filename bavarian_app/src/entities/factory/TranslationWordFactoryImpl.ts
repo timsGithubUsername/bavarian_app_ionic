@@ -1,6 +1,6 @@
-import {TranslationWordFactory} from "./TranslationWordFactory.js";
-import {Language} from "../Language.js";
-import {TranslationWordMutable} from "../TranslationWord.js";
+import {TranslationWordFactory} from "./TranslationWordFactory";
+import {Language} from "../Language";
+import {TranslationWordMutable} from "../TranslationWord";
 
 export class TranslationWordFactoryImpl implements TranslationWordFactory {
 
@@ -51,6 +51,19 @@ class TranslationWordImpl implements TranslationWordMutable {
    */
   setLanguage(l: Language): void {
     this.language = l;
+  }
+
+  getValues(): {
+    word: string;
+    language: {
+      word: string;
+      iconPath: string
+    }
+  } {
+    return {
+      language: this.getLanguage().getValues(),
+      word: this.getWord()
+    };
   }
 
 }

@@ -1,4 +1,4 @@
-import {VocabularyWordMutable} from "../VocabularyWord.js";
+import {VocabularyWordMutable} from "../VocabularyWord";
 import {DialectWord} from "../DialectWord";
 import {TranslationWord} from "../TranslationWord";
 import {Category} from "../Category";
