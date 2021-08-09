@@ -1,9 +1,9 @@
 import {QuizFactory} from "./QuizFactory";
 import {VocabularyWord} from "../VocabularyWord";
-import {QuizMutable} from "../Quiz";
+import {QuizMutable, QuizValue} from "../Quiz";
 import {Category} from "../Category";
 import {Dialect} from "../Dialect";
-import {QuizWord} from "../QuizWord";
+import {QuizWord, QuizWordValue} from "../QuizWord";
 import {QuizWordFactory} from "./QuizWordFactory";
 
 export class QuizFactoryImpl implements QuizFactory{
@@ -92,15 +92,24 @@ class QuizImpl implements QuizMutable{
     this.quizWords = quizWords;
   }
 
-  getValues(): { size: number; dialect: Dialect; category: Category; percentage: number; numberOfCorrectAnswers: number; numberOfIncorrectAnswers: number; numberOfRemainingQuestions: number; quizWords: QuizWord[] } {
+
+
+  getValues(): QuizValue {
+    let that = this;
+    function getQuizWordsValues(): QuizWordValue[] {
+      let values: QuizWordValue[] = [];
+      that.getQuizWords().forEach(v => values.push(v.getValues()));
+      return values;
+    }
+
     return {
-      category: this.getCategory(),
-      dialect: this.getDialect(),
+      category: this.getCategory().getValues(),
+      dialect: this.getDialect().getValues(),
       numberOfCorrectAnswers: this.getNumberOfCorrectAnswers(),
       numberOfIncorrectAnswers: this.getNumberOfFalseAnswers(),
       numberOfRemainingQuestions: this.getNumberOfRemainingQuestions(),
       percentage: this.getPercentage(),
-      quizWords: this.getQuizWords(),
+      quizWords: getQuizWordsValues(),
       size: this.getSize()
     };
   }

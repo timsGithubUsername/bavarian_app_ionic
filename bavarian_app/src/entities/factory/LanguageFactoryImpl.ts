@@ -1,5 +1,5 @@
 import {LanguageFactory} from "./LanguageFactory";
-import {LanguageMutable} from "../Language";
+import {LanguageMutable, LanguageValue} from "../Language";
 
 export class LanguageFactoryImpl implements LanguageFactory{
 
@@ -49,7 +49,7 @@ class LanguageImpl implements LanguageMutable {
     this.name = name;
   }
 
-  getValues(): { word: string; iconPath: string } {
+  getValues(): LanguageValue {
     return {iconPath: this.getIconPath(), word: this.getName()};
   }
 

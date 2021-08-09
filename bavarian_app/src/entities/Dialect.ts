@@ -23,13 +23,15 @@ export interface Dialect{
   /**
    * Returns the values of Dialect as an Object
    */
-  getValues():{
-    name:string,
-    color:number,
-    gender:Gender,
-    info:string
-  }
+  getValues():DialectValue
 
+}
+
+export interface DialectValue{
+  name:string,
+  color:number,
+  gender:Gender,
+  info:string
 }
 
 export interface DialectMutable extends Dialect{

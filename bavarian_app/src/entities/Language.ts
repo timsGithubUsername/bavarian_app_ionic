@@ -13,10 +13,12 @@ export interface Language {
   /**
    * Returns the values of Language as an Object.
    */
-  getValues():{
-    word:string,
-    iconPath:string
-  };
+  getValues():LanguageValue;
+}
+
+export interface LanguageValue{
+  word:string,
+  iconPath:string
 }
 
 export interface LanguageMutable extends Language{

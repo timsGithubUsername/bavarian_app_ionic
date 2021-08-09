@@ -1,4 +1,4 @@
-import {Language} from "./Language";
+import {Language, LanguageValue} from "./Language";
 
 export interface TranslationWord {
 
@@ -15,13 +15,12 @@ export interface TranslationWord {
   /**
    * Returns the values of TranslationWord as an Object.
    */
-  getValues():{
-    word:string,
-    language:{
-      word:string,
-      iconPath:string
-    }
-  };
+  getValues():TranslationWordValue;
+}
+
+export interface TranslationWordValue{
+  word:string,
+  language:LanguageValue
 }
 
 export interface TranslationWordMutable extends TranslationWord{

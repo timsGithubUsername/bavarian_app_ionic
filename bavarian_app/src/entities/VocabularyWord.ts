@@ -1,7 +1,6 @@
-import {DialectWord} from "./DialectWord";
-import {TranslationWord} from "./TranslationWord";
-import {Category} from "./Category";
-import {Gender} from "./Dialect";
+import {DialectWord, DialectWordValue} from "./DialectWord";
+import {TranslationWord, TranslationWordValue} from "./TranslationWord";
+import {Category, CategoryValue} from "./Category";
 
 export interface VocabularyWord {
   /**
@@ -42,37 +41,17 @@ export interface VocabularyWord {
   /**
    * Returns the values of VocabularyWord as an Object.
    */
-  getValues():{
-    id:number,
-    dialectWord:{
-      word:string,
-      dialect:{
-        name:string,
-        color:number,
-        gender:Gender,
-        info:string
-      },
-      pronunciationPath:string
-    },
-    german:string,
-    translationWord:{
-      word:string,
-      language:{
-        word:string,
-        iconPath:string
-      }
-    },
-    picturePath:string,
-    category:{
-      name:string,
-      iconPath:string,
-      level:{
-        id:number,
-        iconPath:string
-      }
-    },
-    annotation:string
-  };
+  getValues():VocabularyWordValue;
+}
+
+export interface VocabularyWordValue{
+  id:number,
+  dialectWord:DialectWordValue,
+  german:string,
+  translationWord:TranslationWordValue,
+  picturePath:string,
+  category:CategoryValue,
+  annotation:string
 }
 
 export interface VocabularyWordMutable extends VocabularyWord{

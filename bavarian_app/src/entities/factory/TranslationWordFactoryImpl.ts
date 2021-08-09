@@ -1,6 +1,6 @@
 import {TranslationWordFactory} from "./TranslationWordFactory";
 import {Language} from "../Language";
-import {TranslationWordMutable} from "../TranslationWord";
+import {TranslationWordMutable, TranslationWordValue} from "../TranslationWord";
 
 export class TranslationWordFactoryImpl implements TranslationWordFactory {
 
@@ -53,13 +53,7 @@ class TranslationWordImpl implements TranslationWordMutable {
     this.language = l;
   }
 
-  getValues(): {
-    word: string;
-    language: {
-      word: string;
-      iconPath: string
-    }
-  } {
+  getValues(): TranslationWordValue {
     return {
       language: this.getLanguage().getValues(),
       word: this.getWord()

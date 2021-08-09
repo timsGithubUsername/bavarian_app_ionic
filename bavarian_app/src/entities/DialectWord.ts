@@ -1,4 +1,4 @@
-import {Dialect, Gender} from "./Dialect";
+import {Dialect, DialectValue} from "./Dialect";
 
 export interface DialectWord{
 
@@ -20,17 +20,14 @@ export interface DialectWord{
   /**
    * Returns the values of DialectWord as an Object.
    */
-  getValues():{
-    word:string,
-    dialect:{
-      name:string,
-      color:number,
-      gender:Gender,
-      info:string
-    },
-    pronunciationPath:string
-  };
+  getValues():DialectWordValue;
 
+}
+
+export interface DialectWordValue{
+  word:string,
+  dialect:DialectValue,
+  pronunciationPath:string
 }
 
 export interface DialectWordMutable extends DialectWord{

@@ -1,6 +1,6 @@
 import {CategoryFactory} from "./CategoryFactory";
 import {Level} from "../Level";
-import {CategoryMutable} from "../Category";
+import {CategoryMutable, CategoryValue} from "../Category";
 
 export class CategoryFactoryImpl implements CategoryFactory{
 
@@ -66,13 +66,7 @@ class CategoryImpl implements CategoryMutable{
     this.name = name;
   }
 
-  getValues():{
-    name: string;
-    iconPath: string;
-    level: {
-      id: number;
-      iconPath: string }
-  } {
+  getValues():CategoryValue {
     return {
       iconPath: this.getIconPath(),
       level: this.getLevel().getValues(),
