@@ -12,5 +12,6 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
+let x: Map<number,string> = new Map();
+let y: number[] = [];
 
-excel()
