@@ -27,15 +27,17 @@ export interface InteractorRequester {
   /**
    * Requests progress in a category
    * @param cat
+   * @param type Indicates which progress is to be returned
    * @param response Called as soon as the request of the progress of a category is completed
    */
-  requestProgressFromCategory(cat:Category,response:((progress:number) => void)):void;
+  requestProgressFromCategory(cat:Category,type:ProgressType,response:((progress:number) => void)):void;
 
   /**
    * Requests progress in all categories
+   * @param type Indicates which progress is to be returned
    * @param response Called as soon as the request of the progress of all categories is completed
    */
-  requestProgressFromAllCategories(response:((progress:Map<Category,number>) => void));
+  requestProgressFromAllCategories(type:ProgressType,response:((progress:Map<Category,number>) => void));
 
   /**
    * Stores a new progress value for a certain category
@@ -43,4 +45,10 @@ export interface InteractorRequester {
    * @param value - New progress to be saved
    */
   saveProgress(cat:Category,value:number);
+}
+
+
+export enum ProgressType{
+  Quiz,
+  Study
 }
