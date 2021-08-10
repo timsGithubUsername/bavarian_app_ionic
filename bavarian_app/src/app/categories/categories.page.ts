@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../services/category.service";
-import {Category} from "../../entities/Category";
-import {Level} from "../../entities/Level";
+import {CategoryValue} from "../../entities/Category";
+import {LevelValue} from "../../entities/Level";
 
 @Component({
   selector: 'app-categories',
@@ -11,10 +11,7 @@ import {Level} from "../../entities/Level";
 export class CategoriesPage implements OnInit {
   //in which mode this page is opened. 0: learning, 1: quiz
   mode: number;
-  categoryLevelMap: Map<Level, Category[]>;
-  levelData;
-  categoryData;
-
+  categoryLevelMap: Map<LevelValue, CategoryValue[]>;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -26,11 +23,11 @@ export class CategoriesPage implements OnInit {
   /**
    * get all levels from Map and sort them by id
    */
-  getCategoryLevels():Level[]{
+  getCategoryLevels():LevelValue[]{
     //get levels
     let keys = Array.from(this.categoryLevelMap.keys());
     //sort them
-    keys.sort((a, b) => a.getId() - b.getId());
+    keys.sort((a, b) => a.id - b.id);
 
     return keys;
   }
@@ -39,16 +36,8 @@ export class CategoriesPage implements OnInit {
    * get all categories from one level
    * @param lvl the level
    */
-  getCategoriesFromLevel(lvl:Level):Category[]{
+  getCategoriesFromLevel(lvl:LevelValue):CategoryValue[]{
     return this.categoryLevelMap.get(lvl);
-  }
-
-  setLevelData(lvl:Level){
-    this.levelData = lvl.getValues();
-  }
-
-  setCategoryData(cat:Category){
-    this.categoryData = cat.getValues();
   }
 
 }

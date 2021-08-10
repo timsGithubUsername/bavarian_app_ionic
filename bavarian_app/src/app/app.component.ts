@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {AppInjector} from "./app.module";
+import {ControllerService} from "./services/controller/controller.service";
+import {TestInteractor} from "./for_test/TestInteractor";
 
 @Component({
   selector: 'app-root',
@@ -8,15 +11,24 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class AppComponent {
   constructor(public translate: TranslateService) {
+    this.setupLanguage();
+    this.buildProgramTree();
+  }
+
+  private setupLanguage(){
     //add translate Service
     //register languages
-    translate.addLangs(['de']);
+    this.translate.addLangs(['de']);
     //set default language
-    translate.setDefaultLang('de');
+    this.translate.setDefaultLang('de');
 
     //try to use system language
-    const browserLang = translate.getBrowserLang();
+    const browserLang = this.translate.getBrowserLang();
     //matcher for example with ['de','cz','ru']: /de|cz|ru/
-    translate.use(browserLang.match(/de/) ? browserLang : 'de');
+    this.translate.use(browserLang.match(/de/) ? browserLang : 'de');
+  }
+
+  private buildProgramTree(){
+    AppInjector.get(ControllerService).setInteractorRequester(new TestInteractor());
   }
 }
