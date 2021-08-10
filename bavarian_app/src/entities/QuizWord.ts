@@ -24,6 +24,11 @@ export interface QuizWord{
   testAnswer(word:VocabularyWord):boolean;
 
   /**
+   * Returns wether the test is correct,incorrect or untested
+   */
+  getTestResult():TestResult;
+
+  /**
    * Returns the values of QuizWord as an Object.
    */
   getValues():QuizWordValue;
@@ -32,6 +37,12 @@ export interface QuizWord{
 export interface QuizWordValue{
   word:VocabularyWordValue,
   answerOptions:VocabularyWordValue[]
+}
+
+export enum TestResult{
+  Incorrect,
+  Correct,
+  Untested
 }
 
 export interface QuizWordMutable extends QuizWord {

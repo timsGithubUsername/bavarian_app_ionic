@@ -1,6 +1,6 @@
 import {QuizWordFactory} from "./QuizWordFactory";
 import {VocabularyWord, VocabularyWordValue} from "../VocabularyWord";
-import {QuizWordMutable, QuizWordValue} from "../QuizWord";
+import {QuizWordMutable, QuizWordValue, TestResult} from "../QuizWord";
 
 export class QuizWordFactoryImpl implements QuizWordFactory {
   createQuizWord(word: VocabularyWord, answerOptions: VocabularyWord[]): QuizWordMutable {
@@ -13,10 +13,12 @@ class QuizWordImpl implements QuizWordMutable {
 
   private word:VocabularyWord;
   private answerOptions:VocabularyWord[];
+  private testResult:TestResult;
 
   constructor(word:VocabularyWord,answerOptions:VocabularyWord[]) {
     this.setWord(word);
     this.setAnswerOptions(answerOptions);
+    this.testResult = TestResult.Untested
   }
 
   /**
@@ -65,7 +67,9 @@ class QuizWordImpl implements QuizWordMutable {
    * @param word - The word to be tested
    */
   testAnswer(word: VocabularyWord): boolean {
-    return word.getId() === this.word.getId();
+    let ret = word.getId() === this.word.getId()
+    this.testResult = ret ? TestResult.Correct : TestResult.Incorrect
+    return ret;
   }
 
   getValues(): QuizWordValue {
@@ -78,6 +82,10 @@ class QuizWordImpl implements QuizWordMutable {
     return {
       answerOptions: getAnswerOptionValues(),
       word: this.getWord().getValues()};
+  }
+
+  getTestResult(): TestResult {
+    return this.testResult;
   }
 
 }

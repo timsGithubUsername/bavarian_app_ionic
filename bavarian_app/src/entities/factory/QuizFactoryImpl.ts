@@ -3,7 +3,7 @@ import {VocabularyWord} from "../VocabularyWord";
 import {QuizMutable, QuizValue} from "../Quiz";
 import {Category} from "../Category";
 import {Dialect} from "../Dialect";
-import {QuizWord, QuizWordValue} from "../QuizWord";
+import {QuizWord, QuizWordValue, TestResult} from "../QuizWord";
 import {QuizWordFactory} from "./QuizWordFactory";
 
 export class QuizFactoryImpl implements QuizFactory{
@@ -52,6 +52,22 @@ class QuizImpl implements QuizMutable{
 
   }
 
+  private updateTested():void{
+    let that = this;
+    this.correctAnswers = 0;
+    this.incorrectAnswers = 0;
+    this.getQuizWords().forEach(word => {
+      switch (word.getTestResult()){
+        case TestResult.Correct:
+          that.correctAnswers++;
+          break;
+        case TestResult.Incorrect:
+          that.incorrectAnswers++;
+          break;
+      }
+    })
+  }
+
   getCategory(): Category {
     return this.quizWords[0].getWord().getCategory();
   }
@@ -61,14 +77,17 @@ class QuizImpl implements QuizMutable{
   }
 
   getNumberOfCorrectAnswers(): number {
+    this.updateTested()
     return this.correctAnswers;
   }
 
   getNumberOfFalseAnswers(): number {
+    this.updateTested()
     return this.incorrectAnswers;
   }
 
   getNumberOfRemainingQuestions(): number {
+    this.updateTested()
     return this.quizWords.length - (this.correctAnswers + this.incorrectAnswers);
   }
 
