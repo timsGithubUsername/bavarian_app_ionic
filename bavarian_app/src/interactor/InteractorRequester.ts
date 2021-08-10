@@ -42,9 +42,10 @@ export interface InteractorRequester {
   /**
    * Stores a new progress value for a certain category
    * @param cat - Category for which the progress needs to be saved
+   * @param type Indicates which progress is to be saved
    * @param value - New progress to be saved
    */
-  saveProgress(cat:Category,value:number);
+  saveProgress(cat:Category,type:ProgressType,value:number);
 }
 
 
