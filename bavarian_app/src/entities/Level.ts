@@ -18,7 +18,8 @@ export interface Level {
 
 export interface LevelValue{
   id:number,
-  iconPath
+  iconPath:string,
+  level:Level
 }
 
 export interface LevelMutable extends Level {

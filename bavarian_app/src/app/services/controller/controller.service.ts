@@ -5,6 +5,8 @@ import {ResponseCategories} from "./ResponseCategories";
 import {ResponseProgressImpl} from "./ResponseProgressImpl";
 import {ResponseQuizImpl} from "./ResponseQuizImpl";
 import {Category} from "../../../entities/Category";
+import {VocabularyWord} from "../../../entities/VocabularyWord";
+import {Quiz} from "../../../entities/Quiz";
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +34,11 @@ export class ControllerService {
   }
 
   public requestStudy(cat:Category){
-
+    this.interactorRequester.requestStudy(cat,(words:VocabularyWord[]) => this.responseStudy.respondStudy(words));
   }
 
-
-
   public requestQuiz(cat:Category){
-
+    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.responseQuiz.respondQuiz(quiz));
   }
 
   public requestProgressFromCategory(cat:Category){

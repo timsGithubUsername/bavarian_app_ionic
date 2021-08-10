@@ -27,14 +27,16 @@ export class DataHodler {
 }
 
 export class LV implements LevelValue {
-  iconPath;
+  iconPath: string;
   id: number;
+  level: Level;
 }
 
 export class CV implements CategoryValue {
   iconPath: string;
   level: LevelValue;
   name: string;
+  category: Category;
 }
 
 export class Lvl implements Level {
@@ -54,6 +56,7 @@ export class Lvl implements Level {
     let lvl = new LV;
     lvl.id = this.getId();
     lvl.iconPath = this.getIconPath();
+    lvl.level = this;
 
     return lvl;
   }
@@ -81,6 +84,7 @@ export class Cat implements Category {
     cat.name = this.name;
     cat.level = this.level.getValues();
     cat.iconPath = this.imagePath;
+    cat.category = this;
 
     return cat;
   }

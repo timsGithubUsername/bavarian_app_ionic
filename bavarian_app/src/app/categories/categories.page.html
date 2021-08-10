@@ -13,7 +13,7 @@
   <div *ngFor="let level of getCategoryLevels()">
     <ion-list>
       <ion-list-header>{{ 'CATEGORIES.LEVELPREFIX' | translate }} {{ level.id }}</ion-list-header>
-        <ion-item *ngFor="let category of getCategoriesFromLevel(level)">
+        <ion-item *ngFor="let category of getCategoriesFromLevel(level)" button (click)="chooseCategory(category)">
           <ion-avatar slot="start">
             <img src="{{ category.iconPath }}" alt="image which describes the category more or less...">
           </ion-avatar>

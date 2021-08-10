@@ -27,7 +27,8 @@ export interface Category{
 export interface CategoryValue{
   name:string,
   iconPath:string,
-  level:LevelValue
+  level:LevelValue,
+  category:Category
 }
 
 export interface CategoryMutable extends Category{
