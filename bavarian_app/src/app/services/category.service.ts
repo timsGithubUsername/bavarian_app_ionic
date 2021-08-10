@@ -9,7 +9,10 @@ export class CategoryService {
   private gamemode:number;
   private categoryLevelMap:Map<LevelValue, CategoryValue[]>;
 
-  constructor() {  }
+  constructor() {
+    this.gamemode = -1;
+    this.categoryLevelMap = new Map<LevelValue, CategoryValue[]>();
+  }
 
   public setGamemode(gamemode:number):void{
     this.gamemode = gamemode;
