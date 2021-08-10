@@ -10,14 +10,14 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let level from getCategoryLevels()"> {{ setLevelData(level) }}
+  <div *ngFor="let level of getCategoryLevels()">
     <ion-list>
-      <ion-list-header>{{ 'CATEGORIES.LEVELPREFIX' | translate }} {{ levelData.id }}</ion-list-header>
-        <ion-item *ngFor="let category from getCategoriesFromLevel(level)"> {{ setCategoryData(category)}}
+      <ion-list-header>{{ 'CATEGORIES.LEVELPREFIX' | translate }} {{ level.id }}</ion-list-header>
+        <ion-item *ngFor="let category of getCategoriesFromLevel(level)">
           <ion-avatar slot="start">
-            <img src="{{ categoryData.iconPath }}" alt="image which describes the category more or less...">
+            <img src="{{ category.iconPath }}" alt="image which describes the category more or less...">
           </ion-avatar>
-          <ion-label>{{ categoryData.name }}</ion-label>
+          <ion-label>{{ category.name }}</ion-label>
         </ion-item>
     </ion-list>
   </div>

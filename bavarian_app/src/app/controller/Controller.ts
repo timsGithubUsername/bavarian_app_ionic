@@ -12,41 +12,34 @@ export class Controller {
   //set Interactor Requster
   public setInteractorRequestor(interactorRequester: InteractorRequester) {
     Controller.interactorRequester = interactorRequester;
-
-    //set responsers
-    Controller.interactorRequester.setCategoriesResponse(this.responseCategoriesImpl);
-    Controller.interactorRequester.setProgressResponse(this.responseProgressImpl);
-    Controller.interactorRequester.setStudyResponse(this.responseStudyImpl);
-    Controller.interactorRequester.setQuizResponse(this.responseQuizImpl);
   }
 
   //Response Objects
-  private responseStudyImpl = new ResponseStudyImpl();
-  private responseCategoriesImpl = new ResponseCategoriesImpl();
-  private responseProgressImpl = new ResponseProgressImpl();
-  private responseQuizImpl = new ResponseQuizImpl();
+  private static responseStudyImpl = new ResponseStudyImpl();
+  private static responseCategoriesImpl = new ResponseCategoriesImpl();
+  private static responseProgressImpl = new ResponseProgressImpl();
+  private static responseQuizImpl = new ResponseQuizImpl();
 
   constructor() {
   }
 
   public static requestAllCategories(){
-    // todo
-    // Controller.interactorRequester.requestAllCategories();
+    Controller.interactorRequester.requestAllCategories((cats:Category[]) => Controller.responseCategoriesImpl.respondAllCategories(cats));
   }
 
   public static requestStudy(cat:Category){
-    Controller.interactorRequester.requestStudy(cat);
+
   }
 
   public static requestQuiz(cat:Category){
-    Controller.interactorRequester.requestQuiz(cat);
+
   }
 
   public static requestProgressFromCategory(cat:Category){
-      Controller.interactorRequester.requestProgressFromCategory(cat);
+
   }
 
   public static requestProgressFromAllCategories(){
-    Controller.interactorRequester.requestProgressFromAllCategories();
+
   }
 }
