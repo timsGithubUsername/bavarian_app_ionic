@@ -1,38 +1,27 @@
 import {LevelFactory} from "./LevelFactory";
-import {LevelMutable, LevelValue} from "../Level";
+import {LevelMutable} from "../Level";
+import {CategoryMutable} from "../Category";
 
 export class LevelFactoryImpl implements LevelFactory{
 
-  createLevel(id: number, iconPath: string): LevelMutable {
-    return new LevelImpl(id,iconPath);
+  createLevel(id: number, iconPath: string, categories:CategoryMutable[]): LevelMutable {
+    return new LevelImpl(id,iconPath,categories);
   }
 
 }
 
 class LevelImpl implements LevelMutable {
 
-  private id:number;
-  private iconPath:string;
+  id:number;
+  iconPath:string;
+  categories:CategoryMutable[];
 
-  constructor(id:number,iconPath:string) {
+  constructor(id:number,iconPath:string,categories:CategoryMutable[]) {
     this.setId(id);
     this.setIconPath(iconPath);
+    this.setCategories(categories);
   }
 
-
-  /**
-   * Returns the path of the icon of the level
-   */
-  getIconPath(): string {
-    return this.iconPath;
-  }
-
-  /**
-   * Returns the number of the level
-   */
-  getId(): number {
-    return this.id;
-  }
 
   /**
    * Sets the path of the icon of the level
@@ -51,8 +40,21 @@ class LevelImpl implements LevelMutable {
     this.id = id;
   }
 
-  getValues(): LevelValue {
-    return {iconPath: this.getIconPath(), id: this.getId()};
+  /**
+   * Add a new Category to the Level
+   * @param category
+   */
+  addCategory(category: CategoryMutable): void {
+    category.setLevel(this);
+    this.categories.push(category)
+  }
+
+  /**
+   * Sets all Categories which correspond to this level
+   * @param categories
+   */
+  setCategories(categories: CategoryMutable[]): void {
+    categories.forEach(cat => this.addCategory(cat))
   }
 
 }

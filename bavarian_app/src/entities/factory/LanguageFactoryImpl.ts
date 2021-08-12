@@ -1,5 +1,5 @@
 import {LanguageFactory} from "./LanguageFactory";
-import {LanguageMutable, LanguageValue} from "../Language";
+import {LanguageMutable} from "../Language";
 
 export class LanguageFactoryImpl implements LanguageFactory{
 
@@ -11,26 +11,12 @@ export class LanguageFactoryImpl implements LanguageFactory{
 
 class LanguageImpl implements LanguageMutable {
 
-  private iconPath:string;
-  private name:string;
+  iconPath:string;
+  name:string;
 
   constructor(name:string,iconPath:string) {
     this.setName(name);
     this.setIconPath(iconPath);
-  }
-
-  /**
-   * Returns the path of the icon of the language
-   */
-  getIconPath(): string {
-    return this.iconPath;
-  }
-
-  /**
-   * Returns the name of the language
-   */
-  getName(): string {
-    return this.name;
   }
 
   /**
@@ -47,10 +33,6 @@ class LanguageImpl implements LanguageMutable {
    */
   setName(name: string): void {
     this.name = name;
-  }
-
-  getValues(): LanguageValue {
-    return {iconPath: this.getIconPath(), word: this.getName()};
   }
 
 }

@@ -1,33 +1,22 @@
-import {Level, LevelValue} from "./Level";
+import {Level} from "./Level";
 
 export interface Category{
 
   /**
    * Returns the name of the category
    */
-  getName():string;
+  readonly name:string;
 
   /**
    * Returns the path of the category icon
    */
-  getIconPath():string;
+  readonly iconPath:string;
 
   /**
    * Returns the level of the category
    */
-  getLevel():Level;
+  readonly level:Level;
 
-  /**
-   * Returns the Values of the Category as an Object
-   */
-  getValues():CategoryValue
-
-}
-
-export interface CategoryValue{
-  name:string,
-  iconPath:string,
-  level:LevelValue
 }
 
 export interface CategoryMutable extends Category{

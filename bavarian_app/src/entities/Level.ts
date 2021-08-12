@@ -1,30 +1,30 @@
+import {Category, CategoryMutable} from "./Category";
+
 export interface Level {
 
   /**
    * Returns the number of the level
    */
-  getId():number;
+  readonly id:number;
 
   /**
    * Returns the path of the icon of the level
    */
-  getIconPath():string;
+  readonly iconPath:string;
+
 
   /**
-   * Returns the values of Level as an Object.
+   * Returns all Categories which correspond to this level
    */
-  getValues():LevelValue;
-}
+  readonly categories:Category[];
 
-export interface LevelValue{
-  id:number,
-  iconPath
 }
 
 export interface LevelMutable extends Level {
 
   /**
    * Sets the number of the level
+   * @param id
    */
   setId(id:number):void;
 
@@ -33,5 +33,17 @@ export interface LevelMutable extends Level {
    * @param path
    */
   setIconPath(path:string):void;
+
+  /**
+   * Sets all Categories which correspond to this level
+   * @param categories
+   */
+  setCategories(categories:CategoryMutable[]):void;
+
+  /**
+   * Add a new Category to the Level
+   * @param category
+   */
+  addCategory(category:CategoryMutable):void;
 
 }

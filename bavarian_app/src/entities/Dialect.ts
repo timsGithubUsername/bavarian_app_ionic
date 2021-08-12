@@ -3,35 +3,24 @@ export interface Dialect{
   /**
    * Returns the name of the dialect
    */
-  getName():string;
+  readonly name:string;
 
   /**
    * Returns the colour value of the dialect
    */
-  getColor():number;
+  readonly color:number;
 
   /**
    * Gives the gender of the reader from the dialect
    */
-  getGender():Gender;
+  readonly gender:Gender;
 
   /**
    * Returns an info about the dialect
    */
-  getInfo():string;
+  readonly info:string;
 
-  /**
-   * Returns the values of Dialect as an Object
-   */
-  getValues():DialectValue
 
-}
-
-export interface DialectValue{
-  name:string,
-  color:number,
-  gender:Gender,
-  info:string
 }
 
 export interface DialectMutable extends Dialect{
