@@ -6,6 +6,7 @@ import {Dialect} from "../../entities/Dialect";
 import {Language} from "../../entities/Language";
 import {Level} from "../../entities/Level";
 import {LevelBuilder} from "./LevelBuilder";
+import {VocabularyWordsBuilder} from "./VocabularyWordsBuilder";
 
 export class TestInteractor implements InteractorRequester {
 
@@ -14,6 +15,8 @@ export class TestInteractor implements InteractorRequester {
   }
 
   requestStudy(cat: Category, response: (study: VocabularyWord[]) => void): void {
+    let vwb = new VocabularyWordsBuilder();
+    response(vwb.vocabularyWords);
   }
 
   saveProgress(cat: Category, value: number) {

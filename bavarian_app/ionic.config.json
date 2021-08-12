@@ -1,7 +1,10 @@
 {
   "name": "bavarian_app",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

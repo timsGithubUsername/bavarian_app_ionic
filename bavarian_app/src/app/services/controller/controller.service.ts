@@ -3,6 +3,8 @@ import {InteractorRequester} from "../../../interactor/InteractorRequester";
 import {Category} from "../../../entities/Category";
 import {Level} from "../../../entities/Level";
 import {LevelResponse} from "./LevelResponse";
+import {VocabularyWord} from "../../../entities/VocabularyWord";
+import {StudyResponse} from "./StudyResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class ControllerService {
 
   //Response Objects
   private levelResponse = new LevelResponse();
+  private studyResponse = new StudyResponse();
 
   constructor() {
   }
@@ -27,7 +30,7 @@ export class ControllerService {
   }
 
   public requestStudy(cat:Category){
-
+    this.interactorRequester.requestStudy(cat, (vocWords:VocabularyWord[]) => this.studyResponse.respondStudy(vocWords));
   }
 
   public requestQuiz(cat:Category){

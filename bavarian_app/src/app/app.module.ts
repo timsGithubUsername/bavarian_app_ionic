@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {NativeAudio} from "@ionic-native/native-audio/ngx";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strings/', '.json');
@@ -31,7 +32,7 @@ export let AppInjector: Injector;
       }
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [NativeAudio, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 /* This was copied from a tutorial once. I dont think we need it, because default lang gets set in app.component.ts.

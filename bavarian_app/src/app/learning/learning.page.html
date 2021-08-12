@@ -8,62 +8,70 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-img [src]="image"></ion-img>
-  </div>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div class="ion-text-center">
-          <h2>{{ bayrisch }}</h2>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div class="ion-text-center">
-          {{ deutsch }}
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-      </ion-col>
-      <ion-col>
-        <ion-button expand="block" size="large" shape="round">
-          <ion-icon slot="icon-only" name="play"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" size="small" shape="round" fill="outline">
-          <ion-icon slot="icon-only" name="play-back"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-      </ion-col>
-      <ion-col>
-        <ion-button expand="block" size="small" shape="round" fill="outline">
-          <ion-icon slot="icon-only" name="play-forward"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-text>
-          {{ count }}
-        </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-progress-bar value="0.75"></ion-progress-bar>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-slides pager="false">
+    <ion-slide *ngFor="let vocabularyWord of vocabularyWords; let i = index">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+              <ion-img src="{{ vocabularyWord.picturePath }}"></ion-img>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <div>
+              <h2>{{ vocabularyWord.dialectWord }}</h2>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-center">
+              {{ vocabularyWord.translationWord }}
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" size="large" shape="round" (click)="playSound(vocabularyWord.pronunciationPath)">
+              <ion-icon slot="icon-only" name="play"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div *ngIf="i > 0">
+            <ion-button expand="block" size="small" shape="round" fill="outline">
+              <ion-icon slot="icon-only" name="play-back"></ion-icon>
+            </ion-button>
+            </div>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" size="small" shape="round" fill="outline">
+              <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-text>
+              {{ buildProgressBar(i) }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-progress-bar value="{{ progressBarProgress }}"></ion-progress-bar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

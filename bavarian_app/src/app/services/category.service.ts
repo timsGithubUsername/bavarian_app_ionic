@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Level} from "../../entities/Level";
+import {VocabularyWord} from "../../entities/VocabularyWord";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import {Level} from "../../entities/Level";
 export class CategoryService {
   private gamemode:number;
   private levels: Level[];
+  private vocabularyWords: VocabularyWord[];
 
   constructor() {
     this.gamemode = -1;
@@ -28,6 +30,14 @@ export class CategoryService {
 
   public getLevels():Level[]{
     return this.levels;
+  }
+
+  public setVocabulayWords(vocabularyWords:VocabularyWord[]){
+    this.vocabularyWords = vocabularyWords;
+  }
+
+  public getVocabulayWords():VocabularyWord[]{
+    return this.vocabularyWords;
   }
 
   private sortLevels(){
