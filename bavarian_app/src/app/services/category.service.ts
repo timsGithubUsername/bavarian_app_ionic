@@ -8,7 +8,7 @@ import {VocabularyWord} from "../../entities/VocabularyWord";
 export class CategoryService {
   private gamemode:number;
   private levels: Level[];
-  private vocabularyWords: VocabularyWord[];
+  private vocabularyWords: VocabularyWord[] = [];
 
   constructor() {
     this.gamemode = -1;

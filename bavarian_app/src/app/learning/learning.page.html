@@ -10,6 +10,20 @@
 <ion-content>
   <ion-slides pager="false">
     <ion-slide *ngFor="let vocabularyWord of vocabularyWords; let i = index">
+
+      <ion-fab vertical="center" horizontal="start" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <div class="div-1">
+          <ion-text class="ion-text-center">
+            {{ vocabularyWord.annotation }}
+          </ion-text>
+          </div>
+        </ion-fab-list>
+      </ion-fab>
+
       <ion-grid>
         <ion-row>
           <ion-col>
@@ -46,9 +60,9 @@
         <ion-row>
           <ion-col>
             <div *ngIf="i > 0">
-            <ion-button expand="block" size="small" shape="round" fill="outline">
-              <ion-icon slot="icon-only" name="play-back"></ion-icon>
-            </ion-button>
+              <ion-button expand="block" size="small" shape="round" fill="outline">
+                <ion-icon slot="icon-only" name="play-back"></ion-icon>
+              </ion-button>
             </div>
           </ion-col>
           <ion-col>

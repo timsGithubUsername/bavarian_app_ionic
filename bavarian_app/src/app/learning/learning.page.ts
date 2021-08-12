@@ -18,7 +18,7 @@ export class LearningPage implements OnInit {
   ngForIndex: number;
   numberOfVocabularyWords: number;
   progressBarProgress: number;
-  vocabularyWords: VocabularyWord[];
+  vocabularyWords: VocabularyWord[] = [];
 
   constructor(private nativeAudio: NativeAudio,
               private categoryService: CategoryService) {

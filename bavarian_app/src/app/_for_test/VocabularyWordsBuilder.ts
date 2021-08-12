@@ -19,7 +19,7 @@ export class VocabularyWordsBuilder {
         "german word "+i,
         "translation word "+i);
 
-      currentVocabularyWord.setAnnotation("test");
+      currentVocabularyWord.setAnnotation("test stuff der hier stehen könnte aber bin Fantasielos");
       currentVocabularyWord.setPronunciationPath("assets/audio/test_audio.mp3")
       currentVocabularyWord.setPicturePath("assets/img/img_not_found.jpg");
 
