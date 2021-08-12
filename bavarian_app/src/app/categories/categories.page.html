@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let level of getCategoryLevels()">
+  <div *ngFor="let level of levels">
     <ion-list>
       <ion-list-header>{{ 'CATEGORIES.LEVELPREFIX' | translate }} {{ level.id }}</ion-list-header>
         <ion-item *ngFor="let category of getCategoriesFromLevel(level)">

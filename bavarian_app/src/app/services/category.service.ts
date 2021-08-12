@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import {LevelValue} from "../../entities/Level";
-import {CategoryValue} from "../../entities/Category";
+import {Level} from "../../entities/Level";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
   private gamemode:number;
-  private categoryLevelMap:Map<LevelValue, CategoryValue[]>;
+  private levels: Level[];
 
   constructor() {
     this.gamemode = -1;
-    this.categoryLevelMap = new Map<LevelValue, CategoryValue[]>();
+    this.levels = [];
   }
 
   public setGamemode(gamemode:number):void{
@@ -22,11 +21,16 @@ export class CategoryService {
     return this.gamemode;
   }
 
-  public setCategoryLevelMap(categoryLevelMap:Map<LevelValue, CategoryValue[]>):void{
-    this.categoryLevelMap = categoryLevelMap;
+  public setLevels(levels: Level[]):void{
+    this.levels = levels;
+    this.sortLevels();
   }
 
-  public getCategoryLevelMap():Map<LevelValue, CategoryValue[]>{
-    return this.categoryLevelMap;
+  public getLevels():Level[]{
+    return this.levels;
+  }
+
+  private sortLevels(){
+    this.levels.sort((level1:Level, level2:Level) => level1.id - level2.id);
   }
 }

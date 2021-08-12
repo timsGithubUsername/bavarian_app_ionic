@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AppInjector} from "./app.module";
 import {ControllerService} from "./services/controller/controller.service";
-import {TestInteractor} from "./for_test/TestInteractor";
+import {TestInteractor} from "./_for_test/TestInteractor";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ import {TestInteractor} from "./for_test/TestInteractor";
 export class AppComponent {
   constructor(public translate: TranslateService) {
     this.setupLanguage();
-    this.buildProgramTree();
+    AppComponent.buildProgramTree();
   }
 
   private setupLanguage(){
@@ -28,7 +28,7 @@ export class AppComponent {
     this.translate.use(browserLang.match(/de/) ? browserLang : 'de');
   }
 
-  private buildProgramTree(){
+  private static buildProgramTree(){
     AppInjector.get(ControllerService).setInteractorRequester(new TestInteractor());
   }
 }

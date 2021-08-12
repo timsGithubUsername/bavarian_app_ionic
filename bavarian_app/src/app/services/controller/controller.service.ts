@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {InteractorRequester} from "../../../interactor/InteractorRequester";
-import {ResponseStudyImpl} from "./ResponseStudyImpl";
-import {ResponseCategories} from "./ResponseCategories";
-import {ResponseProgressImpl} from "./ResponseProgressImpl";
-import {ResponseQuizImpl} from "./ResponseQuizImpl";
 import {Category} from "../../../entities/Category";
+import {Level} from "../../../entities/Level";
+import {LevelResponse} from "./LevelResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -19,23 +17,18 @@ export class ControllerService {
   }
 
   //Response Objects
-  private responseStudy = new ResponseStudyImpl();
-  private responseCategories = new ResponseCategories();
-  private responseProgress = new ResponseProgressImpl();
-  private responseQuiz = new ResponseQuizImpl();
+  private levelResponse = new LevelResponse();
 
   constructor() {
   }
 
   public requestAllCategories(){
-    this.interactorRequester.requestAllCategories((cats:Category[]) => this.responseCategories.respondAllCategories(cats));
+    this.interactorRequester.requestAllLevels((lvls:Level[]) => this.levelResponse.respondAllLevels(lvls));
   }
 
   public requestStudy(cat:Category){
 
   }
-
-
 
   public requestQuiz(cat:Category){
 

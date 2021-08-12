@@ -54,6 +54,8 @@ class LevelImpl implements LevelMutable {
    * @param categories
    */
   setCategories(categories: CategoryMutable[]): void {
+    this.categories = [];
+
     categories.forEach(cat => this.addCategory(cat))
   }
 
