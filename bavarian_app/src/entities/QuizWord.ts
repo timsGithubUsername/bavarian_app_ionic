@@ -1,16 +1,16 @@
-import {VocabularyWord, VocabularyWordValue} from "./VocabularyWord";
+import {VocabularyWord} from "./VocabularyWord";
 
 export interface QuizWord{
 
   /**
    * Returns the word of the question
    */
-  getWord():VocabularyWord;
+  readonly word:VocabularyWord;
 
   /**
    * Returns the answer options to the question
    */
-  getAnswerOptions():VocabularyWord[];
+  readonly answerOptions:VocabularyWord[];
 
   /**
    * Shuffles through the answer options
@@ -27,16 +27,6 @@ export interface QuizWord{
    * Returns wether the test is correct,incorrect or untested
    */
   getTestResult():TestResult;
-
-  /**
-   * Returns the values of QuizWord as an Object.
-   */
-  getValues():QuizWordValue;
-}
-
-export interface QuizWordValue{
-  word:VocabularyWordValue,
-  answerOptions:VocabularyWordValue[]
 }
 
 export enum TestResult{

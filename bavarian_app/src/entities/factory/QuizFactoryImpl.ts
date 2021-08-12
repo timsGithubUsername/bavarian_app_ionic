@@ -1,9 +1,7 @@
 import {QuizFactory} from "./QuizFactory";
 import {VocabularyWord} from "../VocabularyWord";
-import {QuizMutable, QuizValue} from "../Quiz";
-import {Category} from "../Category";
-import {Dialect} from "../Dialect";
-import {QuizWord, QuizWordValue, TestResult} from "../QuizWord";
+import {QuizMutable} from "../Quiz";
+import {QuizWord, TestResult} from "../QuizWord";
 import {QuizWordFactory} from "./QuizWordFactory";
 
 export class QuizFactoryImpl implements QuizFactory{
@@ -16,7 +14,7 @@ export class QuizFactoryImpl implements QuizFactory{
 
 class QuizImpl implements QuizMutable{
 
-  private quizWords:QuizWord[];
+  quizWords:QuizWord[];
 
   private correctAnswers : number
   private incorrectAnswers : number
@@ -56,7 +54,7 @@ class QuizImpl implements QuizMutable{
     let that = this;
     this.correctAnswers = 0;
     this.incorrectAnswers = 0;
-    this.getQuizWords().forEach(word => {
+    this.quizWords.forEach(word => {
       switch (word.getTestResult()){
         case TestResult.Correct:
           that.correctAnswers++;
@@ -68,13 +66,6 @@ class QuizImpl implements QuizMutable{
     })
   }
 
-  getCategory(): Category {
-    return this.quizWords[0].getWord().getCategory();
-  }
-
-  getDialect(): Dialect {
-    return this.quizWords[0].getWord().getDialectWord().getDialect();
-  }
 
   getNumberOfCorrectAnswers(): number {
     this.updateTested()
@@ -99,37 +90,9 @@ class QuizImpl implements QuizMutable{
     }
   }
 
-  getQuizWords(): QuizWord[] {
-    return this.quizWords;
-  }
-
-  getSize(): number {
-    return this.quizWords.length;
-  }
 
   setQuizWords(quizWords: QuizWord[]): void {
     this.quizWords = quizWords;
   }
 
-
-
-  getValues(): QuizValue {
-    let that = this;
-    function getQuizWordsValues(): QuizWordValue[] {
-      let values: QuizWordValue[] = [];
-      that.getQuizWords().forEach(v => values.push(v.getValues()));
-      return values;
-    }
-
-    return {
-      category: this.getCategory().getValues(),
-      dialect: this.getDialect().getValues(),
-      numberOfCorrectAnswers: this.getNumberOfCorrectAnswers(),
-      numberOfIncorrectAnswers: this.getNumberOfFalseAnswers(),
-      numberOfRemainingQuestions: this.getNumberOfRemainingQuestions(),
-      percentage: this.getPercentage(),
-      quizWords: getQuizWordsValues(),
-      size: this.getSize()
-    };
-  }
 }

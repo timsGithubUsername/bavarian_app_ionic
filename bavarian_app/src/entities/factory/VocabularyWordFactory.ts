@@ -1,7 +1,4 @@
 import {VocabularyWordMutable} from "../VocabularyWord";
-import {DialectWord} from "../DialectWord";
-import {TranslationWord} from "../TranslationWord";
-import {Category} from "../Category";
 
 export interface VocabularyWordFactory {
 
@@ -11,14 +8,12 @@ export interface VocabularyWordFactory {
    * @param dialectWord - Word as a dialect of the object
    * @param germanWord - Word in High German from object
    * @param translationWord - Translation of the object
-   * @param category - Category of the object
    */
   createVocabularyWord(
     id:number,
-    dialectWord:DialectWord,
+    dialectWord:string,
     germanWord:string,
-    translationWord:TranslationWord,
-    category:Category
+    translationWord:string,
   ):VocabularyWordMutable;
 
 }

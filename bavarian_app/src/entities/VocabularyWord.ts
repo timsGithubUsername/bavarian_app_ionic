@@ -1,57 +1,44 @@
-import {DialectWord, DialectWordValue} from "./DialectWord";
-import {TranslationWord, TranslationWordValue} from "./TranslationWord";
-import {Category, CategoryValue} from "./Category";
-
 export interface VocabularyWord {
   /**
    * Returns the ID of the vocabulary.
    */
-  getId():number;
+  readonly id:number;
+
 
   /**
    * Returns the vocabulary in dialect.
    */
-  getDialectWord():DialectWord;
+  readonly dialectWord:string;
+
 
   /**
    * Returns the vocabulary in High German
    */
-  getGerman():string;
+  readonly german:string;
+
 
   /**
    * Returns the translation of the vocabulary
    */
-  getTranslation():TranslationWord;
+  readonly translationWord:string;
+
 
   /**
    * Returns the path of the image
    */
-  getPicturePath():string;
+  readonly picturePath:string;
 
   /**
-   * Returns the category of the vocabulary.
+   * Returns the path of the sound file with the pronunciation of the word
    */
-  getCategory():Category;
+  readonly pronunciationPath:string;
+
 
   /**
    * Returns the annotation of the vocabulary
    */
-  getAnnotation():string;
+  readonly annotation:string
 
-  /**
-   * Returns the values of VocabularyWord as an Object.
-   */
-  getValues():VocabularyWordValue;
-}
-
-export interface VocabularyWordValue{
-  id:number,
-  dialectWord:DialectWordValue,
-  german:string,
-  translationWord:TranslationWordValue,
-  picturePath:string,
-  category:CategoryValue,
-  annotation:string
 }
 
 export interface VocabularyWordMutable extends VocabularyWord{
@@ -61,7 +48,7 @@ export interface VocabularyWordMutable extends VocabularyWord{
    * Set the word in the dialect of the vocabulary.
    * @param word - The word to be set
    */
-  setDialectWord(word:DialectWord):void;
+  setDialectWord(word:string):void;
 
   /**
    * Puts the vocabulary word into High German
@@ -73,7 +60,7 @@ export interface VocabularyWordMutable extends VocabularyWord{
    * Sets the translation of the vocabulary
    * @param word - The word to be set
    */
-  setTranslation(word:TranslationWord):void;
+  setTranslation(word:string):void;
 
   /**
    * Sets the path of the image
@@ -82,10 +69,10 @@ export interface VocabularyWordMutable extends VocabularyWord{
   setPicturePath(path:string):void;
 
   /**
-   * Sets the category of the vocabulary
-   * @param cat - New category
+   * Sets the path of the sound file with the pronunciation of the word
+   * @param path
    */
-  setCategory(cat:Category):void;
+  setPronunciationPath(path:string):void;
 
   /**
    * Sets the annotation of the vocabulary

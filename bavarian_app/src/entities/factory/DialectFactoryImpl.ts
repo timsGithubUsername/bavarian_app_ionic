@@ -1,5 +1,5 @@
 import {DialectFactory} from "./DialectFactory";
-import {DialectMutable, DialectValue, Gender} from "../Dialect";
+import {DialectMutable, Gender} from "../Dialect";
 
 export class DialectFactoryImpl implements DialectFactory{
 
@@ -10,44 +10,16 @@ export class DialectFactoryImpl implements DialectFactory{
 }
 
 class DialectImpl implements DialectMutable {
-  private name:string;
-  private color:number;
-  private gender:Gender;
-  private info:string;
+  name:string;
+  color:number;
+  gender:Gender;
+  info:string;
 
   constructor(name:string,color:number,gender:Gender,info:string) {
     this.setName(name);
     this.setColor(color);
     this.setGender(gender);
     this.setInfo(info);
-  }
-
-  /**
-   * Returns the colour value of the dialect
-   */
-  getColor(): number {
-    return this.color;
-  }
-
-  /**
-   * Gives the gender of the reader from the dialect
-   */
-  getGender(): Gender {
-    return this.gender;
-  }
-
-  /**
-   * Returns an info about the dialect
-   */
-  getInfo(): string {
-    return this.info;
-  }
-
-  /**
-   * Returns the name of the dialect
-   */
-  getName(): string {
-    return this.name;
   }
 
   /**
@@ -80,14 +52,4 @@ class DialectImpl implements DialectMutable {
   setName(name: string): void {
     this.name = name;
   }
-
-  getValues(): DialectValue {
-    return {
-      color: this.getColor(),
-      gender: this.getGender(),
-      info: this.getInfo(),
-      name: this.getName()
-    };
-  }
-
 }

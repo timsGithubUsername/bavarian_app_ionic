@@ -3,22 +3,13 @@ export interface Language {
   /**
    * Returns the name of the language
    */
-  getName():string;
+  readonly name:string;
 
   /**
    * Returns the path of the icon of the language
    */
-  getIconPath():string;
+  readonly iconPath:string;
 
-  /**
-   * Returns the values of Language as an Object.
-   */
-  getValues():LanguageValue;
-}
-
-export interface LanguageValue{
-  word:string,
-  iconPath:string
 }
 
 export interface LanguageMutable extends Language{

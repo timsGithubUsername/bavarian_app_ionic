@@ -1,6 +1,6 @@
 import {QuizWordFactory} from "./QuizWordFactory";
-import {VocabularyWord, VocabularyWordValue} from "../VocabularyWord";
-import {QuizWordMutable, QuizWordValue, TestResult} from "../QuizWord";
+import {VocabularyWord} from "../VocabularyWord";
+import {QuizWordMutable, TestResult} from "../QuizWord";
 
 export class QuizWordFactoryImpl implements QuizWordFactory {
   createQuizWord(word: VocabularyWord, answerOptions: VocabularyWord[]): QuizWordMutable {
@@ -11,28 +11,14 @@ export class QuizWordFactoryImpl implements QuizWordFactory {
 
 class QuizWordImpl implements QuizWordMutable {
 
-  private word:VocabularyWord;
-  private answerOptions:VocabularyWord[];
+  word:VocabularyWord;
+  answerOptions:VocabularyWord[];
   private testResult:TestResult;
 
   constructor(word:VocabularyWord,answerOptions:VocabularyWord[]) {
     this.setWord(word);
     this.setAnswerOptions(answerOptions);
     this.testResult = TestResult.Untested
-  }
-
-  /**
-   * Returns the answer options to the question
-   */
-  getAnswerOptions(): VocabularyWord[] {
-    return this.answerOptions;
-  }
-
-  /**
-   * Returns the word of the question
-   */
-  getWord(): VocabularyWord {
-    return this.word;
   }
 
   /**
@@ -67,22 +53,11 @@ class QuizWordImpl implements QuizWordMutable {
    * @param word - The word to be tested
    */
   testAnswer(word: VocabularyWord): boolean {
-    let ret = word.getId() === this.word.getId()
+    let ret = word.id === this.word.id
     this.testResult = ret ? TestResult.Correct : TestResult.Incorrect
     return ret;
   }
 
-  getValues(): QuizWordValue {
-    let that = this;
-    function getAnswerOptionValues():VocabularyWordValue[]{
-      let values:VocabularyWordValue[] = [];
-      that.getAnswerOptions().forEach(v => values.push(v.getValues()))
-      return values;
-    }
-    return {
-      answerOptions: getAnswerOptionValues(),
-      word: this.getWord().getValues()};
-  }
 
   getTestResult(): TestResult {
     return this.testResult;

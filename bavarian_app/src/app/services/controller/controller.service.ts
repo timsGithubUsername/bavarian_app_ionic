@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import {InteractorRequester} from "../../../interactor/InteractorRequester";
-import {ResponseStudyImpl} from "./ResponseStudyImpl";
-import {ResponseCategories} from "./ResponseCategories";
-import {ResponseProgressImpl} from "./ResponseProgressImpl";
-import {ResponseQuizImpl} from "./ResponseQuizImpl";
 import {Category} from "../../../entities/Category";
-import {VocabularyWord} from "../../../entities/VocabularyWord";
-import {Quiz} from "../../../entities/Quiz";
+import {Level} from "../../../entities/Level";
+import {LevelResponse} from "./LevelResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +17,21 @@ export class ControllerService {
   }
 
   //Response Objects
-  private responseStudy = new ResponseStudyImpl();
-  private responseCategories = new ResponseCategories();
-  private responseProgress = new ResponseProgressImpl();
-  private responseQuiz = new ResponseQuizImpl();
+  private levelResponse = new LevelResponse();
 
   constructor() {
   }
 
   public requestAllCategories(){
-    this.interactorRequester.requestAllCategories((cats:Category[]) => this.responseCategories.respondAllCategories(cats));
+    this.interactorRequester.requestAllLevels((lvls:Level[]) => this.levelResponse.respondAllLevels(lvls));
   }
 
   public requestStudy(cat:Category){
-    this.interactorRequester.requestStudy(cat,(words:VocabularyWord[]) => this.responseStudy.respondStudy(words));
+
   }
 
   public requestQuiz(cat:Category){
-    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.responseQuiz.respondQuiz(quiz));
+
   }
 
   public requestProgressFromCategory(cat:Category){
