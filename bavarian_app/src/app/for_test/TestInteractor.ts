@@ -2,12 +2,12 @@ import {InteractorRequester, ProgressType} from "../../interactor/InteractorRequ
 import {Category} from "../../entities/Category";
 import {Quiz} from "../../entities/Quiz";
 import {VocabularyWord} from "../../entities/VocabularyWord";
-import {DataHodler} from "./DataHodler";
+import {CategoryHodler} from "./CategoryHodler";
 
 export class TestInteractor implements InteractorRequester {
 
   requestAllCategories(response: (cats: Category[]) => void): void {
-    let dataHodler = new DataHodler();
+    let dataHodler = new CategoryHodler();
     response(dataHodler.getCats());
   }
 

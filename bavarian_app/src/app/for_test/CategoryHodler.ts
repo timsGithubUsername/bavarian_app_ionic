@@ -1,7 +1,7 @@
 import {Level, LevelValue} from "../../entities/Level";
 import {Category, CategoryValue} from "../../entities/Category";
 
-export class DataHodler {
+export class CategoryHodler {
   cats: Cat[];
 
   constructor() {
