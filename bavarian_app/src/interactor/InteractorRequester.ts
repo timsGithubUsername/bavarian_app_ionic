@@ -14,7 +14,7 @@ export interface InteractorRequester {
   requestAllLanguages(response:((langs:Language[]) => void)):void;
 
   /**
-   * Requests all Dialects of the Database
+   * Requests all dialects of the database
    * @param response Called as soon as the request ist finished
    */
   requestAllDialects(response:((dialects:Dialect[]) => void)):void;
@@ -30,6 +30,18 @@ export interface InteractorRequester {
    * @param dialect
    */
   setDialect(dialect:Dialect):void;
+
+  /**
+   * Requests the currently selected language
+   * @param response Called as soon as the request ist finished. Hands Over undefined if the language isn't set yet
+   */
+  requestLanguage(response:((lang:Language) => void)):void;
+
+  /**
+   * Requests the currently selected dialect
+   * @param response Called as soon as the request ist finished. Hands Over undefined if the dialect isn't set yet
+   */
+  requestDialect(response:((dialect:Dialect) => void)):void;
 
   /**
    * Requests all levels in the database
