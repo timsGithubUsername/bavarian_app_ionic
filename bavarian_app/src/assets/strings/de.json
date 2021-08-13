@@ -9,7 +9,13 @@
     "LEVELPREFIX": "Level"
   },
   "LEARNING": {
-    "TITLE": "Lernen"
+    "TITLE": "Lernen",
+    "GRATULATION": "Herzlichen Glückwunsch",
+    "GRATULATION_TEXT": "Du hast die Kategorie erfolgreich abgeschlossen!",
+    "REPLAY_BTN": "Erneut lernen",
+    "LEARNING_BTN": "Andere Kategorie Lernen",
+    "QUIZ_BTN": "Kategorie abfragen",
+    "HOME_BTN": "Zum Hauptmenü"
   },
   "TEST": {
     "TITLE": "Quiz"

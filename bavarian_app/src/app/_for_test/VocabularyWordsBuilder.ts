@@ -17,11 +17,12 @@ export class VocabularyWordsBuilder {
         i,
         "dialect word "+i,
         "german word "+i,
-        "translation word "+i);
+        "");
 
-      currentVocabularyWord.setAnnotation("test stuff der hier stehen könnte aber bin Fantasielos");
+      if(Math.floor(Math.random() * 2) === 0) currentVocabularyWord.setAnnotation("test stuff der hier stehen könnte aber bin Fantasielos");
+
       currentVocabularyWord.setPronunciationPath("assets/audio/test_audio.mp3")
-      currentVocabularyWord.setPicturePath("assets/img/img_not_found.jpg");
+      currentVocabularyWord.setPicturePath("assets/img/test_img.jpg");
 
       this.vocabularyWords.push(currentVocabularyWord);
     }

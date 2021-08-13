@@ -25,11 +25,4 @@ export class HomePage {
     this.controller.requestAllCategories();
   }
 
-  //get array of elements and redirect
-  //todo get array of vocable elements
-  //todo this is for core, this should be modified later to get array of lectures!
-  responseCategories(){
-    this.router.navigate(['learning'])
-  }
-
 }
