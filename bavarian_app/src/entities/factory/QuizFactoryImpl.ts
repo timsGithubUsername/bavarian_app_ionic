@@ -14,7 +14,7 @@ export class QuizFactoryImpl implements QuizFactory{
 
 class QuizImpl implements QuizMutable{
 
-  quizWords:QuizWord[];
+  quizWords:QuizWord[] = [];
 
   private correctAnswers : number
   private incorrectAnswers : number
@@ -31,13 +31,14 @@ class QuizImpl implements QuizMutable{
      */
     words.forEach((value ,index)  => {
 
-      let possibleWords = words;
+      //Deep Copy Patrick... formerly: let possibleWords = words;
+      let possibleWords = words.slice();
       let answerOptions:VocabularyWord[] = [];
 
-      possibleWords.splice(index,1,);
+      possibleWords.splice(index,1);
 
       for(let i = numberOfAnswers-1;i > 0;i--) {
-        let randomIndex = Math.random() * possibleWords.length
+        let randomIndex = Math.floor(Math.random() * possibleWords.length)
         answerOptions.push(possibleWords[randomIndex]);
         possibleWords.splice(randomIndex,1);
       }
@@ -46,6 +47,7 @@ class QuizImpl implements QuizMutable{
       let currentQuizWord = quizWordFactory.createQuizWord(value,answerOptions)
       currentQuizWord.shuffle();
       this.quizWords.push(currentQuizWord);
+
     })
 
   }

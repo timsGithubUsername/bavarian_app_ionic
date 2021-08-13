@@ -26,7 +26,7 @@ class QuizWordImpl implements QuizWordMutable {
    * @param answers
    */
   setAnswerOptions(answers: VocabularyWord[]): void {
-    this.answerOptions = answers;
+    this.answerOptions = answers.slice();
   }
 
   /**

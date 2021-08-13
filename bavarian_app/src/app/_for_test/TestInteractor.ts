@@ -7,11 +7,14 @@ import {Language} from "../../entities/Language";
 import {Level} from "../../entities/Level";
 import {LevelBuilder} from "./LevelBuilder";
 import {VocabularyWordsBuilder} from "./VocabularyWordsBuilder";
+import {QuizBuilder} from "./QuizBuilder";
 
 export class TestInteractor implements InteractorRequester {
 
 
   requestQuiz(cat: Category, response: (quiz: Quiz) => void): void {
+    let qb = new QuizBuilder();
+    response(qb.quiz);
   }
 
   requestStudy(cat: Category, response: (study: VocabularyWord[]) => void): void {

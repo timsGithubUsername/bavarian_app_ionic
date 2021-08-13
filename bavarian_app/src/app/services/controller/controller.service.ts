@@ -5,6 +5,8 @@ import {Level} from "../../../entities/Level";
 import {LevelResponse} from "./LevelResponse";
 import {VocabularyWord} from "../../../entities/VocabularyWord";
 import {StudyResponse} from "./StudyResponse";
+import {QuizResponse} from "./QuizResponse";
+import {Quiz} from "../../../entities/Quiz";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,7 @@ export class ControllerService {
   //Response Objects
   private levelResponse = new LevelResponse();
   private studyResponse = new StudyResponse();
+  private quizResponse = new QuizResponse();
 
   constructor() {
   }
@@ -34,13 +37,15 @@ export class ControllerService {
   }
 
   public requestQuiz(cat:Category){
-
+    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.quizResponse.respondQuiz(quiz));
   }
 
+  //todo
   public requestProgressFromCategory(cat:Category){
 
   }
 
+  //todo
   public requestProgressFromAllCategories(){
 
   }
