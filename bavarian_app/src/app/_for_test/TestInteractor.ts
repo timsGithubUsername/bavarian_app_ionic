@@ -9,8 +9,19 @@ import {LevelBuilder} from "./LevelBuilder";
 import {VocabularyWordsBuilder} from "./VocabularyWordsBuilder";
 import {QuizBuilder} from "./QuizBuilder";
 
+/**
+ * TestInteractor implements the InteractorRequester to prove functions of the app in system tests without the database mechanics.
+ * If we build the app TestInteractor can be easily exchanged in app.component.ts, method buildProgrammTree()
+ */
 export class TestInteractor implements InteractorRequester {
+  /*
+  I dont comment here, there is not realy much to explain.
 
+  The methods basically all do what they are called. In this package are individual classes implemented which in turn
+  use the factories in the entities package to call the passed response method with "real" objects.
+
+  What is needed is implemented, what is not needed is not implemented.
+   */
 
   requestQuiz(cat: Category, response: (quiz: Quiz) => void): void {
     let qb = new QuizBuilder();

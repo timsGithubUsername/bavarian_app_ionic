@@ -17,11 +17,11 @@ export class LearningPage implements OnInit {
   progressBarProgress: number; //Progress of.. the progress bar (from 0 to 1)
   vocabularyWords: VocabularyWord[] = []; //Vocabulary Words of this lecture
 
-  constructor(private nativeAudio: NativeAudio,
-              private categoryService: CategoryService,
-              private routingService: RoutingService,
-              private controller: ControllerService,
-              private router: Router) {
+  constructor(private nativeAudio: NativeAudio, //to play mp3
+              private categoryService: CategoryService, //to get the VocabularyWord[]
+              private routingService: RoutingService, //to redirect after the lesson
+              private controller: ControllerService, //to redirect after the lesson
+              private router: Router) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
     //get vocabulary words
     this.vocabularyWords = categoryService.getVocabulayWords();
     //set the length
@@ -36,7 +36,7 @@ export class LearningPage implements OnInit {
    * @param pronunciationPath relative path to mp3 as string
    */
   playSound(pronunciationPath: string){
-    //preload the sound. Im not sure this is neccessary. Im sure this should be done when the page loads - if we find no
+    //preload the sound. Im not sure this is necessary. Im sure this should be done when the page loads - if we find no
     //performance issues we just forget this ;)
     //the path to the mp3 also works as id
     this.nativeAudio.preloadSimple(pronunciationPath, pronunciationPath);
@@ -49,8 +49,11 @@ export class LearningPage implements OnInit {
    * @param i current index
    */
   buildProgressBar(i:number):string{
+    //set the current index of the slides
     this.ngForIndex = i + 1;
+    //calculate the progress and set the value
     this.progressBarProgress = this.ngForIndex / this.numberOfVocabularyWords;
+    //return the string to show
     return this.ngForIndex + "/" + this.numberOfVocabularyWords;
   }
 
@@ -71,6 +74,9 @@ export class LearningPage implements OnInit {
 
     //if length is zero return undefined
     if(output === ""){
+      //it works here with undefined without quotes but for some reason not in the similar next method which is used similar... wtf...
+      //so it returns a string for consistency, undefined is anyway interpreted as string in html
+      //the string is needed to check if we show the info FAB
       return 'undefined';
     }
     //else return string
@@ -79,6 +85,11 @@ export class LearningPage implements OnInit {
     }
   }
 
+  /**
+   * This is a bit hacky, we need to know if there is a translation word but i want to check both, its undefined or empty.
+   * It seems that double checks are not (easily) possible in html+angular, so we do it this way.
+   * @param vocWord the word we build the string for
+   */
   buildTranslationWord(vocWord: VocabularyWord):string{
     let output = "";
 
@@ -88,6 +99,8 @@ export class LearningPage implements OnInit {
     }
 
     //if length is zero return undefined
+    //like above, for some reason undefined without quotes dont work.
+    //undefined is needed to check if the german word should be shown in italy or not also if we show the translation word
     if(output === ""){
       return 'undefined';
     }

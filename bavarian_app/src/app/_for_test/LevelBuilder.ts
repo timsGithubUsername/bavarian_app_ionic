@@ -3,6 +3,9 @@ import {Level} from "../../entities/Level";
 import {CategoryMutable} from "../../entities/Category";
 import {LevelFactoryImpl} from "../../entities/factory/LevelFactoryImpl";
 
+/**
+ * Use the factories in entities package to build some objects for system tests
+ */
 export class LevelBuilder{
   categoryFactory = new CategoryFactoryImpl();
   levelFactory = new LevelFactoryImpl();
