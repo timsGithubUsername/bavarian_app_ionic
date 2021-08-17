@@ -5,7 +5,8 @@
     "TEST_BTN": "Abfragen"
   },
   "CATEGORIES": {
-    "TITLE": "Wähle eine Kategorie zum Lernen",
+    "TITLE_LEARNING": "Wähle eine Kategorie zum Lernen",
+    "TITLE_QUIZ": "Wähle eine Kategorie zum Abfragen",
     "LEVELPREFIX": "Level"
   },
   "LEARNING": {

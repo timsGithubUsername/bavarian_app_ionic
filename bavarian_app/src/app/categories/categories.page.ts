@@ -17,9 +17,14 @@ export class CategoriesPage implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private routingService: RoutingService,
-              private controllerService: ControllerService) { }
+              private controllerService: ControllerService) {
+  }
 
   ngOnInit() {
+  }
+
+  //called every time this page is entered - even if it is already instantiated
+  ionViewWillEnter(){
     this.mode = this.categoryService.getGamemode();
     this.levels = this.categoryService.getLevels();
   }

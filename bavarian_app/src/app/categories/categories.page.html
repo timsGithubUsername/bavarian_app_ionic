@@ -4,7 +4,11 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      <div class="ion-text-wrap">{{ 'CATEGORIES.TITLE' | translate }}</div>
+      <div class="ion-text-wrap" *ngIf="mode === 0; else quizMode">{{ 'CATEGORIES.TITLE_LEARNING' | translate }}</div>
+      <ng-template #quizMode>
+        <div class="ion-text-wrap">{{ 'CATEGORIES.TITLE_QUIZ' | translate }}</div>
+
+      </ng-template>
     </ion-title>
   </ion-toolbar>
 </ion-header>
