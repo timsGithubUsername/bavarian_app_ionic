@@ -59,6 +59,12 @@ export class CategoriesPage implements OnInit {
       }
     }
   }
+  /**
+   * navigate to home page
+   */
+  directToHome(){
+    this.routingService.getRouter().navigate(['home'])
+  }
 }
 
 

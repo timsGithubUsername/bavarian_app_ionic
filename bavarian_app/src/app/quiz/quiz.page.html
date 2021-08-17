@@ -1,97 +1,247 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-button (click)="onBackButton()">
+        <ion-icon name="home-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{ "TEST.TITLE" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" #slides>
-    <ion-slide *ngFor="let quizWord of quiz.quizWords; let i = index">
+  <ion-slides pager="false" [options]="{allowTouchMove: false}" #slides>
+    <!-- CONTENT FOR EVERY WORD -->
+    <!-- Slides with questions and play-button -->
+    <ng-container *ngFor="let quizWord of quizWords; let i = index">
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="isAnswerCorrect(0, quizWord, slides)">
+                <ion-img [src]="quizWord.answerOptions[0].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[0]) !== 'undefined'; else elseBlock0">
+                  {{ quizWord.answerOptions[0].translationWord }}
+                </h2>
+                <ng-template #elseBlock0>
+                  <h2>
+                    {{ quizWord.answerOptions[0].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+            </ion-col>
+            <ion-col>
+              <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="isAnswerCorrect(1, quizWord, slides)">
+                <ion-img [src]="quizWord.answerOptions[1].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[1]) !== 'undefined'; else elseBlock1">
+                  {{ quizWord.answerOptions[1].translationWord }}
+                </h2>
+                <ng-template #elseBlock1>
+                  <h2>
+                    {{ quizWord.answerOptions[1].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="isAnswerCorrect(2, quizWord, slides)">
+                <ion-img [src]="quizWord.answerOptions[2].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[2]) !== 'undefined'; else elseBlock2">
+                  {{ quizWord.answerOptions[2].translationWord }}
+                </h2>
+                <ng-template #elseBlock2>
+                  <h2>
+                    {{ quizWord.answerOptions[2].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+            </ion-col>
+            <ion-col>
+              <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="isAnswerCorrect(3, quizWord, slides)">
+                <ion-img [src]="quizWord.answerOptions[3].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[3]) !== 'undefined'; else elseBlock3">
+                  {{ quizWord.answerOptions[3].translationWord }}
+                </h2>
+                <ng-template #elseBlock3>
+                  <h2>
+                    {{ quizWord.answerOptions[3].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-text>
+                {{ buildProgressBar(i) }}
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-progress-bar value="{{ progressBarProgress }}"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+              <ion-button expand="block" shape="round" size="large">
+                <ion-icon name="play" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
 
       <!-- CONTENT FOR EVERY WORD -->
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap">
-              <ion-img [src]="quizWord.answerOptions[0].picturePath"></ion-img>
-              <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[0]) !== 'undefined'; else elseBlock0">
-                {{ quizWord.answerOptions[0].translationWord }}
-              </h2>
-              <ng-template #elseBlock0>
-                <h2>
-                  {{ quizWord.answerOptions[0].german }}
+      <!-- Slides with correct and wrong answers and also next button -->
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card *ngIf="quizWord.testAnswer(quizWord.answerOptions[0]); else elseBlock0Wrong" button="false" color="success" class="ion-text-center ion-text-wrap">
+                <ion-img [src]="quizWord.answerOptions[0].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[0]) !== 'undefined'; else elseBlock0">
+                  {{ quizWord.answerOptions[0].translationWord }}
                 </h2>
+                <ng-template #elseBlock0>
+                  <h2>
+                    {{ quizWord.answerOptions[0].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+              <ng-template #elseBlock0Wrong>
+                <ion-card button="false" color="danger" class="ion-text-center ion-text-wrap">
+                  <ion-img [src]="quizWord.answerOptions[0].picturePath"></ion-img>
+                  <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[0]) !== 'undefined'; else elseBlock0">
+                    {{ quizWord.answerOptions[0].translationWord }}
+                  </h2>
+                  <ng-template #elseBlock0>
+                    <h2>
+                      {{ quizWord.answerOptions[0].german }}
+                    </h2>
+                  </ng-template>
+                </ion-card>
               </ng-template>
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap">
-              <ion-img [src]="quizWord.answerOptions[1].picturePath"></ion-img>
-              <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[1]) !== 'undefined'; else elseBlock1">
-                {{ quizWord.answerOptions[1].translationWord }}
-              </h2>
-              <ng-template #elseBlock1>
-                <h2>
-                  {{ quizWord.answerOptions[1].german }}
+            </ion-col>
+            <ion-col>
+              <ion-card *ngIf="quizWord.testAnswer(quizWord.answerOptions[1]); else elseBlock1Wrong" button="false" color="success" class="ion-text-center ion-text-wrap">
+                <ion-img [src]="quizWord.answerOptions[1].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[1]) !== 'undefined'; else elseBlock1">
+                  {{ quizWord.answerOptions[1].translationWord }}
                 </h2>
+                <ng-template #elseBlock1>
+                  <h2>
+                    {{ quizWord.answerOptions[1].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+              <ng-template #elseBlock1Wrong>
+                <ion-card button="false" color="danger" class="ion-text-center ion-text-wrap">
+                  <ion-img [src]="quizWord.answerOptions[1].picturePath"></ion-img>
+                  <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[1]) !== 'undefined'; else elseBlock1">
+                    {{ quizWord.answerOptions[1].translationWord }}
+                  </h2>
+                  <ng-template #elseBlock1>
+                    <h2>
+                      {{ quizWord.answerOptions[1].german }}
+                    </h2>
+                  </ng-template>
+                </ion-card>
               </ng-template>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap">
-              <ion-img [src]="quizWord.answerOptions[2].picturePath"></ion-img>
-              <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[2]) !== 'undefined'; else elseBlock2">
-                {{ quizWord.answerOptions[2].translationWord }}
-              </h2>
-              <ng-template #elseBlock2>
-                <h2>
-                  {{ quizWord.answerOptions[2].german }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card *ngIf="quizWord.testAnswer(quizWord.answerOptions[2]); else elseBlock2Wrong" button="false" color="success" class="ion-text-center ion-text-wrap">
+                <ion-img [src]="quizWord.answerOptions[2].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[2]) !== 'undefined'; else elseBlock2">
+                  {{ quizWord.answerOptions[2].translationWord }}
                 </h2>
+                <ng-template #elseBlock2>
+                  <h2>
+                    {{ quizWord.answerOptions[2].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+              <ng-template #elseBlock2Wrong>
+                <ion-card button="false" color="danger" class="ion-text-center ion-text-wrap">
+                  <ion-img [src]="quizWord.answerOptions[2].picturePath"></ion-img>
+                  <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[2]) !== 'undefined'; else elseBlock2">
+                    {{ quizWord.answerOptions[2].translationWord }}
+                  </h2>
+                  <ng-template #elseBlock2>
+                    <h2>
+                      {{ quizWord.answerOptions[2].german }}
+                    </h2>
+                  </ng-template>
+                </ion-card>
               </ng-template>
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <ion-card button="true" color="primary" class="ion-text-center ion-text-wrap">
-              <ion-img [src]="quizWord.answerOptions[3].picturePath"></ion-img>
-              <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[3]) !== 'undefined'; else elseBlock3">
-                {{ quizWord.answerOptions[3].translationWord }}
-              </h2>
-              <ng-template #elseBlock3>
-                <h2>
-                  {{ quizWord.answerOptions[3].german }}
+            </ion-col>
+            <ion-col>
+              <ion-card *ngIf="quizWord.testAnswer(quizWord.answerOptions[3]); else elseBlock3Wrong" button="false" color="success" class="ion-text-center ion-text-wrap">
+                <ion-img [src]="quizWord.answerOptions[3].picturePath"></ion-img>
+                <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[3]) !== 'undefined'; else elseBlock3">
+                  {{ quizWord.answerOptions[3].translationWord }}
                 </h2>
+                <ng-template #elseBlock3>
+                  <h2>
+                    {{ quizWord.answerOptions[3].german }}
+                  </h2>
+                </ng-template>
+              </ion-card>
+              <ng-template #elseBlock3Wrong>
+                <ion-card button="false" color="danger" class="ion-text-center ion-text-wrap">
+                  <ion-img [src]="quizWord.answerOptions[3].picturePath"></ion-img>
+                  <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[3]) !== 'undefined'; else elseBlock3">
+                    {{ quizWord.answerOptions[3].translationWord }}
+                  </h2>
+                  <ng-template #elseBlock3>
+                    <h2>
+                      {{ quizWord.answerOptions[3].german }}
+                    </h2>
+                  </ng-template>
+                </ion-card>
               </ng-template>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col></ion-col>
-          <ion-col>
-            <ion-button expand="block" shape="round" size="large">
-              <ion-icon name="play" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-text>
-              <!-- {{ buildProgressBar(i) }} -->
-            </ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <!-- <ion-progress-bar value="{{ progressBarProgress }}"></ion-progress-bar> -->
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-text>
+                {{ buildProgressBar(i) }}
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-progress-bar value="{{ progressBarProgress }}"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="answerCorrect; else answerIncorrect">
+              {{ "TEST.SUCCESS" | translate }}
+            </ion-col>
+            <ng-template #answerIncorrect>
+              <ion-col>
+                {{ "TEST.FAILURE" | translate }}
+              </ion-col>
+            </ng-template>
+          </ion-row>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+              <ion-button expand="block" size="large" (click)="nextSlide(slides)">
+                  {{ "TEST.NEXT_BTN" | translate }}
+              </ion-button>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+    </ng-container>
 
     <!-- END SLIDE -->
     <ion-slide>
@@ -99,43 +249,43 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <h1>{{ 'LEARNING.GRATULATION' | translate }}</h1>
+              <h1>{{ 'TEST.GRATULATION' | translate }}</h1>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <h2>{{ 'LEARNING.GRATULATION_TEXT' | translate }}</h2>
+              <h2>{{ 'TEST.GRATULATION_TEXT' | translate }}</h2>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap">
+              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="slideToFirst(slides)">
                 <ion-icon slot="start" name="reload"></ion-icon>
-                {{ 'LEARNING.REPLAY_BTN' | translate }}
+                {{ 'TEST.REPLAY_BTN' | translate }}
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap">
+              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(0)">
                 <ion-icon slot="start" name="school"></ion-icon>
-                {{ 'LEARNING.LEARNING_BTN' | translate }}
+                {{ 'TEST.LEARNING_BTN' | translate }}
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap">
+              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(1)">
                 <ion-icon slot="start" name="ear"></ion-icon>
-                {{ 'LEARNING.QUIZ_BTN' | translate }}
+                {{ 'TEST.QUIZ_BTN' | translate }}
               </ion-button>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap">
+              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="directToHome()">
                 <ion-icon slot="start" name="home"></ion-icon>
-                <span class="ion-text-left">{{ 'LEARNING.HOME_BTN' | translate }}</span>
+                <span class="ion-text-left">{{ 'TEST.HOME_BTN' | translate }}</span>
               </ion-button>
             </ion-col>
           </ion-row>

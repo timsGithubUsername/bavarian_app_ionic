@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-button (click)="directToHome()">
+        <ion-icon name="home-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>{{ 'LEARNING.TITLE' | translate }}</ion-title>
   </ion-toolbar>

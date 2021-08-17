@@ -15,10 +15,23 @@
     "GRATULATION_TEXT": "Du hast die Kategorie erfolgreich abgeschlossen!",
     "REPLAY_BTN": "Erneut lernen",
     "LEARNING_BTN": "Andere Kategorie Lernen",
-    "QUIZ_BTN": "Kategorie abfragen",
+    "QUIZ_BTN": "Anderes Quiz",
     "HOME_BTN": "Zum Hauptmenü"
   },
   "TEST": {
-    "TITLE": "Quiz"
+    "TITLE": "Quiz",
+    "SUCCESS": "Deine Antwort war korrekt!",
+    "FAILURE": "Deine Antwort war leider falsch.",
+    "NEXT_BTN": "Nächste Frage",
+    "ALRT_HEAD": "Zurück in die Levelauswahl?",
+    "ALRT_MSG": "Wenn du das Quiz nicht beendet hast, wird dein Fortschritt nicht gespeichert!",
+    "ALRT_CANCEL_BTN": "Abbrechen",
+    "ALRT_AGREE_BTN": "OK!",
+    "GRATULATION": "Herzlichen Glückwunsch",
+    "GRATULATION_TEXT": "Du hast das Quiz erfolgreich abgeschlossen! Wir sollten hier noch mehr differenzieren je nachdem wie gut du warst!",
+    "REPLAY_BTN": "Quiz erneut spielen",
+    "LEARNING_BTN": "Andere Kategorie Lernen",
+    "QUIZ_BTN": "Anderes Quiz",
+    "HOME_BTN": "Zum Hauptmenü"
   }
 }

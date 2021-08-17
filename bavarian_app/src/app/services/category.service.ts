@@ -7,14 +7,12 @@ import {Quiz} from "../../entities/Quiz";
   providedIn: 'root'
 })
 export class CategoryService {
-  private gamemode:number;
-  private levels: Level[];
+  private gamemode:number = -1;
+  private levels: Level[] = [];
   private vocabularyWords: VocabularyWord[] = [];
-  private quiz: Quiz;
+  private quiz: Quiz = null;
 
   constructor() {
-    this.gamemode = -1;
-    this.levels = [];
   }
 
   public setQuiz(quiz:Quiz):void{
