@@ -2,7 +2,22 @@
   "HOME": {
     "TITLE": "Welcome to Bavaria!",
     "LEARNING_BTN": "Lernen",
-    "TEST_BTN": "Abfragen"
+    "TEST_BTN": "Abfragen",
+    "MENU_TITLE": "Einstellungen",
+    "MENU_TRANSLATE": "Übersetzung",
+    "MENU_DIALECT": "Dialect",
+    "MENU_ACHIEVEMENTS": "Erfolge",
+    "MENU_RESET": "Zurücksetzen",
+    "MENU_ABOUT": "Über uns",
+    "MENU_REFERENCES": "Referenzen",
+    "MENU_SHARE": "Teilen"
+  },
+  "TRANSLATION": {
+    "TITLE": "Wähle deine Übersetzungssprache aus",
+    "AL": "Arabisch",
+    "DEU": "Deutsch",
+    "US": "Englisch",
+    "CZ": "Tschechisch"
   },
   "CATEGORIES": {
     "TITLE_LEARNING": "Wähle eine Kategorie zum Lernen",
@@ -33,5 +48,9 @@
     "LEARNING_BTN": "Andere Kategorie Lernen",
     "QUIZ_BTN": "Anderes Quiz",
     "HOME_BTN": "Zum Hauptmenü"
+  },
+  "ERROR": {
+    "_comment": "This category should not be translated (but still taken over!) as the texts should not appear and if they do, then only in the logs which are usually not visible to the user.",
+    "QUIZ_PAGE_QUIZ_UNDEFINED": " * * * * * ERROR * * * * * \nCan't access quiz from CategoryService in quiz.page. Do you loaded the app on this page?\n * * * * * * * * * * * * * "
   }
 }

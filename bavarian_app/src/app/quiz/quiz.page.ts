@@ -15,13 +15,12 @@ import {ControllerService} from "../services/controller/controller.service";
   styleUrls: ['./quiz.page.scss'],
 })
 export class QuizPage implements OnInit {
-  answerCorrect: boolean = false;
-  isGameComplete: boolean = false;
-  ngForIndex: number;
-  progressBarProgress: number;
-  numberOfQuizWords: number;
-  quiz: Quiz = null;
-  quizWords: QuizWord[] = [];
+  answerCorrect: boolean = false; //tests if the choosen answer is correct - indikator for the text on the next slide
+  ngForIndex: number; //index of the current slide - for progress bar
+  progressBarProgress: number; //progress of the progress bar - between 0 and 1
+  numberOfQuizWords: number; //number of quiz words for the progress bar
+  quiz: Quiz = null; //the quiz
+  quizWords: QuizWord[] = []; //the quiz words
 
   constructor(private categoryService: CategoryService,
               private alertCtrl: AlertController,
@@ -29,19 +28,32 @@ export class QuizPage implements OnInit {
               private router: Router,
               private routingService: RoutingService,
               private controller: ControllerService) {
-    this.quiz = categoryService.getQuiz();
-    try{
-      this.quizWords = this.quiz.quizWords;
-      this.numberOfQuizWords = this.quiz.quizWords.length;
-    } catch (e) {
-      console.log(e);
-      console.log("Can't access quiz from CategoryService in quiz.page. Do you loaded the app on this page?");
-    }
   }
 
   ngOnInit() {
   }
 
+  //called every time this page is entered - even if it is already instantiated
+  ionViewWillEnter(){
+    //set quiz
+    this.quiz = this.categoryService.getQuiz();
+    //set quizwords and number of quizwords. catch the case quiz is undefined which happens when the app gets instatiated in the quiz screen
+    try{
+      this.quizWords = this.quiz.quizWords;
+      this.numberOfQuizWords = this.quiz.quizWords.length;
+    } catch (e) {
+      //print stack trace and error message because its clear whats going wrong here
+      console.log(e);
+      console.log(this.translate.instant("ERROR.QUIZ_PAGE_QUIZ_UNDEFINED"));
+    }
+  }
+
+  /**
+   * This is a bit hacky, we need to know if there is a translation word but i want to check both, its undefined or empty.
+   * It seems that double checks are not (easily) possible in html+angular, so we do it this way.
+   * @param vocWord the word we build the string for
+   */
+  //(i found that it is easily possible with '==' instead of '===', but it dosnt work either. :)
   buildTranslationWord(vocWord: VocabularyWord): string {
     let output = "";
 
@@ -94,6 +106,9 @@ export class QuizPage implements OnInit {
    *
    */
   onBackButton() {
+    //todo here should be an if-else-block which requests a variable
+    // that is set to false if the results of the quiz are persisted
+    // so that the alert then no longer triggers!
     this.alertCtrl.create({
       header: this.translate.instant("TEST.ALRT_HEAD"),
       message: this.translate.instant("TEST.ALRT_MSG"),

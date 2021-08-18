@@ -1,31 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>
-      {{ 'HOME.TITLE' | translate }}
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu side="end" content-id="home">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{ "HOME.MENU_TITLE" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="directToTranslateSelection()">
+        <ion-icon name="language-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_TRANSLATE" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="chatbubble-ellipses-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_DIALECT" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="trophy-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_ACHIEVEMENTS" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_RESET" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_ABOUT" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_REFERENCES" | translate }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="share-social-outline" slot="start"></ion-icon>
+        <ion-label>{{ "HOME.MENU_SHARE" | translate }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
 
-<ion-content [fullscreen]="true">
-  <div>
-    <ion-img [src]="image"></ion-img>
-  </div>
-  <div>
-    <ion-grid>
-      <ion-row>
-        <ion-col class="ion-text-center">
-          <ion-button expand="block" (click)="requestCategories(0)">
-            <ion-icon slot="start" name="school"></ion-icon>
-            {{ 'HOME.LEARNING_BTN' | translate }}
-          </ion-button>
-        </ion-col>
-        <ion-col class="ion-text-center">
-          <ion-button expand="block" (click)="requestCategories(1)">
-            <ion-icon slot="start" name="ear"></ion-icon>
-            {{ 'HOME.TEST_BTN' | translate }}
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</ion-content>
+<div class="ion-page" id="home">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="end">
+        <ion-menu-button>
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        {{ 'HOME.TITLE' | translate }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <div>
+      <ion-img [src]="image"></ion-img>
+    </div>
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button expand="block" (click)="requestCategories(0)">
+              <ion-icon slot="start" name="school"></ion-icon>
+              {{ 'HOME.LEARNING_BTN' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-button expand="block" (click)="requestCategories(1)">
+              <ion-icon slot="start" name="ear"></ion-icon>
+              {{ 'HOME.TEST_BTN' | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+</div>

@@ -22,13 +22,17 @@ export class LearningPage implements OnInit {
               private routingService: RoutingService, //to redirect after the lesson
               private controller: ControllerService, //to redirect after the lesson
               private router: Router) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
-    //get vocabulary words
-    this.vocabularyWords = categoryService.getVocabulayWords();
-    //set the length
-    this.numberOfVocabularyWords = this.vocabularyWords.length;
   }
 
   ngOnInit() {
+  }
+
+  //called every time this page is entered - even if it is already instantiated
+  ionViewWillEnter(){
+    //get vocabulary words
+    this.vocabularyWords = this.categoryService.getVocabulayWords();
+    //set the length
+    this.numberOfVocabularyWords = this.vocabularyWords.length;
   }
 
   /**

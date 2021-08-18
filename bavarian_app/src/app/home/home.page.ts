@@ -16,13 +16,22 @@ export class HomePage {
               private categoryService: CategoryService,
               private routingService: RoutingService,
               private controller: ControllerService) {
+    this.routingService.setRouter(this.router);
   }
 
   //request array of vocable elements for lecture
   requestCategories(mode: number){
     this.categoryService.setGamemode(mode);
-    this.routingService.setRouter(this.router);
     this.controller.requestAllCategories();
   }
 
+  /*
+  MENU BUTTONS
+   */
+  /**
+   * direct to the settings for translation
+   */
+  directToTranslateSelection(){
+    this.routingService.getRouter().navigate(['translation']);
+  }
 }

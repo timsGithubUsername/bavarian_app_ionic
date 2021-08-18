@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="directToHome()">
-        <ion-icon name="home-outline" slot="icon-only"></ion-icon>
-      </ion-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
       <div class="ion-text-wrap" *ngIf="mode === 0; else quizMode">{{ 'CATEGORIES.TITLE_LEARNING' | translate }}</div>

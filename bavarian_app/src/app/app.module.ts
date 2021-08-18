@@ -10,6 +10,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NativeAudio} from "@ionic-native/native-audio/ngx";
+import {pik} from "./_for_test/TestInteractor";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strings/', '.json');
@@ -57,5 +58,8 @@ export class AppModule {
   constructor(private injector: Injector) {
     //to get the Injector everywhere to use Services in Controller
     AppInjector = this.injector;
+    //42
+    console.log(pik);
   }
+
 }
