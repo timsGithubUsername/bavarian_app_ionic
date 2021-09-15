@@ -14,13 +14,20 @@ import {ControllerService} from "../services/controller/controller.service";
   templateUrl: './quiz.page.html',
   styleUrls: ['./quiz.page.scss'],
 })
+
 export class QuizPage implements OnInit {
+  answerColorArray: string[] = ["primary", "primary", "primary", "primary"];
+  buttonsActive: boolean = true;
   answerCorrect: boolean = false; //tests if the choosen answer is correct - indikator for the text on the next slide
   ngForIndex: number; //index of the current slide - for progress bar
   progressBarProgress: number; //progress of the progress bar - between 0 and 1
   numberOfQuizWords: number; //number of quiz words for the progress bar
   quiz: Quiz = null; //the quiz
   quizWords: QuizWord[] = []; //the quiz words
+
+  slideOpts = {
+    initialSlide: 0
+  };
 
   constructor(private categoryService: CategoryService,
               private alertCtrl: AlertController,
@@ -31,6 +38,29 @@ export class QuizPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  submitAnswer(indexOfAnswer: number, currentQuizWord: QuizWord){
+    if(!this.buttonsActive) return;
+
+    this.answerColorArray[indexOfAnswer] = "danger";
+
+    for(let i = 0; i < currentQuizWord.answerOptions.length; i++){
+      if(currentQuizWord.testAnswer(currentQuizWord.answerOptions[i])){
+        this.answerColorArray[i] = "success";
+      }
+    }
+    this.buttonsActive = false;
+
+    //todo
+    //-set statistics
+  }
+
+  nextSlide(slides){
+    this.answerColorArray = ["primary", "primary", "primary", "primary"];
+    this.buttonsActive = true;
+    slides.slideNext();
+
   }
 
   //called every time this page is entered - even if it is already instantiated
@@ -70,14 +100,6 @@ export class QuizPage implements OnInit {
     else {
       return output;
     }
-  }
-
-  /**
-   * navigate to next slide
-   * @param slide the slider element
-   */
-  nextSlide(slide) {
-    slide.slideNext();
   }
 
   /**

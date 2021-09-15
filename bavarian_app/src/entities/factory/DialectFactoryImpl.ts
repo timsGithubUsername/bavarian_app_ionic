@@ -23,7 +23,7 @@ class DialectImpl implements DialectMutable {
   }
 
   /**
-   * Sets the colour value of the dialect
+   * Sets the colour value of the dialect_old
    * @param color
    */
   setColor(color: number): void {
@@ -31,7 +31,7 @@ class DialectImpl implements DialectMutable {
   }
 
   /**
-   * Sets the gender of the reader from the dialect
+   * Sets the gender of the reader from the dialect_old
    * @param gender
    */
   setGender(gender: Gender): void {
@@ -39,14 +39,14 @@ class DialectImpl implements DialectMutable {
   }
 
   /**
-   * Sets an info about the dialect
+   * Sets an info about the dialect_old
    */
   setInfo(info: string): void {
     this.info = info;
   }
 
   /**
-   * Sets the name of the dialect
+   * Sets the name of the dialect_old
    * @param name
    */
   setName(name: string): void {

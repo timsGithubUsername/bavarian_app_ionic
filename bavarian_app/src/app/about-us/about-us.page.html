@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="ion-text-wrap">{{ 'ABOUT.TITLE' | translate }}</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-text style="white-space:pre-wrap">
+        <h2>{{ 'ABOUT.SUBTITLE' | translate }}</h2>
+        {{ 'ABOUT.ABOUT' | translate }}
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text style="white-space:pre-wrap">
+        <h2>{{ 'ABOUT.TEAM' | translate }}</h2>
+        <h3>{{ 'ABOUT.LEAD' | translate }}</h3>
+        {{ 'ABOUT.LEAD_TEXT' | translate }}
+        <h3>{{ 'ABOUT.COORDINATION' | translate }}</h3>
+        {{ 'ABOUT.COORDINATION_TEXT' | translate }}
+        <h3>{{ 'ABOUT.DEVELOPEMENT' | translate }}</h3>
+        {{ 'ABOUT.DEVELOPEMENT_TEXT' | translate }}
+        <h3>{{ 'ABOUT.COWORKER' | translate }}</h3>
+        {{ 'ABOUT.COWORKER_TEXT' | translate }}
+        <h3>{{ 'ABOUT.VOICE' | translate }}</h3>
+        {{ 'ABOUT.VOICE_TEXT' | translate }}<br><br>
+        <i>{{ 'ABOUT.VOICE_NOTE' | translate }}</i>
+        <h3>{{ 'ABOUT.TRANSLATION' | translate }}</h3>
+        {{ 'ABOUT.TRANSLATION_TEXT' | translate }}
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text>
+        <h2>{{ 'ABOUT.SUBTITLE' | translate }}</h2>
+        {{ 'ABOUT.ABOUT' | translate }}
+      </ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

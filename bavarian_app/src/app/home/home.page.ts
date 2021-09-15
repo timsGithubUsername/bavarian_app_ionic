@@ -34,4 +34,15 @@ export class HomePage {
   directToTranslateSelection(){
     this.routingService.getRouter().navigate(['translation']);
   }
+  /**
+   * direct to the settings for dialect
+   */
+  directToDialectSelection(){
+    this.routingService.getRouter().navigate(['dialect']);
+  }  /**
+   * direct to the achievements
+   */
+  directToAchievementsSelection(){
+    this.routingService.getRouter().navigate(['achievments']);
+  }
 }
