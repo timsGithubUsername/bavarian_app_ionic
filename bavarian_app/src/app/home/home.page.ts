@@ -39,10 +39,24 @@ export class HomePage {
    */
   directToDialectSelection(){
     this.routingService.getRouter().navigate(['dialect']);
-  }  /**
+  }
+  /**
    * direct to the achievements
    */
-  directToAchievementsSelection(){
+  directToAchievements(){
     this.routingService.getRouter().navigate(['achievments']);
+  }
+  /**
+   * direct to about us
+   */
+  resetApp(){
+    //todo
+    console.log("TODO: APP RESET");
+  }
+  /**
+   * direct to about us
+   */
+  directToAboutUs(){
+    this.routingService.getRouter().navigate(['about-us']);
   }
 }
