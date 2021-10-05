@@ -23,6 +23,7 @@ export class DatabaseRequesterImpl{
   private create(event : any):void{
     this.db = event.target.result;
     this.db.createObjectStore("VocabWords")
+    let param : IDBObjectStoreParameters = { autoIncrement : true}
   }
 
   private resetDB() {
