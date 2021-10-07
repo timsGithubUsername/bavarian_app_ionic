@@ -6,7 +6,7 @@ import {Table, TableFactory, TableFactoryImpl} from "../interactor/Table";
 
 export interface ExcelManagerRequest{
 
-  requestExcelTable(fileName:string,sheetIndex:number,response:((table:Table) => void)):void;
+  requestExcelTable(fileName:string,tableName:string,sheetIndex:number,response:((table:Table) => void)):void;
 
 }
 
@@ -16,14 +16,11 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
 
   private path = "../assets/tables/";
   private tableFacrory: TableFactory;
-  private width: number;
-  private response:(table: Table) => void;
 
-  requestExcelTable(fileName: string, sheetIndex: number, response: (table: Table) => void): void {
+  requestExcelTable(fileName: string,tableName:string, sheetIndex: number, response: (table: Table) => void): void {
 
-      this.response = response;
 
-      this.readFile(fileName,sheetIndex);
+      this.readFile(fileName,sheetIndex,response);
 
   }
 
@@ -32,7 +29,7 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
   }
 
 
-  private readFile(fileName:string, sheetIndex:number):void{
+  private readFile(fileName:string, sheetIndex:number,response: (table: Table) => void):void{
 
     let url = this.path + fileName;
     let that = this;
@@ -46,40 +43,40 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
       let data = new Uint8Array(req.response);
       let workbook = XLSX.read(data, {type:"array"});
 
-      that.convert(workbook,sheetIndex);
+      that.convert(workbook,sheetIndex,response);
     }
 
     req.send();
 
   }
 
-  private convert(workBook:WorkBook, sheetIndex:number):void {
+  private convert(workBook:WorkBook, sheetIndex:number,response: (table: Table) => void):void {
     let sheetName = workBook.SheetNames[sheetIndex]
     let worksheet = workBook.Sheets[sheetName];
     let table = this.tableFacrory.createTable();
 
 
-    this.width = this.getSheetWidth(worksheet);
+    let width = this.getSheetWidth(worksheet);
 
-    table.setColumnNames(this.getColumnNameList(worksheet));
+    table.setColumnNames(this.getColumnNameList(worksheet,width));
 
-    table.setTable(this.getStringArray(worksheet));
+    table.setTable(this.getStringArray(worksheet,width));
 
-    this.response(table);
+    response(table);
 
   }
 
-  private getColumnNameList(worksheet:WorkSheet):string[]{
+  private getColumnNameList(worksheet:WorkSheet,width:number):string[]{
     let columnNames:string[]=[];
 
-    for(let i = 0;i < this.width;i++){
+    for(let i = 0;i < width;i++){
       columnNames.push(worksheet[this.numberToLetters(i)+1].v);
     }
 
     return columnNames;
   }
 
-  private getStringArray(worksheet:WorkSheet):(string[])[] {
+  private getStringArray(worksheet:WorkSheet,width:number):(string[])[] {
 
     let result:(string[])[] = [];
 
@@ -88,7 +85,7 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
     while(!end){
       end = true;
 
-      for(let x = 0;x < this.width;x++) {
+      for(let x = 0;x < width;x++) {
         let cell = worksheet[this.numberToLetters(x) + y]
         if (!cell || cell.v === "") {
           end = end && true;
