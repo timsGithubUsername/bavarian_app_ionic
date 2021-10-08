@@ -1,15 +1,14 @@
 export interface VocabularyWord {
-  /**
-   * Returns the ID of the vocabulary.
-   */
-  readonly id:number;
-
 
   /**
    * Returns the vocabulary in dialect.
    */
   readonly dialectWord:string;
 
+  /**
+   * Returns the vocabulary in dialect.
+   */
+  readonly dialectWordLiterally:string;
 
   /**
    * Returns the vocabulary in High German
@@ -49,6 +48,12 @@ export interface VocabularyWordMutable extends VocabularyWord{
    * @param word - The word to be set
    */
   setDialectWord(word:string):void;
+
+  /**
+   * Set the word in the dialect of the vocabulary.
+   * @param word - The word to be set
+   */
+  setDialectWordLiterally(word:string):void;
 
   /**
    * Puts the vocabulary word into High German

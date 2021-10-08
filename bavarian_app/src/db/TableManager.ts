@@ -85,6 +85,21 @@ export abstract class TableManager<T>{
     }
   }
 
+  public readAllRows(response: ((objects:T[]) => void)):void{
+    let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
+    let tbl : IDBObjectStore= trans.objectStore(this.tInfo.tableName);
+    let idx : IDBIndex= tbl.index(this.tInfo.primaryIndexName);
+    let req : IDBRequest = idx.getAll();
+
+    req.onsuccess = function (e: any) {
+      let obj : T[] = e.target.result;
+      response(obj);
+    };
+    req.onerror = function (e: any) {
+      alert(e.target.result);
+    }
+  }
+
 
   public updateRow(obj: T):void {
 
