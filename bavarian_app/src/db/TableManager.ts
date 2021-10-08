@@ -1,4 +1,4 @@
-//Inspiriert von https://visualstudiomagazine.com/articles/2016/09/01/working-with-indexeddb.aspx
+//Inspiriert durch https://visualstudiomagazine.com/articles/2016/09/01/working-with-indexeddb.aspx
 import {
   CategoriesTableModel,
   DialectTableModel,
@@ -8,6 +8,9 @@ import {
 } from "./TableModels";
 import {Table} from "../interactor/Table";
 
+/**
+ * Handles all requests to individual stores in the database.
+ */
 export abstract class TableManager<T>{
 
   protected content:Table;
@@ -15,35 +18,57 @@ export abstract class TableManager<T>{
   constructor(public tInfo:TableInfo,public db: IDBDatabase) {
   }
 
+  /**
+   * Sets the content of the table
+   * @param table
+   */
   public setContent(table:Table):void{
     this.content = table;
   }
 
+  /**
+   * Creates a standard index on the primary key.
+   * @param tbl
+   */
   public createIndex(tbl:IDBObjectStore):void{
     tbl.createIndex(this.tInfo.primaryIndexName,this.tInfo.primaryFieldName);
   }
 
+  /**
+   * Puts a new object in the Store
+   * @param ob
+   */
   public createRow(ob:T):void{
-    console.log(ob)
-    console.log(this.tInfo.tableName)
-    let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
 
+    let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
     let tbl : IDBObjectStore = trans.objectStore(this.tInfo.tableName);
     tbl.add(ob);
   }
 
+  /**
+   * Deletes a specific entry in the store
+   * @param id
+   */
   public deleteRow(id:string):void{
     let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
     let tbl : IDBObjectStore = trans.objectStore(this.tInfo.tableName);
     tbl.delete(id);
   }
 
+  /**
+   * Deletes all entries in the store
+   */
   public clearTable():void{
     let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
     let tbl : IDBObjectStore = trans.objectStore(this.tInfo.tableName);
     tbl.clear();
   }
 
+  /**
+   * Requests a read operation in a row.
+   * @param id
+   * @param response Called with the result when the operation is complete
+   */
   public readRow(id:string,response: ((ob:T) => void)):void{
 
     let trans : IDBTransaction = this.db.transaction([this.tInfo.tableName], "readwrite");
@@ -76,6 +101,9 @@ export abstract class TableManager<T>{
     }
   }
 
+  /**
+   * Fills the table.
+   */
   public abstract fillTable():void;
 }
 
@@ -91,7 +119,7 @@ export class VocabWordsTableManager extends TableManager<VocabWordsTableModel>{
     let x = new TableInfo();
     x.primaryFieldName = "";
     x.tableName = "VocabWordsTable";
-    x.primaryIndexName = "idIndex";
+    x.primaryIndexName = "categoriesIndex";
     super(x,db);
 
     this.categoriesIndexName  = "categoriesIndex";
@@ -121,8 +149,22 @@ export class VocabWordsTableManager extends TableManager<VocabWordsTableModel>{
   }
 
   public fillTable(): void {
-    let dialectColumn = this.content.getColumnIndex(this.dialect);
-    let languageColumn = this.content.getColumnIndex(this.language);
+    let dialectColumn:number;
+    let languageColumn:number;
+    //If the value for dialect or language arent set, there get set to default values.
+    if(this.dialect && this.content.getColumnNames().indexOf(this.dialect)>-1){
+      dialectColumn = this.content.getColumnIndex(this.dialect);
+    }else{
+      dialectColumn = this.content.getColumnIndex("Regensburg_male");
+    }
+
+    if(this.language && this.content.getColumnNames().indexOf(this.language)>-1){
+      languageColumn = this.content.getColumnIndex(this.language);
+    }else{
+      languageColumn = this.content.getColumnIndex("Englisch")
+    }
+
+
     this.content.getTable().forEach((row:string[]) => {
       let rowObj = new VocabWordsTableModel();
       rowObj.categories = parseInt(row[0]);
@@ -220,6 +262,9 @@ export class LevelsTableManager extends TableManager<LevelsTableModel>{
   }
 }
 
+/**
+ * Class to store information about a specific store.
+ */
 export class TableInfo {
   tableName: string;
   primaryFieldName: string;

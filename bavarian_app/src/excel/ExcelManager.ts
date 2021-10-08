@@ -4,31 +4,50 @@ import {Table, TableFactory, TableFactoryImpl} from "../interactor/Table";
 
 //https://github.com/SheetJS/sheetjs
 
+/**
+ * Handles all requests on a Excel document
+ */
 export interface ExcelManagerRequest{
 
-  requestExcelTable(fileName:string,tableName:string,sheetIndex:number,response:((table:Table) => void)):void;
+  /**
+   * Requests a table object from an Excel document.
+   * @param fileName Document file name
+   * @param sheetIndex
+   * @param response Called with the result if the request is successful.
+   */
+  requestExcelTable(fileName:string,sheetIndex:number,response:((table:Table) => void)):void;
 
 }
 
 
 export class ExcelManagerImpl implements ExcelManagerRequest{
 
-
+  //Path where all Excel tables are stored
   private path = "../assets/tables/";
+  //Instance of a TableFactory to create new tables.
   private tableFacrory: TableFactory;
 
-  requestExcelTable(fileName: string,tableName:string, sheetIndex: number, response: (table: Table) => void): void {
-
-
+  /**
+   * Requests a table object from an Excel document.
+   * @param fileName Document file name
+   * @param sheetIndex
+   * @param response Called with the result if the request is successful.
+   */
+  requestExcelTable(fileName: string, sheetIndex: number, response: (table: Table) => void): void {
       this.readFile(fileName,sheetIndex,response);
-
   }
 
   setTableFactory(instance:TableFactory):void{
     this.tableFacrory = instance;
   }
 
-
+  /**
+   * Reads an Excel document
+   * @param fileName
+   * @param sheetIndex
+   * @param response
+   * @private
+   */
   private readFile(fileName:string, sheetIndex:number,response: (table: Table) => void):void{
 
     let url = this.path + fileName;
@@ -50,12 +69,21 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
 
   }
 
+  /**
+   * Converts an Excel document from a workbook to a table object
+   * @param workBook Excel document
+   * @param sheetIndex
+   * @param response
+   * @private
+   */
   private convert(workBook:WorkBook, sheetIndex:number,response: (table: Table) => void):void {
+
     let sheetName = workBook.SheetNames[sheetIndex]
     let worksheet = workBook.Sheets[sheetName];
+
     let table = this.tableFacrory.createTable();
 
-
+    //Width of the table gets calculated
     let width = this.getSheetWidth(worksheet);
 
     table.setColumnNames(this.getColumnNameList(worksheet,width));
@@ -82,14 +110,15 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
 
     let end = false;
     let y = 2; //First row are the column names and are therefore skipped here.
-    while(!end){
+    while(!end){ //Continues to run until there are no entries in the complete next line
       end = true;
 
       for(let x = 0;x < width;x++) {
         let cell = worksheet[this.numberToLetters(x) + y]
-        if (!cell || cell.v === "") {
+        if (!cell || cell.v === "") { // If there is no entry in the current cell
           end = end && true;
         }else{
+          //If this is the first entry of a new line a new array is created first
           if(!result[y-2]){
             result[y-2] = [];
           }
@@ -116,8 +145,14 @@ export class ExcelManagerImpl implements ExcelManagerRequest{
     return index;
   }
 
+  /**
+   * Converts a number to the corresponding letter identifiers of the X-axis of an Excel spreadsheet
+   * @param num number to convert
+   * @private
+   */
   private numberToLetters(num:number):string{
-    num = num + 1;
+
+    num++;
 
     let valueA = 65;
     let valueZ = 90;

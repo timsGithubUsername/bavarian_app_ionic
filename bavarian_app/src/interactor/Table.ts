@@ -1,17 +1,6 @@
 export interface Table{
 
   /**
-   * Sets th name of the Table
-   * @param name
-   */
-  setName(name:string):void;
-
-  /**
-   * Returns the name of th table
-   */
-  getName():string;
-
-  /**
    * Overrides the content of the Table
    * @param table
    */
@@ -192,20 +181,4 @@ class TableImpl implements Table{
   getColumnIndex(columnName: string): number {
     return this.columnNames.indexOf(columnName);
   }
-
-  /**
-   * Returns the name of th table
-   */
-  getName(): string {
-    return this.name;
-  }
-
-  /**
-   * Sets th name of the Table
-   * @param name
-   */
-  setName(name: string): void {
-    this.name = name;
-  }
-
 }
