@@ -1,25 +1,10 @@
 import * as XLSX from 'xlsx';
 import {WorkBook, WorkSheet} from "xlsx";
-import {Table, TableFactory, TableFactoryImpl} from "../interactor/Table";
+import {Table, TableFactory} from "../interactor/Table";
+import {ExcelManagerRequest} from "../interactor/ExcelManagerRequest";
+
 
 //https://github.com/SheetJS/sheetjs
-
-/**
- * Handles all requests on a Excel document
- */
-export interface ExcelManagerRequest{
-
-  /**
-   * Requests a table object from an Excel document.
-   * @param fileName Document file name
-   * @param sheetIndex
-   * @param response Called with the result if the request is successful.
-   */
-  requestExcelTable(fileName:string,sheetIndex:number,response:((table:Table) => void)):void;
-
-}
-
-
 export class ExcelManagerImpl implements ExcelManagerRequest{
 
   //Path where all Excel tables are stored

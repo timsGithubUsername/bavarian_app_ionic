@@ -3,17 +3,16 @@ import {VocabularyWordFactory} from "./VocabularyWordFactory";
 
 export class VocabularyWordFactoryImpl implements VocabularyWordFactory {
 
-  createVocabularyWord(id: number, dialectWord: string, germanWord: string, translationWord: string): VocabularyWordMutable {
-    return new VocabularyWordImpl(id,germanWord,dialectWord,translationWord);
+  createVocabularyWord(dialectWord: string, germanWord: string, translationWord: string): VocabularyWordMutable {
+    return new VocabularyWordImpl(germanWord,dialectWord,translationWord);
   }
 
 }
 
 class VocabularyWordImpl implements VocabularyWordMutable {
 
-  id:number;
-
   dialectWord : string;
+  dialectWordLiterally : string;
   german : string;
   translationWord : string;
   picturePath : string;
@@ -22,16 +21,22 @@ class VocabularyWordImpl implements VocabularyWordMutable {
 
 
   constructor(
-    id:number,
     germanWord:string,
     dialectWord:string,
     translationWord:string){
 
-    this.id = id;
     this.setGerman(germanWord);
     this.setDialectWord(dialectWord);
     this.setTranslation(translationWord);
 
+  }
+
+  /**
+   * Set the word in the dialect of the vocabulary.
+   * @param word - The word to be set
+   */
+  setDialectWordLiterally(word: string): void {
+        this.dialectWordLiterally = word;
   }
 
 

@@ -53,7 +53,7 @@ class QuizWordImpl implements QuizWordMutable {
    * @param word - The word to be tested
    */
   testAnswer(word: VocabularyWord): boolean {
-    let ret = word.id === this.word.id
+    let ret = word === this.word
     this.testResult = ret ? TestResult.Correct : TestResult.Incorrect
     return ret;
   }
@@ -62,5 +62,6 @@ class QuizWordImpl implements QuizWordMutable {
   getTestResult(): TestResult {
     return this.testResult;
   }
+
 
 }
