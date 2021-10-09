@@ -6,7 +6,7 @@ import {
   TableManager,
   VocabWordsTableManager
 } from "./TableManager";
-import {Table} from "../interactor/Table";
+import {Table, TableFactoryImpl} from "../interactor/Table";
 import {DatabaseRequester} from "../interactor/DatabaseRequester";
 import {Dialect, Gender} from "../entities/Dialect";
 import {Language} from "../entities/Language";
@@ -25,6 +25,7 @@ import {LevelFactory} from "../entities/factory/LevelFactory";
 import {CategoryFactory} from "../entities/factory/CategoryFactory";
 import {VocabularyWordFactory} from "../entities/factory/VocabularyWordFactory";
 import {Category, CategoryMutable} from "../entities/Category";
+import {ExcelManagerImpl} from "../excel/ExcelManager";
 
 /**
  * Implementation for the DatabaseRequester
@@ -292,7 +293,7 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     return result;
   }
 }
-/*
+
 //Test Code for IndexedDb
 export function db():void{
   let em : ExcelManagerImpl= new ExcelManagerImpl();
@@ -302,27 +303,31 @@ export function db():void{
   let start = function (){
     counter++;
     if(counter > 4){
-      dr.startDatabase(()=>{})
+      dr.startDatabase(()=>{
+        dr.requestAllDialects(dialects => {
+          console.log(dialects);
+        })
+      })
     }
   }
 
-  em.requestExcelTable("Welcome_to_Bavaria_V_2_35.xlsx","VocabWords",0,(table:Table)=>{
+  em.requestExcelTable("Welcome_to_Bavaria_V_2_35.xlsx",0,(table:Table)=>{
     dr.setVocabWordsContent(table,"Englisch","Regensburg_male");
     start();
   })
-  em.requestExcelTable("Categories_V_1_5.xlsx","Categories",0,(table:Table)=>{
+  em.requestExcelTable("Categories_V_1_5.xlsx",0,(table:Table)=>{
     dr.setCategoriesContent(table)
     start();
   })
-  em.requestExcelTable("Dialects_V_1_17.xlsx","Dialects",0,(table:Table)=>{
+  em.requestExcelTable("Dialects_V_1_17.xlsx",0,(table:Table)=>{
     dr.setDialectContent(table)
     start();
   })
-  em.requestExcelTable("Languages_V_1_8.xlsx","Languages",0,(table:Table)=>{
+  em.requestExcelTable("Languages_V_1_8.xlsx",0,(table:Table)=>{
     dr.setLanguageContent(table)
     start();
   })
-  em.requestExcelTable("Levels_V_1_5.xlsx","Levels",0,(table:Table)=>{
+  em.requestExcelTable("Levels_V_1_5.xlsx",0,(table:Table)=>{
     dr.setLevelsContent(table)
     start();
   })
@@ -331,4 +336,4 @@ export function db():void{
 
 }
 
-*/
+

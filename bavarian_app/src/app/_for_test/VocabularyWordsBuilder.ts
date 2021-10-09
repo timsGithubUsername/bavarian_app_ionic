@@ -17,7 +17,6 @@ export class VocabularyWordsBuilder {
 
     for(let i = 0; i < 6; i++){
       currentVocabularyWord = this.vocabularyWordFactory.createVocabularyWord(
-        i,
         "dialect word "+i,
         "german word "+i,
         "translation word"+i);
