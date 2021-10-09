@@ -26,6 +26,11 @@ import {CategoryFactory} from "../entities/factory/CategoryFactory";
 import {VocabularyWordFactory} from "../entities/factory/VocabularyWordFactory";
 import {Category, CategoryMutable} from "../entities/Category";
 import {ExcelManagerImpl} from "../excel/ExcelManager";
+import {DialectFactoryImpl} from "../entities/factory/DialectFactoryImpl";
+import {LanguageFactoryImpl} from "../entities/factory/LanguageFactoryImpl";
+import {LevelFactoryImpl} from "../entities/factory/LevelFactoryImpl";
+import {CategoryFactoryImpl} from "../entities/factory/CategoryFactoryImpl";
+import {VocabularyWordFactoryImpl} from "../entities/factory/VocabularyWordFactoryImpl";
 
 /**
  * Implementation for the DatabaseRequester
@@ -89,6 +94,14 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     this.levelsContent = content;
   }
 
+  public setFactorys(dialect:DialectFactory,language:LanguageFactory,level:LevelFactory,category:CategoryFactory,vocab:VocabularyWordFactory):void{
+    this.dialectFactory = dialect;
+    this.languageFactory = language;
+    this.levelFactory = level;
+    this.categoryFactory = category;
+    this.vocabFactory = vocab;
+  }
+
   public startDatabase(response:(()=>void)):void{
     this.request = indexedDB.open(this.dbName,this.dbVersion);
     let that = this;
@@ -102,6 +115,7 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
       //Tables are only refilled if the version has changed or no database existed before.
       if(this.upgradeNeeded){
         that.vocabManager.clearTable();
+        that.fillTable();
       }
 
       response();
@@ -201,6 +215,11 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     this.startDatabase(response);
   }
 
+  /**
+   * Makes a request for all dialects in the database. When
+   * the request is evaluated, response is called with the result
+   * @param response
+   */
   requestAllDialects(response: (dialects: Dialect[]) => void): void {
     this.dialectsManager.readAllRows((objects: DialectTableModel[]) => {
       let result:Dialect[] = [];
@@ -217,12 +236,22 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     });
   }
 
+  /**
+   * Makes a request for all languages in the database. When
+   * the request is evaluated, response is called with the result
+   * @param response
+   */
   requestAllLanguages(response: (langs: Language[]) => void): void {
     this.languagesManager.readAllRows((objects:LanguagesTableModel[]) =>{
       response(this.buildLanguages(objects));
     });
   }
 
+  /**
+   * Converts a LanguageTableModel object to a Language object.
+   * @param langM
+   * @private
+   */
   private buildLanguages(langM:LanguagesTableModel[]):Language[] {
     let result:Language[] = [];
     langM.forEach((obj:LanguagesTableModel) => {
@@ -237,6 +266,11 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
 
 
 
+  /**
+   * Makes a request for all levels in the database. When
+   * the request is evaluated, response is called with the result
+   * @param response
+   */
   requestAllLevels(response: (levels: Level[]) => void): void {
     this.levelsManager.readAllRows((levelModels:LevelsTableModel[])=>{
       this.categoriesManager.readAllRows((catModels:CategoriesTableModel[]) => {
@@ -245,6 +279,12 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     });
   }
 
+  /**
+   * Converts a LevelTableModel object to a Level object.
+   * @param levelModels
+   * @param catModels
+   * @private
+   */
   private buildLevels(levelModels:LevelsTableModel[],catModels:CategoriesTableModel[]):Level[]{
     let result:Level[] = [];
     levelModels.forEach((levelM:LevelsTableModel) =>{
@@ -259,6 +299,11 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     return result;
   }
 
+  /**
+   * Converts a CategoriesTableModel object to a Category object.
+   * @param catModels
+   * @private
+   */
   private buildCategories(catModels:CategoriesTableModel[]):CategoryMutable[]{
     let result:CategoryMutable[] = [];
     catModels.forEach((value:CategoriesTableModel) =>{
@@ -270,12 +315,22 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     return result;
   }
 
+  /**
+   * Makes a request for all words with a given category in the database.
+   * When the request is evaluated, response is called with the result
+   * @param cat
+   * @param response
+   */
   requestVocabularyWords(cat: number, response: (words: VocabularyWord[]) => void): void {
     this.vocabManager.readRows(cat,(vocabs:VocabWordsTableModel[])=> {
       response(this.buildVocabularyWords(vocabs));
     });
   }
 
+  /**
+   * Converts a VocabWordsTableModel object to a VocabularyWord object.
+   * @param vocabs
+   */
   buildVocabularyWords(vocabs:VocabWordsTableModel[]):VocabularyWord[]{
     let result:VocabularyWord[] = [];
     vocabs.forEach((value :VocabWordsTableModel) => {
@@ -299,20 +354,25 @@ export function db():void{
   let em : ExcelManagerImpl= new ExcelManagerImpl();
   em.setTableFactory(new TableFactoryImpl());
   let dr : DatabaseRequesterImpl = new DatabaseRequesterImpl();
+  dr.setFactorys(new DialectFactoryImpl(),
+    new LanguageFactoryImpl(),
+    new LevelFactoryImpl(),
+    new CategoryFactoryImpl(),
+    new VocabularyWordFactoryImpl());
   let counter = 0;
   let start = function (){
     counter++;
     if(counter > 4){
       dr.startDatabase(()=>{
-        dr.requestAllDialects(dialects => {
-          console.log(dialects);
+        dr.requestVocabularyWords(1,vocabs => {
+          console.log(vocabs)
         })
       })
     }
   }
 
   em.requestExcelTable("Welcome_to_Bavaria_V_2_35.xlsx",0,(table:Table)=>{
-    dr.setVocabWordsContent(table,"Englisch","Regensburg_male");
+    dr.setVocabWordsContent(table,"Tschechisch","Regensburg_male");
     start();
   })
   em.requestExcelTable("Categories_V_1_5.xlsx",0,(table:Table)=>{

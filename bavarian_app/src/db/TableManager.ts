@@ -209,8 +209,8 @@ export class CategoriesTableManager extends TableManager<CategoriesTableModel>{
       let rowObj = new CategoriesTableModel();
       rowObj.id = parseInt(row[0]);
       rowObj.name = row[1];
-      rowObj.level = parseInt(row[2]);
-      rowObj.pictureName = row[3];
+      rowObj.level = parseInt(row[3]);
+      rowObj.pictureName = row[2];
       this.createRow(rowObj)
     })
   }
