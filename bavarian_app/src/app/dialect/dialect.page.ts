@@ -12,4 +12,10 @@ export class DialectPage implements OnInit {
   ngOnInit() {
   }
 
+  setDialect(id:number):void{
+    switch (id){
+      case 0:
+        //
+    }
+  }
 }
