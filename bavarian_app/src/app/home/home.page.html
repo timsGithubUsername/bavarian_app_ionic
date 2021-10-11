@@ -10,19 +10,19 @@
         <ion-icon name="language-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_TRANSLATE" | translate }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="directToDialectSelection()">
         <ion-icon name="chatbubble-ellipses-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_DIALECT" | translate }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="directToAchievements()">
         <ion-icon name="trophy-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_ACHIEVEMENTS" | translate }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="resetApp()">
         <ion-icon name="refresh-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_RESET" | translate }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="directToAboutUs()">
         <ion-icon name="people-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_ABOUT" | translate }}</ion-label>
       </ion-item>

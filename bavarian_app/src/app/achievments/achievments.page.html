@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="ion-text-wrap">{{ 'ACHIEVEMENTS.TITLE' | translate }}</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(1)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L1' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(2)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L2' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(3)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L3' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(4)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L4' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(5)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L5' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(6)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L6' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(7)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L7' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="ion-text-center ion-text-wrap">
+          <ion-img [src]="getPicturePathForLevel(8)"></ion-img>
+          <h2>{{ 'ACHIEVEMENTS.L8' | translate }}</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

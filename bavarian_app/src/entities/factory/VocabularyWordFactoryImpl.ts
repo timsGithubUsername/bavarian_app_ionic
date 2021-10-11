@@ -41,7 +41,7 @@ class VocabularyWordImpl implements VocabularyWordMutable {
 
 
   /**
-   * Set the word in the dialect of the vocabulary.
+   * Set the word in the dialect_old of the vocabulary.
    * @param word - The word to be set
    */
   setDialectWord(word: string): void {

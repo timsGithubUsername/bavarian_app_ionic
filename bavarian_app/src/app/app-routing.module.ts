@@ -27,6 +27,22 @@ const routes: Routes = [
     path: 'translation',
     loadChildren: () => import('./translation/translation.module').then( m => m.TranslationPageModule)
   },
+  {
+    path: 'dialect',
+    loadChildren: () => import('./dialect/dialect.module').then( m => m.DialectPageModule)
+  },
+  {
+    path: 'achievments',
+    loadChildren: () => import('./achievments/achievments.module').then( m => m.AchievmentsPageModule)
+  },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./about-us/about-us.module').then( m => m.AboutUsPageModule)
+  },
+  {
+    path: 'references',
+    loadChildren: () => import('./references/references.module').then( m => m.ReferencesPageModule)
+  },
 ];
 
 @NgModule({

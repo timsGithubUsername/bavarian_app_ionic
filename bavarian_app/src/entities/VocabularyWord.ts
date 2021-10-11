@@ -1,7 +1,7 @@
 export interface VocabularyWord {
 
   /**
-   * Returns the vocabulary in dialect.
+   * Returns the vocabulary in dialect_old.
    */
   readonly dialectWord:string;
 
@@ -44,7 +44,7 @@ export interface VocabularyWordMutable extends VocabularyWord{
 
 
   /**
-   * Set the word in the dialect of the vocabulary.
+   * Set the word in the dialect_old of the vocabulary.
    * @param word - The word to be set
    */
   setDialectWord(word:string):void;

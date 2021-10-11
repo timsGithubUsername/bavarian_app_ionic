@@ -38,7 +38,7 @@ export interface InteractorRequester {
   setLanguage(language:Language):void;
 
   /**
-   * Sets the dialect for all upcoming requests
+   * Sets the dialect_old for all upcoming requests
    * @param dialect
    */
   setDialect(dialect:Dialect):void;
@@ -50,21 +50,21 @@ export interface InteractorRequester {
   requestLanguage(response:((lang:Language) => void)):void;
 
   /**
-   * Requests the currently selected dialect
-   * @param response Called as soon as the request ist finished. Hands Over undefined if the dialect isn't set yet
+   * Requests the currently selected dialect_old
+   * @param response Called as soon as the request ist finished. Hands Over undefined if the dialect_old isn't set yet
    */
   requestDialect(response:((dialect:Dialect) => void)):void;
 
   /**
    * Requests all levels in the database
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param response Called as soon as the request of all levels is finished
    */
   requestAllLevels(response:((levels:Level[]) => void)):void;
 
   /**
    * Requests the study for a category
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param cat
    * @param response Called as soon as the request of a spezific study is finished
    */
@@ -72,7 +72,7 @@ export interface InteractorRequester {
 
   /**
    * Requests a quiz for a category
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param cat
    * @param response Called as soon as the request of a spezific quiz is finished
    */
@@ -80,7 +80,7 @@ export interface InteractorRequester {
 
   /**
    * Requests progress in a category
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param cat
    * @param type Indicates which progress is to be returned
    * @param response Called as soon as the request of the progress of a category is completed
@@ -89,7 +89,7 @@ export interface InteractorRequester {
 
   /**
    * Requests progress in all categories
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param type Indicates which progress is to be returned
    * @param response Called as soon as the request of the progress of all categories is completed
    */
@@ -97,7 +97,7 @@ export interface InteractorRequester {
 
   /**
    * Stores a new progress value for a certain category
-   * Language and dialect must be set before
+   * Language and dialect_old must be set before
    * @param cat - Category for which the progress needs to be saved
    * @param type Indicates which progress is to be saved
    * @param value - New progress to be saved

@@ -71,6 +71,5 @@ export class AppComponent {
     interactor.setDatabaseRequester(databaseRequester);
     interactor.startInteractor(()=>{});
     AppInjector.get(ControllerService).setInteractorRequester(interactor);
-
   }
 }
