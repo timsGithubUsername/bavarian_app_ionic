@@ -7,6 +7,8 @@ import {Quiz} from "../../../entities/Quiz";
 import {AppInjector} from "../../app.module";
 import {CategoryService} from "../category.service";
 import {RoutingService} from "../routing.service";
+import {Dialect} from "../../../entities/Dialect";
+import {ConfigService} from "../config.service";
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +70,12 @@ export class ControllerService {
 
   }
 
+  /**
+   * request all Dialects
+   */
+  public requestAllDialects(){
+    this.interactorRequester.requestAllDialects((dialects => this.respondAllDialects(dialects)));
+  }
   /*
   RESPONSE METHODS
 
@@ -93,4 +101,20 @@ export class ControllerService {
     AppInjector.get(RoutingService).getRouter().navigate(['learning']);
   }
 
+  //respond all dialects in the DB
+  private respondAllDialects(dialects: Dialect[]){
+    AppInjector.get(ConfigService).setDialects(dialects);
+  }
+
+  /*
+
+  SETTINGS
+
+  Set the.. settings
+   */
+
+  //set the dialect
+  public setDialect(d:Dialect):void{
+    this.interactorRequester.setDialect(d);
+  }
 }

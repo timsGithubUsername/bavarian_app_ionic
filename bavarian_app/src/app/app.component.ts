@@ -71,5 +71,9 @@ export class AppComponent {
     interactor.setDatabaseRequester(databaseRequester);
     interactor.startInteractor(()=>{});
     AppInjector.get(ControllerService).setInteractorRequester(interactor);
+
+    //set all configurations
+    //todo kommentare wieder entkommentieren. Patrick muss nur den Bug fixen
+    //AppInjector.get(ControllerService).requestAllDialects();
   }
 }

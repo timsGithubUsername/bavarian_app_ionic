@@ -14,6 +14,7 @@
   },
   "TRANSLATION": {
     "TITLE": "Wähle deine Übersetzungssprache aus",
+    "_comment": "The following strings are probably no longer needed, since the texts are taken directly from the DB. For error prevention these remain further - however a translation of these will not arrive if necessary in the APP!",
     "AL": "Arabisch",
     "DEU": "Deutsch",
     "US": "Englisch",
@@ -26,6 +27,7 @@
     "WARNING_NO": "Nein",
     "WARNING_MALE": "Männliche Stimme",
     "WARNING_FEMALE": "Weibliche Stimme",
+    "_comment": "The following strings are probably no longer needed, since the texts are taken directly from the DB. For error prevention these remain further - however a translation of these will not arrive if necessary in the APP!",
     "BAYREUTH": "Bayreuth\n(Ostfränkisch)",
     "ALTENSTADT": "Altenstadt an der Waldnaab\n(Nordbairisch)",
     "REGENSBURG": "Regensburg\n(Nordmittelbairisch)",

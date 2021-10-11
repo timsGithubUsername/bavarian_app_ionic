@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Dialect} from "../../entities/Dialect";
+import {AppInjector} from "../app.module";
+import {ControllerService} from "../services/controller/controller.service";
+import {ConfigService} from "../services/config.service";
 
 @Component({
   selector: 'app-dialect',
@@ -7,15 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialectPage implements OnInit {
 
-  constructor() { }
+  dialects:Dialect[];
+
+  constructor(private config:ConfigService,
+              private controller:ControllerService) {
+    this.dialects = this.config.dialects;
+  }
 
   ngOnInit() {
   }
 
-  setDialect(id:number):void{
-    switch (id){
-      case 0:
-        //
-    }
+  setDialect(d:Dialect):void{
+    this.controller.setDialect(d);
   }
 }
