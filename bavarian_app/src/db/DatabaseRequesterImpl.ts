@@ -308,6 +308,7 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     let result:CategoryMutable[] = [];
     catModels.forEach((value:CategoriesTableModel) =>{
       result.push(this.categoryFactory.createCategory(
+        value.id,
         value.name,
         value.pictureName
       ));
@@ -391,9 +392,6 @@ export function db():void{
     dr.setLevelsContent(table)
     start();
   })
-
-
-
 }
 
 

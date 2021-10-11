@@ -3,6 +3,11 @@ import {Level} from "./Level";
 export interface Category{
 
   /**
+   * Returns the id of the category
+   */
+  readonly id:number;
+
+  /**
    * Returns the name of the category
    */
   readonly name:string;

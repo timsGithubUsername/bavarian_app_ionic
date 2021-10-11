@@ -49,18 +49,18 @@ export class LocalStorageManagerImpl implements LocalStorageManager{
 
   saveProgress(type: ProgressType, cat: Category, value: number): void {
     let prefix = this.getProgressPrefix(type);
-    this.strg.setItem(prefix+cat.name,"" + value);
+    this.strg.setItem(prefix+cat.id,"" + value);
   }
   loadProgress(type: ProgressType, cat: Category): number {
     let prefix = this.getProgressPrefix(type);
-    return parseFloat(this.strg.getItem(prefix+cat.name));
+    return parseFloat(this.strg.getItem(prefix+cat.id));
   }
   existProgress(type: ProgressType, cat: Category): boolean {
     let prefix = this.getProgressPrefix(type);
-    return this.strg.getItem(prefix+cat.name) != null;
+    return this.strg.getItem(prefix+cat.id) != null;
   }
   deleteProgress(type: ProgressType, cat: Category): void {
     let prefix = this.getProgressPrefix(type);
-    this.strg.removeItem(prefix+cat.name);
+    this.strg.removeItem(prefix+cat.id);
   }
 }

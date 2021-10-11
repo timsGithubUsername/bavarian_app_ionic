@@ -8,6 +8,18 @@ import {Dialect} from "../entities/Dialect";
 export interface InteractorRequester {
 
   /**
+   * Requests the start of the database. Calls the response function when the start of the database is completed.
+   * @param response
+   */
+  startInteractor(response:()=>void);
+
+  /**
+   * Requests the reset of the database. Calls the response function when the reset of the database is completed.
+   * @param response
+   */
+  resetInteractor(response:()=>void);
+
+  /**
    * Requests all Languages of the Database
    * @param response Called as soon as the request ist finished
    */
