@@ -224,18 +224,24 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
    */
   requestAllDialects(response: (dialects: Dialect[]) => void): void {
     this.dialectsManager.readAllRows((objects: DialectTableModel[]) => {
-      let result:Dialect[] = [];
-      objects.forEach((obj:DialectTableModel) =>{
-        let dialect = this.dialectFactory.create(
-          obj.name,
-          obj.id,
-          obj.gender === "w" ? Gender.FEMALE : Gender.MALE,
-          obj.info
-        );
-        result.push(dialect);
-      });
-      response(result);
+      response(this.buildDialects(objects));
     });
+  }
+
+  private buildDialects(dialects:DialectTableModel[]):Dialect[]{
+    let result:Dialect[] = [];
+
+    dialects.forEach((obj:DialectTableModel) =>{
+      result.push(this.dialectFactory.create(
+        obj.name,
+        obj.id,
+        obj.gender === "w" ? Gender.FEMALE : Gender.MALE,
+        obj.info
+      ));
+    });
+
+    return result;
+
   }
 
   /**
