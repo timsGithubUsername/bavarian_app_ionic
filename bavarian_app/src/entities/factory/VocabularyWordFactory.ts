@@ -10,7 +10,6 @@ export interface VocabularyWordFactory {
    * @param translationWord - Translation of the object
    */
   createVocabularyWord(
-    id:number,
     dialectWord:string,
     germanWord:string,
     translationWord:string,

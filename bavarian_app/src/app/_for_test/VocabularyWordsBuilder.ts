@@ -17,10 +17,9 @@ export class VocabularyWordsBuilder {
 
     for(let i = 0; i < 6; i++){
       currentVocabularyWord = this.vocabularyWordFactory.createVocabularyWord(
-        i,
-        "dialect_old word "+i,
+        "dialect word "+i,
         "german word "+i,
-        "");
+        "translation word"+i);
 
       if(Math.floor(Math.random() * 2) === 0) currentVocabularyWord.setAnnotation("test stuff der hier stehen könnte aber bin Fantasielos");
 

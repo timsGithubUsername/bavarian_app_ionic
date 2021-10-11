@@ -1,5 +1,5 @@
 import {CategoryMutable} from "../Category";
 
 export interface CategoryFactory {
-  createCategory(name:string,iconPath:string):CategoryMutable;
+  createCategory(id:number, name:string,iconPath:string):CategoryMutable;
 }

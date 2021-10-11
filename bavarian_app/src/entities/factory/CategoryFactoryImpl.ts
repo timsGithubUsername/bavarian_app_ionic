@@ -4,8 +4,8 @@ import {CategoryMutable} from "../Category";
 
 export class CategoryFactoryImpl implements CategoryFactory{
 
-  createCategory(name: string, iconPath: string): CategoryMutable {
-    return new CategoryImpl(name,iconPath);
+  createCategory(id:number,name: string, iconPath: string): CategoryMutable {
+    return new CategoryImpl(id,name,iconPath);
   }
 
 }
@@ -14,7 +14,7 @@ class CategoryImpl implements CategoryMutable{
 
   level: Level;
 
-  constructor(public name: string,public iconPath: string){
+  constructor(public id:number,public name: string,public iconPath: string){
 
   }
 
