@@ -11,18 +11,20 @@
 
 <ion-content>
   <ion-grid>
+    <div *ngFor="let translation of translations">
     <ion-row>
       <ion-col>
-        <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap">
+        <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="setLanguage(translation)">
           <ion-avatar slot="start">
-            <ion-img src="assets/img/national_flags/al.png"></ion-img>
+            <ion-img [src]="translation.iconPath"></ion-img>
           </ion-avatar>
           <ion-label>
-            <h2>{{ "TRANSLATION.AL" | translate }}</h2>
+            <h2>{{ translation.name }}</h2>
           <small>+{{ "TRANSLATION.DEU" | translate }}</small>
           </ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
+    </div>
   </ion-grid>
 </ion-content>

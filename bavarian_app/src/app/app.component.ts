@@ -75,5 +75,6 @@ export class AppComponent {
     //set all configurations
     //todo kommentare wieder entkommentieren. Patrick muss nur den Bug fixen
     //AppInjector.get(ControllerService).requestAllDialects();
+    //AppInjector.get(ControllerService).requestAllLanguages();
   }
 }

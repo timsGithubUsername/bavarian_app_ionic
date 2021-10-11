@@ -9,6 +9,7 @@ import {CategoryService} from "../category.service";
 import {RoutingService} from "../routing.service";
 import {Dialect} from "../../../entities/Dialect";
 import {ConfigService} from "../config.service";
+import {Language} from "../../../entities/Language";
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,13 @@ export class ControllerService {
   public requestAllDialects(){
     this.interactorRequester.requestAllDialects((dialects => this.respondAllDialects(dialects)));
   }
+
+  /**
+   * request all Languages
+   */
+  public requestAllLanguages(){
+    this.interactorRequester.requestAllLanguages((langs => this.respondAllLanguages(langs)));
+  }
   /*
   RESPONSE METHODS
 
@@ -106,6 +114,10 @@ export class ControllerService {
     AppInjector.get(ConfigService).setDialects(dialects);
   }
 
+  //respond all languages in the DB
+  private respondAllLanguages(languages: Language[]){
+    AppInjector.get(ConfigService).setTranslations(languages);
+  }
   /*
 
   SETTINGS
@@ -116,5 +128,9 @@ export class ControllerService {
   //set the dialect
   public setDialect(d:Dialect):void{
     this.interactorRequester.setDialect(d);
+  }
+  //set the language
+  public setLanguage(l:Language):void{
+    this.interactorRequester.setLanguage(l);
   }
 }
