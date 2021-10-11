@@ -11,7 +11,6 @@ import {LocalStorageManager} from "./LocalStorageManager";
 import {Table} from "./Table";
 import {QuizFactory} from "../entities/factory/QuizFactory";
 import {QuizWordFactory} from "../entities/factory/QuizWordFactory";
-import {valueReferenceToExpression} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
 
 export class InteractorImpl implements InteractorRequester {
 
@@ -48,6 +47,8 @@ export class InteractorImpl implements InteractorRequester {
   }
 
   startInteractor(response: () => void) {
+
+    console.log("Starting Database...")
 
     let counter = 0;
     let excel = this.excel;
@@ -94,7 +95,7 @@ export class InteractorImpl implements InteractorRequester {
 
   requestAllLanguages(response: (langs: Language[]) => void): void {
     let that = this;
-    if(this.langs === []){
+    if(this.langs.length < 1){
       this.database.requestAllLanguages((langs:Language[]) => {
         that.langs = langs;
         response(langs);
@@ -105,7 +106,7 @@ export class InteractorImpl implements InteractorRequester {
   }
   requestAllDialects(response: (dialects: Dialect[]) => void): void {
     let that = this;
-    if(this.dialects === []){
+    if(this.dialects.length < 1){
       this.database.requestAllDialects((dialects:Dialect[]) => {
         that.dialects = dialects;
         response(dialects);
@@ -140,9 +141,10 @@ export class InteractorImpl implements InteractorRequester {
 
   requestAllLevels(response: (levels: Level[]) => void): void {
     let that = this;
-    if(this.levels === []){
+    if(this.levels.length<1){
       this.database.requestAllLevels(levels => {
         that.levels = levels;
+        console.log(levels);
         response(levels);
       });
     }else{
@@ -159,22 +161,33 @@ export class InteractorImpl implements InteractorRequester {
       response(that.quizFactory.createQuiz(words,that.quizWordFactory));
     })
   }
-    requestProgressFromCategory(cat: Category, type: ProgressType, response: (progress: number) => void): void {
-        response(this.storage.loadProgress(type,cat));
-    }
-    requestProgressFromAllCategories(type: ProgressType, response: (progress: Map<Category, number>) => void) {
-      let storage = this.storage;
-        this.database.requestAllLevels((levels:Level[]) => {
-          let result:Map<Category,number> = new Map<Category, number>();
-          levels.forEach((value:Level) => {
-            value.categories.forEach((value:Category) => {
-              result.set(value,storage.loadProgress(type,value))
-            })
-          })
-          response(result);
+  requestProgressFromCategory(cat: Category, type: ProgressType, response: (progress: number) => void): void {
+    response(this.storage.loadProgress(type,cat));
+  }
+  requestProgressFromAllCategories(type: ProgressType, response: (progress: Map<Category, number>) => void) {
+    let storage = this.storage;
+    this.database.requestAllLevels((levels:Level[]) => {
+      let result:Map<Category,number> = new Map<Category, number>();
+      levels.forEach((value:Level) => {
+        value.categories.forEach((value:Category) => {
+          result.set(value,storage.loadProgress(type,value))
         })
+      })
+      response(result);
+    })
+  }
+  saveProgress(cat: Category, type: ProgressType, value: number) {
+    this.storage.saveProgress(type,cat,value);
+  }
+
+  saveAchievement(id: string, status: boolean): void {
+    if(status){
+      this.storage.saveAchievement(id);
+    }else if(this.storage.testAchievement(id)){
+      this.storage.deleteAchievement(id);
     }
-    saveProgress(cat: Category, type: ProgressType, value: number) {
-        this.storage.saveProgress(type,cat,value);
-    }
+  }
+  checkAchievement(id: string): boolean {
+    return this.storage.testAchievement(id);
+  }
 }

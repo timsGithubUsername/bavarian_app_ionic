@@ -9,7 +9,7 @@ import {LevelFactoryImpl} from "../../entities/factory/LevelFactoryImpl";
 export class LevelBuilder{
   categoryFactory = new CategoryFactoryImpl();
   levelFactory = new LevelFactoryImpl();
-  cat: CategoryMutable = this.categoryFactory.createCategory("Test Category!", "assets/img/img_not_found.jpg");
+  cat: CategoryMutable = this.categoryFactory.createCategory(0,"Test Category!", "assets/img/img_not_found.jpg");
   lvls: Level[] = [];
 
   constructor() {

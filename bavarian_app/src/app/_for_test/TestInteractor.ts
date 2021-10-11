@@ -14,6 +14,13 @@ import {QuizBuilder} from "./QuizBuilder";
  * If we build the app TestInteractor can be easily exchanged in app.component.ts, method buildProgrammTree()
  */
 export class TestInteractor implements InteractorRequester {
+
+  startInteractor(response: () => void) {
+      throw new Error("Method not implemented.");
+  }
+  resetInteractor(response: () => void) {
+      throw new Error("Method not implemented.");
+  }
   /*
   I dont comment here, there is not realy much to explain.
 
@@ -63,6 +70,13 @@ export class TestInteractor implements InteractorRequester {
   }
 
   setLanguage(language: Language): void {
+  }
+
+  checkAchievement(id: string): boolean {
+    return false;
+  }
+
+  saveAchievement(id: string, status: boolean): void {
   }
 
 }

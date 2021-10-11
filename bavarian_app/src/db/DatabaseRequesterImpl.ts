@@ -118,6 +118,8 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
         that.fillTable();
       }
 
+      console.log("Database started!");
+
       response();
     }
 

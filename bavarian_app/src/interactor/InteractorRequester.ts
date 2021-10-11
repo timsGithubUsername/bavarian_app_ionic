@@ -103,6 +103,19 @@ export interface InteractorRequester {
    * @param value - New progress to be saved
    */
   saveProgress(cat:Category,type:ProgressType,value:number);
+
+  /**
+   * Saves an specific achievement
+   * @param id
+   * @param status True if the user completed the achievement
+   */
+  saveAchievement(id: string, status: boolean): void;
+
+  /**
+   * Returns if a user completed this achievement
+   * @param id
+   */
+  checkAchievement(id: string): boolean
 }
 
 
