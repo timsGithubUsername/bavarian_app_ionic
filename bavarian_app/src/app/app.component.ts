@@ -69,12 +69,13 @@ export class AppComponent {
     interactor.setQuizFactory(quizFactory);
     interactor.setQuizWordFactory(quizWordFactory);
     interactor.setDatabaseRequester(databaseRequester);
-    interactor.startInteractor(()=>{});
-    AppInjector.get(ControllerService).setInteractorRequester(interactor);
+    interactor.startInteractor(()=>{
+      AppInjector.get(ControllerService).setInteractorRequester(interactor);
+      //set all configurations
+      AppInjector.get(ControllerService).requestAllDialects();
+      AppInjector.get(ControllerService).requestAllLanguages();
+    });
 
-    //set all configurations
-    //todo kommentare wieder entkommentieren. Patrick muss nur den Bug fixen
-    //AppInjector.get(ControllerService).requestAllDialects();
-    //AppInjector.get(ControllerService).requestAllLanguages();
+
   }
 }
