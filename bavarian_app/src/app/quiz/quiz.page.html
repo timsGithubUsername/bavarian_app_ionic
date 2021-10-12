@@ -21,7 +21,7 @@
               <!-- Same chematic for every card: if u press the button the color changes to red (false) or green (correct) -->
               <ion-card color="{{ answerColorArray[0] }}"
                         class="ion-text-center ion-text-wrap" (click)="submitAnswer(0, quizWord)">
-                <ion-img [src]="quizWord.answerOptions[0].picturePath"></ion-img>
+                <ion-img src="/assets/img/{{quizWord.answerOptions[0].picturePath}}.jpg"></ion-img>
                 <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[0]) !== 'undefined'; else elseBlock0">
                   {{ quizWord.answerOptions[0].translationWord }}
                 </h2>
@@ -35,7 +35,7 @@
             <ion-col>
               <ion-card color="{{ answerColorArray[1] }}"
                         class="ion-text-center ion-text-wrap" (click)="submitAnswer(1, quizWord)">
-                <ion-img [src]="quizWord.answerOptions[1].picturePath"></ion-img>
+                <ion-img src="/assets/img/{{quizWord.answerOptions[1].picturePath}}.jpg"></ion-img>
                 <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[1]) !== 'undefined'; else elseBlock1">
                   {{ quizWord.answerOptions[1].translationWord }}
                 </h2>
@@ -51,7 +51,7 @@
             <ion-col>
               <ion-card color="{{ answerColorArray[2] }}"
                         class="ion-text-center ion-text-wrap" (click)="submitAnswer(2, quizWord)">
-                <ion-img [src]="quizWord.answerOptions[2].picturePath"></ion-img>
+                <ion-img src="/assets/img/{{quizWord.answerOptions[2].picturePath}}.jpg"></ion-img>
                 <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[2]) !== 'undefined'; else elseBlock2">
                   {{ quizWord.answerOptions[2].translationWord }}
                 </h2>
@@ -65,7 +65,7 @@
             <ion-col>
               <ion-card color="{{ answerColorArray[3] }}"
                         class="ion-text-center ion-text-wrap" (click)="submitAnswer(3, quizWord)">
-                <ion-img [src]="quizWord.answerOptions[3].picturePath"></ion-img>
+                <ion-img src="/assets/img/{{quizWord.answerOptions[3].picturePath}}.jpg"></ion-img>
                 <h2 *ngIf="buildTranslationWord(quizWord.answerOptions[3]) !== 'undefined'; else elseBlock3">
                   {{ quizWord.answerOptions[3].translationWord }}
                 </h2>

@@ -11,7 +11,7 @@ import {ControllerService} from "../services/controller/controller.service";
 })
 
 export class HomePage {
-  image: string = 'assets/img/img_not_found.jpg'; //todo mock
+  image: string = 'assets/img/Header.png'; //todo mock
   constructor(private router: Router,
               private categoryService: CategoryService,
               private routingService: RoutingService,
