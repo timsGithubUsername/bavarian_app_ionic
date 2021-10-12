@@ -75,14 +75,28 @@ export class ControllerService {
    * request all Dialects
    */
   public requestAllDialects(){
-    this.interactorRequester.requestAllDialects((dialects => this.respondAllDialects(dialects)));
+    this.interactorRequester.requestAllDialects(dialects => this.respondAllDialects(dialects));
   }
 
   /**
    * request all Languages
    */
   public requestAllLanguages(){
-    this.interactorRequester.requestAllLanguages((langs => this.respondAllLanguages(langs)));
+    this.interactorRequester.requestAllLanguages(langs => this.respondAllLanguages(langs));
+  }
+
+  /**
+   * request the current Dialect
+   */
+  public requestDialect(){
+    this.interactorRequester.requestDialect(dialect => this.respondDialect(dialect));
+  }
+
+  /**
+   * request the current Language
+   */
+  public requestLanguage(){
+    this.interactorRequester.requestLanguage(lang => this.respondLanguage(lang));
   }
   /*
   RESPONSE METHODS
@@ -118,6 +132,17 @@ export class ControllerService {
   private respondAllLanguages(languages: Language[]){
     AppInjector.get(ConfigService).setTranslations(languages);
   }
+
+  //respond the current dialect
+  private respondDialect(dialect: Dialect) {
+    AppInjector.get(ConfigService).setCurrentDialect(dialect);
+  }
+
+  //respond the current language
+  private respondLanguage(lang: Language) {
+    AppInjector.get(ConfigService).setCurrentLanguage(lang);
+  }
+
   /*
 
   SETTINGS
@@ -133,4 +158,5 @@ export class ControllerService {
   public setLanguage(l:Language):void{
     this.interactorRequester.setLanguage(l);
   }
+
 }

@@ -16,6 +16,7 @@ import {QuizWordFactoryImpl} from "../entities/factory/QuizWordFactoryImpl";
 import {ExcelManagerImpl} from "../excel/ExcelManager";
 import {TableFactory, TableFactoryImpl} from "../interactor/Table";
 import {LocalStorageManagerImpl} from "../localStorage/LocalStorageManagerImpl";
+import {ConfigService} from "./services/config.service";
 
 @Component({
   selector: 'app-root',
@@ -72,8 +73,7 @@ export class AppComponent {
     interactor.startInteractor(()=>{
       AppInjector.get(ControllerService).setInteractorRequester(interactor);
       //set all configurations
-      AppInjector.get(ControllerService).requestAllDialects();
-      AppInjector.get(ControllerService).requestAllLanguages();
+      AppInjector.get(ConfigService).refresh();
     });
 
 

@@ -134,7 +134,7 @@ export class InteractorImpl implements InteractorRequester {
     let storage = this.storage;
     this.requestAllDialects((dialects:Dialect[]) => {
       response(dialects.filter((value:Dialect) => {
-        value.name === storage.loadDialect();
+        return value.name === storage.loadDialect();
       })[0]);
     });
   }

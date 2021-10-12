@@ -14,11 +14,20 @@
     <div *ngFor="let dialect of dialects">
     <ion-row>
       <ion-col>
-        <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="setDialect(dialect)">
-          <ion-label>
-            <h2>{{ dialect.name }}</h2>
-          </ion-label>
-        </ion-item>
+        <div *ngIf="isCurrentDialect(dialect); else isNotCurrentDialect">
+          <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="setDialect(dialect)">
+            <ion-label>
+              <h2>{{ dialect.name }}</h2>
+            </ion-label>
+          </ion-item>
+        </div>
+        <ng-template #isNotCurrentDialect>
+          <ion-item button="true" color="secondary" class="ion-text-center ion-text-wrap" (click)="setDialect(dialect)">
+            <ion-label>
+              <h2>{{ dialect.name }}</h2>
+            </ion-label>
+          </ion-item>
+        </ng-template>
       </ion-col>
     </ion-row>
     </div>

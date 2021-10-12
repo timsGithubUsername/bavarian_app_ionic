@@ -3,6 +3,8 @@ import {Language} from "../../entities/Language";
 import {ConfigService} from "../services/config.service";
 import {ControllerService} from "../services/controller/controller.service";
 import {Dialect} from "../../entities/Dialect";
+import {ToastController} from "@ionic/angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-translation',
@@ -10,18 +12,34 @@ import {Dialect} from "../../entities/Dialect";
   styleUrls: ['./translation.page.scss'],
 })
 export class TranslationPage implements OnInit {
-  translations:Language[];
+  languages:Language[];
 
   constructor(private config:ConfigService,
-              private controller:ControllerService) {
-    this.translations = config.translations;
+              private controller:ControllerService,
+              private toast:ToastController,
+              private translate:TranslateService) {
+    this.languages = config.translations;
   }
 
   ngOnInit() {
   }
 
-  setLanguage(l:Language):void{
+  async setLanguage(l:Language){
     this.controller.setLanguage(l);
+    this.config.refresh();
+
+    //toast
+    const t = await this.toast.create({
+      message: this.translate.instant("TRANSLATION.TOAST") + " " + l.name,
+      duration: 2000
+    });
+    t.present();
   }
 
+  isCurrentLanguage(l:Language){
+    return l.name === this.config.getCurrentLanguage().name;
+  }
+  isDeutsch(l:Language){
+    return l.name === 'Deutsch';
+  }
 }

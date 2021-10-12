@@ -11,20 +11,39 @@
 
 <ion-content>
   <ion-grid>
-    <div *ngFor="let translation of translations">
-    <ion-row>
-      <ion-col>
-        <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap" (click)="setLanguage(translation)">
-          <ion-avatar slot="start">
-            <ion-img src="/assets/img/{{translation.iconPath}}.png"></ion-img>
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ translation.name }}</h2>
-          <small>+{{ "TRANSLATION.DEU" | translate }}</small>
-          </ion-label>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <div *ngFor="let language of languages">
+      <ion-row>
+        <ion-col>
+          <div *ngIf="isCurrentLanguage(language); else isNotCurrentLanguage">
+            <ion-item button="true" color="primary" class="ion-text-center ion-text-wrap"
+                      (click)="setLanguage(language)">
+              <ion-avatar slot="start">
+                <ion-img src="/assets/img/{{language.iconPath}}.png"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ language.name }}</h2>
+                <div *ngIf="!isDeutsch(language)">
+                  <small>+{{ "TRANSLATION.DEU" | translate }}</small>
+                </div>
+              </ion-label>
+            </ion-item>
+          </div>
+          <ng-template #isNotCurrentLanguage>
+            <ion-item button="true" color="secondary" class="ion-text-center ion-text-wrap"
+                      (click)="setLanguage(language)">
+              <ion-avatar slot="start">
+                <ion-img src="/assets/img/{{language.iconPath}}.png"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ language.name }}</h2>
+                <div *ngIf="!isDeutsch(language)">
+                  <small>+{{ "TRANSLATION.DEU" | translate }}</small>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ng-template>
+        </ion-col>
+      </ion-row>
     </div>
   </ion-grid>
 </ion-content>
