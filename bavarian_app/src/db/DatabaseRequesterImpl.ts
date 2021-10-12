@@ -163,7 +163,6 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
       new CategoriesTableManager(this.db),
       this.categoriesContent);
 
-
     this.dialectsManager = <DialectTableManager>setManager(
       new DialectTableManager(this.db),
       this.dialectContent);
