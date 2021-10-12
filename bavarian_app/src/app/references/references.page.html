@@ -1,9 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>References</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="ion-text-wrap">{{ 'REFERENCES.TITLE' | translate }}</div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item>
+      <ion-text style="white-space:pre-line">
+        <h2>{{ 'REFERENCES.PICTURES' | translate }}</h2>
+        <h3>{{ 'REFERENCES.VOC' | translate }}</h3>
+        {{ 'REFERENCES.LINK1_VOC' | translate }}<br>
+        {{ 'REFERENCES.LINK2_VOC' | translate }}<br>
+        {{ 'REFERENCES.LINK3_VOC' | translate }}<br>
+        {{ 'REFERENCES.LINK4_VOC' | translate }}<br>
+        {{ 'REFERENCES.LINK5_VOC' | translate }}<br>
+        <h3>{{ 'REFERENCES.CAT' | translate }}</h3>
+        {{ 'REFERENCES.LINK1_CAT' | translate }}<br>
+        {{ 'REFERENCES.LINK2_CAT' | translate }}<br>
+        <h3>{{ 'REFERENCES.FLAG' | translate }}</h3>
+        {{ 'REFERENCES.LINK1_FLAG' | translate }}<br>
+        {{ 'REFERENCES.LINK2_FLAG' | translate }}
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text style="white-space:pre-line">
+        {{ 'REFERENCES.NOTE' | translate }}
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text style="white-space:pre-line">
+        <h2>{{ 'REFERENCES.GRAPHICS' | translate }}</h2>
+        {{ 'REFERENCES.GRAPHICS_TEXT' | translate }}<br>
+        {{ 'REFERENCES.LINK_GRAPHICS' | translate }}
+      </ion-text>
+    </ion-item>
+  </ion-list>
 </ion-content>

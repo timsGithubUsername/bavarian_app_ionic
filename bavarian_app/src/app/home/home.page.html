@@ -26,7 +26,7 @@
         <ion-icon name="people-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_ABOUT" | translate }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item button (click)="directToReferences()">
         <ion-icon name="document-text-outline" slot="start"></ion-icon>
         <ion-label>{{ "HOME.MENU_REFERENCES" | translate }}</ion-label>
       </ion-item>

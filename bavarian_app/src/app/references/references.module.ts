@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ReferencesPageRoutingModule } from './references-routing.module';
 
 import { ReferencesPage } from './references.page';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ReferencesPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ReferencesPageRoutingModule,
+        TranslateModule
+    ],
   declarations: [ReferencesPage]
 })
 export class ReferencesPageModule {}

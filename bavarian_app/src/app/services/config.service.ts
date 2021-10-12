@@ -20,8 +20,8 @@ export class ConfigService {
    * This method updates all fields of this service based on the database
    */
   refresh(){
-    AppInjector.get(ControllerService).requestAllDialects();
     AppInjector.get(ControllerService).requestAllLanguages();
+    AppInjector.get(ControllerService).requestAllDialects();
     AppInjector.get(ControllerService).requestDialect();
     AppInjector.get(ControllerService).requestLanguage();
   }

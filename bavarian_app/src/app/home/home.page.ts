@@ -59,4 +59,10 @@ export class HomePage {
   directToAboutUs(){
     this.routingService.getRouter().navigate(['about-us']);
   }
+  /**
+   * direct to about us
+   */
+  directToReferences(){
+    this.routingService.getRouter().navigate(['references']);
+  }
 }
