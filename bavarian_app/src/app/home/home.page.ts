@@ -50,7 +50,6 @@ export class HomePage {
    * direct to about us
    */
   resetApp(){
-    //todo
     console.log("TODO: APP RESET");
   }
   /**

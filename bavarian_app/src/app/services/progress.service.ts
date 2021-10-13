@@ -1,9 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Quiz} from "../../entities/Quiz";
-import {AppInjector} from "../app.module";
-import {CategoryService} from "./category.service";
-import {Level} from "../../entities/Level";
-import {Category} from "../../entities/Category";
 import {ControllerService} from "./controller/controller.service";
 
 @Injectable({
@@ -11,9 +6,41 @@ import {ControllerService} from "./controller/controller.service";
 })
 export class ProgressService {
 
-  currentArchievment:number;
+  currentLevel:number;
 
-  constructor(private controllerService:ControllerService) { }
+  constructor(private controllerService:ControllerService) {
+    this.currentLevel = 1;
+    this.checkLevel();
+  }
 
+  /**
+   * Checks if a level is archived
+   * @private
+   */
+  private checkLevel(){
+    for(let a in Archivements){
+      if(this.controllerService.getArchivement(a)){
+        this.currentLevel++;
+      }
+    }
+  }
 
+  /**
+   * adds an archieved archievement
+   * @param a the archived archivement
+   */
+  addArchivement(a:Archivements){
+    this.controllerService.setArchivement(a);
+    this.checkLevel();
+  }
+}
+export enum Archivements{
+  A1 = "a1",
+  A2 = "a2",
+  A3 = "a3",
+  A4 = "a4",
+  A5 = "a5",
+  A6 = "a6",
+  A7 = "a7",
+  A8 = "a8"
 }

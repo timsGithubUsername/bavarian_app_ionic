@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProgressService} from "../services/progress.service";
 
 @Component({
   selector: 'app-achievments',
@@ -23,7 +24,7 @@ export class AchievmentsPage implements OnInit {
   imageLevel8Blur: string = 'assets/img/achievements/level8_blur.png';
   imageLevel8: string = 'assets/img/achievements/level8.png';
 
-  constructor() { }
+  constructor(private progressService:ProgressService) { }
 
   ngOnInit() {
   }
@@ -70,7 +71,6 @@ export class AchievmentsPage implements OnInit {
   }
 
   achievementAchived(lvl:number){
-    //todo
-    return false;
+    return lvl < this.progressService.currentLevel;
   }
 }

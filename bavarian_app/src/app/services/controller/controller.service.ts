@@ -160,5 +160,12 @@ export class ControllerService {
     this.interactorRequester.setLanguage(l);
     this.interactorRequester.resetInteractor(()=>{ return;});
   }
-
+  //set Archivement
+  public setArchivement(a:string){
+    this.interactorRequester.saveAchievement(a,true);
+  }
+  //get Archivement
+  public getArchivement(a:string):boolean{
+    return this.interactorRequester.checkAchievement(a);
+  }
 }
