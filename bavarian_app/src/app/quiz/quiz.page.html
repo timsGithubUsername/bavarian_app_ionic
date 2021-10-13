@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" [options]="{allowTouchMove: false}" #slides>
+  <ion-slides pager="false" [options]="{allowTouchMove: false}" #slides (ionSlideDidChange)="lastSlide(slides)">
     <!-- CONTENT FOR EVERY WORD -->
     <!-- Slides with questions and play-button -->
     <ng-container *ngFor="let quizWord of quizWords; let i = index">

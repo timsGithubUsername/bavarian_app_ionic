@@ -17,6 +17,10 @@ export class LearningPage implements OnInit {
   progressBarProgress: number; //Progress of.. the progress bar (from 0 to 1)
   vocabularyWords: VocabularyWord[] = []; //Vocabulary Words of this lecture
 
+  slideOpts = {
+    initialSlide: 0
+  };
+
   constructor(private nativeAudio: NativeAudio, //to play mp3
               private categoryService: CategoryService, //to get the VocabularyWord[]
               private routingService: RoutingService, //to redirect after the lesson
@@ -114,8 +118,12 @@ export class LearningPage implements OnInit {
     }
   }
 
-  lastSlide(){
-    this.controller.setProgressLearning(this.categoryService.getCategory());
+  lastSlide(slides){
+    slides.getActiveIndex().then(index => {
+      if(index === this.numberOfVocabularyWords) {
+        this.controller.setProgressLearning(this.categoryService.getCategory());
+      }
+    });
   }
   /**
    * navigate to next slide

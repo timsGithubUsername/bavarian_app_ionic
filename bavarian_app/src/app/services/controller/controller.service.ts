@@ -69,24 +69,6 @@ export class ControllerService {
     //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
     this.interactorRequester.requestProgressFromAllCategories(ProgressType.Quiz, (qp:Map<Category,number>) => this.respondQuizProgress(qp));
   }
-  //todo
-  /**
-   * request the progress from a given category
-   * @param cat the category from which we want the progress
-   */
-  public requestProgressFromCategory(cat:Category){
-    //the method we hand over should set the ... field in category service and redirect the app
-
-  }
-
-  //todo
-  /**
-   * request the prograss from all categories
-   */
-  public requestProgressFromAllCategories(){
-    //the method we hand over should set the ... field in category service and redirect the app
-
-  }
 
   /**
    * request all Dialects
@@ -195,6 +177,12 @@ export class ControllerService {
   //save learning Progress
   public setProgressLearning(cat:Category){
     this.interactorRequester.saveProgress(cat, ProgressType.Study, 1);
+    //this.interactorRequester.resetInteractor(()=>{ return;});
+    AppInjector.get(ProgressService).updateProgress();
+  }
+  //save qiuz progress
+  public setProgressQuiz(cat:Category, progress:number){
+    this.interactorRequester.saveProgress(cat, ProgressType.Quiz, progress);
     //this.interactorRequester.resetInteractor(()=>{ return;});
     AppInjector.get(ProgressService).updateProgress();
   }

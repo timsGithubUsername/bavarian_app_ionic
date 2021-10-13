@@ -7,8 +7,8 @@ import {Category} from "../../entities/Category";
 })
 export class ProgressService {
 
-  quizProgress:Map<Category,number>;
-  studyProgress:Map<Category,number>;
+  quizProgress:Map<Category,number> = new Map<Category, number>();
+  studyProgress:Map<Category,number> = new Map<Category, number>();
   currentLevel:number;
 
   constructor(private controllerService:ControllerService) {

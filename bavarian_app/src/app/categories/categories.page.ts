@@ -51,22 +51,29 @@ export class CategoriesPage implements OnInit {
    * @param category
    */
   setCheckMark(category:Category){
+    let output = false;
+
     switch (this.mode) {
       case 0 : {
         //learning
-        return this.progressService.studyProgress.get(category) === 1;
+        this.progressService.studyProgress.forEach((val:number, cat:Category) => {
+          if(cat.id === category.id && val === 1) {
+            output = true;
+          }
+        });
         break;
       }
       case 1 : {
         //quiz
-        return this.progressService.quizProgress.get(category) >= 0.9;
+        this.progressService.quizProgress.forEach((val:number, cat:Category) => {
+          if(cat.id === category.id && val >= 0.9) {
+            output = true;
+          }
+        });
         break;
-
-      }
-      default : {
-        return false;
       }
     }
+    return output;
   }
 
   /**

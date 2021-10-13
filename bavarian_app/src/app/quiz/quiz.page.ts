@@ -24,6 +24,7 @@ export class QuizPage implements OnInit {
   numberOfQuizWords: number; //number of quiz words for the progress bar
   quiz: Quiz = null; //the quiz
   quizWords: QuizWord[] = []; //the quiz words
+  isProgressSaved:boolean = false;
 
   slideOpts = {
     initialSlide: 0
@@ -52,21 +53,22 @@ export class QuizPage implements OnInit {
     }
     this.buttonsActive = false;
 
-    //todo
-    //-set statistics
+    //what a bummer... to find out how the buttons are colored we have to test the answers. but testing the answers also
+    // triggers the result, so in the end we have to test again the really selected answer. :D
+    currentQuizWord.testAnswer(currentQuizWord.answerOptions[indexOfAnswer]);
   }
 
   nextSlide(slides){
     this.answerColorArray = ["primary", "primary", "primary", "primary"];
     this.buttonsActive = true;
     slides.slideNext();
-
   }
 
   //called every time this page is entered - even if it is already instantiated
   ionViewWillEnter(){
     //set quiz
     this.quiz = this.categoryService.getQuiz();
+    this.isProgressSaved = false;
     //set quizwords and number of quizwords. catch the case quiz is undefined which happens when the app gets instatiated in the quiz screen
     try{
       this.quizWords = this.quiz.quizWords;
@@ -123,29 +125,40 @@ export class QuizPage implements OnInit {
     return this.ngForIndex + "/" + this.numberOfQuizWords;
   }
 
+  lastSlide(slides){
+    slides.getActiveIndex().then(index => {
+      if(index === this.numberOfQuizWords) {
+        console.log("blub");
+        this.controller.setProgressQuiz(this.categoryService.getCategory(), this.quiz.getPercentage());
+        this.isProgressSaved = true;
+      }
+    });
+  }
+
   /**
    * Custom Back button for this game. the game is not counted if it has not been played through.
    *
    */
   onBackButton() {
-    //todo here should be an if-else-block which requests a variable
-    // that is set to false if the results of the quiz are persisted
-    // so that the alert then no longer triggers!
-    this.alertCtrl.create({
-      header: this.translate.instant("TEST.ALRT_HEAD"),
-      message: this.translate.instant("TEST.ALRT_MSG"),
-      buttons: [{
-        text: this.translate.instant("TEST.ALRT_CANCEL_BTN"),
-        role: "cancel"
-      }, {
-        text: this.translate.instant("TEST.ALRT_AGREE_BTN"),
-        handler: () => {
-          this.directToHome();
-        }
-      }]
-    }).then(alertEL => {
-      alertEL.present();
-    });
+    if(!this.isProgressSaved) {
+      this.alertCtrl.create({
+        header: this.translate.instant("TEST.ALRT_HEAD"),
+        message: this.translate.instant("TEST.ALRT_MSG"),
+        buttons: [{
+          text: this.translate.instant("TEST.ALRT_CANCEL_BTN"),
+          role: "cancel"
+        }, {
+          text: this.translate.instant("TEST.ALRT_AGREE_BTN"),
+          handler: () => {
+            this.directToHome();
+          }
+        }]
+      }).then(alertEL => {
+        alertEL.present();
+      });
+    } else {
+      this.directToHome();
+    }
   }
 
   /**
@@ -153,6 +166,7 @@ export class QuizPage implements OnInit {
    * @param slide the slider element
    */
   slideToFirst(slide){
+    this.isProgressSaved = false;
     slide.slideTo(0);
   }
 
