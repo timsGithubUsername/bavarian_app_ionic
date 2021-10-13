@@ -4,6 +4,7 @@ import {Level} from "../../entities/Level";
 import {Category} from "../../entities/Category";
 import {RoutingService} from "../services/routing.service";
 import {ControllerService} from "../services/controller/controller.service";
+import {ProgressService} from "../services/progress.service";
 
 @Component({
   selector: 'app-categories',
@@ -17,7 +18,8 @@ export class CategoriesPage implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private routingService: RoutingService,
-              private controllerService: ControllerService) {
+              private controllerService: ControllerService,
+              private progressService: ProgressService) {
   }
 
   ngOnInit() {
@@ -30,11 +32,41 @@ export class CategoriesPage implements OnInit {
   }
 
   /**
+   * check if the given level is the current or less
+   */
+  checkLevel(lvl:Level){
+    return lvl.id <= this.progressService.currentLevel;
+  }
+
+  /**
    * get all categories from one level
    * @param lvl the level
    */
   getCategoriesFromLevel(lvl:Level):Category[]{
     return lvl.categories;
+  }
+
+  /**
+   * Proof if a category is learned or the quiz is better then 90%
+   * @param category
+   */
+  setCheckMark(category:Category){
+    switch (this.mode) {
+      case 0 : {
+        //learning
+        return this.progressService.studyProgress.get(category) === 1;
+        break;
+      }
+      case 1 : {
+        //quiz
+        return this.progressService.quizProgress.get(category) >= 0.9;
+        break;
+
+      }
+      default : {
+        return false;
+      }
+    }
   }
 
   /**
@@ -45,12 +77,12 @@ export class CategoriesPage implements OnInit {
     switch (this.mode) {
       case 0 : {
         //learning
-        this.controllerService.requestStudy(category);
+        this.controllerService.requestStudyAndRedirect(category);
         break;
       }
       case 1 : {
         //quiz
-        this.controllerService.requestQuiz(category);
+        this.controllerService.requestQuizAndRedirect(category);
         break;
 
       }

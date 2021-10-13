@@ -1,18 +1,37 @@
 import { Injectable } from '@angular/core';
 import {ControllerService} from "./controller/controller.service";
+import {Category} from "../../entities/Category";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProgressService {
 
+  quizProgress:Map<Category,number>;
+  studyProgress:Map<Category,number>;
   currentLevel:number;
 
   constructor(private controllerService:ControllerService) {
     this.currentLevel = 1;
-    this.checkLevel();
+
+    this.updateProgress();
   }
 
+  updateProgress(){
+    this.checkLevel();
+    this.updateQuizAndStudy();
+  }
+
+  setQuizProgress(qp:Map<Category,number>){
+    this.quizProgress = qp;
+  }
+  setStudyProgress(sp:Map<Category,number>){
+    this.studyProgress = sp;
+  }
+  private updateQuizAndStudy(){
+    this.controllerService.requestStudyProgress();
+    this.controllerService.requestQuizProgress();
+  }
   /**
    * Checks if a level is archived
    * @private

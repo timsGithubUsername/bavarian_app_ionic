@@ -114,6 +114,9 @@ export class LearningPage implements OnInit {
     }
   }
 
+  lastSlide(){
+    this.controller.setProgressLearning(this.categoryService.getCategory());
+  }
   /**
    * navigate to next slide
    * @param slide the slider element

@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" #slides>
+  <ion-slides pager="false" #slides (ionSlideReachEnd)="lastSlide()">
     <ion-slide *ngFor="let vocabularyWord of vocabularyWords; let i = index">
       <!-- FAB BUTTON -->
       <ion-fab vertical="center" horizontal="start" slot="fixed" *ngIf="buildAnnotationAndDescribtion(vocabularyWord) !== 'undefined'">

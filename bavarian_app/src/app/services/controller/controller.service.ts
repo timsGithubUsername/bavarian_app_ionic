@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {InteractorRequester} from "../../../interactor/InteractorRequester";
+import {Injectable} from '@angular/core';
+import {InteractorRequester, ProgressType} from "../../../interactor/InteractorRequester";
 import {Category} from "../../../entities/Category";
 import {Level} from "../../../entities/Level";
 import {VocabularyWord} from "../../../entities/VocabularyWord";
@@ -10,6 +10,7 @@ import {RoutingService} from "../routing.service";
 import {Dialect} from "../../../entities/Dialect";
 import {ConfigService} from "../config.service";
 import {Language} from "../../../entities/Language";
+import {ProgressService} from "../progress.service";
 
 @Injectable({
   providedIn: 'root'
@@ -38,20 +39,36 @@ export class ControllerService {
    * request the study (learning) for the given category.
    * @param cat the category from which we want the VocabularyWords as a request.
    */
-  public requestStudy(cat:Category){
+  public requestStudyAndRedirect(cat:Category){
     //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
-    this.interactorRequester.requestStudy(cat, (vocWords:VocabularyWord[]) => this.respondStudy(vocWords));
+    AppInjector.get(CategoryService).setCategory(cat);
+    this.interactorRequester.requestStudy(cat, (vocWords:VocabularyWord[]) => this.respondStudyAndRedirect(vocWords));
   }
-
+  /**
+   * request the study progress (learning) for the given category.
+   * @param cat the category from which we want the VocabularyWords as a request.
+   */
+  public requestStudyProgress(){
+    //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
+    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Study, (sp:Map<Category,number>) => this.respondStudyProgress(sp));
+  }
   /**
    * request the quiz for a given category
    * @param cat the category from which we want the Quiz as a request
    */
-  public requestQuiz(cat:Category){
+  public requestQuizAndRedirect(cat:Category){
     //the method we hand over should set the Level[] field in category service and redirect the app
-    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.respondQuiz(quiz));
+    AppInjector.get(CategoryService).setCategory(cat);
+    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.respondQuizAndRedirect(quiz));
   }
-
+  /**
+   * request the study progress (learning) for the given category.
+   * @param cat the category from which we want the VocabularyWords as a request.
+   */
+  public requestQuizProgress(){
+    //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
+    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Quiz, (qp:Map<Category,number>) => this.respondQuizProgress(qp));
+  }
   //todo
   /**
    * request the progress from a given category
@@ -112,15 +129,22 @@ export class ControllerService {
   }
 
   //take the response of the quiz, set them to the category service and redirect the app
-  private respondQuiz(quiz: Quiz){
+  private respondQuizAndRedirect(quiz: Quiz){
     AppInjector.get(CategoryService).setQuiz(quiz);
     AppInjector.get(RoutingService).getRouter().navigate(['quiz']);
   }
-
+  //take the response of the quiz, set them to the category service and redirect the app
+  private respondQuizProgress(qp:Map<Category,number>){
+    AppInjector.get(ProgressService).setQuizProgress(qp);
+  }
   //take the response of the study (learning), set them in category service and redirect the app
-  private respondStudy(vocWords: VocabularyWord[]){
+  private respondStudyAndRedirect(vocWords: VocabularyWord[]){
     AppInjector.get(CategoryService).setVocabulayWords(vocWords);
     AppInjector.get(RoutingService).getRouter().navigate(['learning']);
+  }
+  //take the response of the quiz, set them to the category service and redirect the app
+  private respondStudyProgress(sp:Map<Category,number>){
+    AppInjector.get(ProgressService).setStudyProgress(sp);
   }
 
   //respond all dialects in the DB
@@ -167,5 +191,11 @@ export class ControllerService {
   //get Archivement
   public getArchivement(a:string):boolean{
     return this.interactorRequester.checkAchievement(a);
+  }
+  //save learning Progress
+  public setProgressLearning(cat:Category){
+    this.interactorRequester.saveProgress(cat, ProgressType.Study, 1);
+    //this.interactorRequester.resetInteractor(()=>{ return;});
+    AppInjector.get(ProgressService).updateProgress();
   }
 }
