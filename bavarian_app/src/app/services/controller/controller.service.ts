@@ -153,10 +153,12 @@ export class ControllerService {
   //set the dialect
   public setDialect(d:Dialect):void{
     this.interactorRequester.setDialect(d);
+    this.interactorRequester.resetInteractor(()=>{ return;});
   }
   //set the language
   public setLanguage(l:Language):void{
     this.interactorRequester.setLanguage(l);
+    this.interactorRequester.resetInteractor(()=>{ return;});
   }
 
 }
