@@ -18,8 +18,8 @@ export class ProgressService {
   }
 
   updateProgress(){
-    this.checkLevel();
     this.updateQuizAndStudy();
+    this.checkLevelProgress();
   }
 
   setQuizProgress(qp:Map<Category,number>){
@@ -27,6 +27,19 @@ export class ProgressService {
   }
   setStudyProgress(sp:Map<Category,number>){
     this.studyProgress = sp;
+  }
+  private checkLevelProgress(){
+    let allQuizesPassed = true;
+
+    this.quizProgress.forEach((val:number, cat:Category) => {
+      if(cat.level.id === this.currentLevel){
+        console.log(val);
+        console.log(allQuizesPassed && val >= 0.9);
+        allQuizesPassed = allQuizesPassed && val >= 0.9;
+      }
+    });
+
+    if(allQuizesPassed) this.addArchivement(this.currentLevel);
   }
   private updateQuizAndStudy(){
     this.controllerService.requestStudyProgress();
@@ -37,8 +50,10 @@ export class ProgressService {
    * @private
    */
   private checkLevel(){
+    this.currentLevel = 1;
+
     for(let a in Archivements){
-      if(this.controllerService.getArchivement(a)){
+      if(this.controllerService.getArchivement(Archivements[a])){
         this.currentLevel++;
       }
     }
@@ -48,8 +63,41 @@ export class ProgressService {
    * adds an archieved archievement
    * @param a the archived archivement
    */
-  addArchivement(a:Archivements){
-    this.controllerService.setArchivement(a);
+  private addArchivement(level:number){
+    switch (level){
+      case 1: {
+        this.controllerService.setArchivement(Archivements.A1);
+        break;
+      }
+      case 2: {
+        this.controllerService.setArchivement(Archivements.A2);
+        break;
+      }
+      case 3: {
+        this.controllerService.setArchivement(Archivements.A3);
+        break;
+      }
+      case 4: {
+        this.controllerService.setArchivement(Archivements.A4);
+        break;
+      }
+      case 5: {
+        this.controllerService.setArchivement(Archivements.A5);
+        break;
+      }
+      case 6: {
+        this.controllerService.setArchivement(Archivements.A6);
+        break;
+      }
+      case 7: {
+        this.controllerService.setArchivement(Archivements.A7);
+        break;
+      }
+      case 8: {
+        this.controllerService.setArchivement(Archivements.A8);
+        break;
+      }
+    }
     this.checkLevel();
   }
 }

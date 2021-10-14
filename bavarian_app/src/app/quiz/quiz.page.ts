@@ -56,6 +56,9 @@ export class QuizPage implements OnInit {
     //what a bummer... to find out how the buttons are colored we have to test the answers. but testing the answers also
     // triggers the result, so in the end we have to test again the really selected answer. :D
     currentQuizWord.testAnswer(currentQuizWord.answerOptions[indexOfAnswer]);
+    console.log("corr: "+this.quiz.getNumberOfCorrectAnswers());
+    console.log("wron: "+this.quiz.getNumberOfFalseAnswers());
+    console.log("perc: "+this.quiz.getPercentage());
   }
 
   nextSlide(slides){
@@ -104,13 +107,6 @@ export class QuizPage implements OnInit {
     }
   }
 
-  /**
-   * set the answerCorrect bool and trigger next slide
-   */
-  isAnswerCorrect(indexOfAnswer: number, quizWord: QuizWord, slide) {
-    this.answerCorrect = quizWord.testAnswer(quizWord.answerOptions[indexOfAnswer]);
-    this.nextSlide(slide);
-  }
 
   /**
    * calculate the progress of the progress bar, uses numberOfVocabularyWords
@@ -128,7 +124,6 @@ export class QuizPage implements OnInit {
   lastSlide(slides){
     slides.getActiveIndex().then(index => {
       if(index === this.numberOfQuizWords) {
-        console.log("blub");
         this.controller.setProgressQuiz(this.categoryService.getCategory(), this.quiz.getPercentage());
         this.isProgressSaved = true;
       }
