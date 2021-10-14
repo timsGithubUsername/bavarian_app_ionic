@@ -182,3 +182,4 @@ class TableImpl implements Table{
     return this.columnNames.indexOf(columnName);
   }
 }
+

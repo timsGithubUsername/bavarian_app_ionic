@@ -14,7 +14,8 @@ export interface InteractorRequester {
   startInteractor(response:()=>void);
 
   /**
-   * Requests the reset of the database. Calls the response function when the reset of the database is completed.
+   * Requests the reset of the database. Has to be called after a change to language or dialect.
+   * Calls the response function when the reset of the database is completed.
    * @param response
    */
   resetInteractor(response:()=>void);
