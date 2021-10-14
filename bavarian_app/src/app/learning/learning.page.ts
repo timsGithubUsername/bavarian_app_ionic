@@ -19,6 +19,8 @@ export class LearningPage implements OnInit {
   numberOfVocabularyWords: number; //count of Vocabulary Words
   progressBarProgress: number; //Progress of.. the progress bar (from 0 to 1)
   vocabularyWords: VocabularyWord[] = []; //Vocabulary Words of this lecture
+  //todo
+  testSoundPath = "/assets/audio/test_sound.mp3";
 
   slideOpts = {
     initialSlide: 0
@@ -36,10 +38,6 @@ export class LearningPage implements OnInit {
 
   //called every time this page is entered - even if it is already instantiated
   ionViewWillEnter(){
-    AppInjector.get(ProgressService).quizProgress.forEach((val:number, cat:Category) => {
-      console.log(val);
-      console.log(cat.name);
-    });
     //get vocabulary words
     this.vocabularyWords = this.categoryService.getVocabulayWords();
     //set the length
@@ -51,13 +49,13 @@ export class LearningPage implements OnInit {
    * @param pronunciationPath relative path to mp3 as string
    */
   playSound(pronunciationPath: string){
-    console.log(pronunciationPath);
     //preload the sound. Im not sure this is necessary. Im sure this should be done when the page loads - if we find no
     //performance issues we just forget this ;)
     //the path to the mp3 also works as id
-    this.nativeAudio.preloadSimple(pronunciationPath, pronunciationPath);
+    //todo remove testsoundpath
+    this.nativeAudio.preloadSimple("/assets/audio/test_sound.mp3", "/assets/audio/test_sound.mp3");
     //play the preloaded sound
-    this.nativeAudio.play(pronunciationPath);
+    this.nativeAudio.play("/assets/audio/test_sound.mp3");
   }
 
   /**
