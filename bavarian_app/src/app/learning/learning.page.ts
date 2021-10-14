@@ -19,8 +19,6 @@ export class LearningPage implements OnInit {
   numberOfVocabularyWords: number; //count of Vocabulary Words
   progressBarProgress: number; //Progress of.. the progress bar (from 0 to 1)
   vocabularyWords: VocabularyWord[] = []; //Vocabulary Words of this lecture
-  //todo
-  testSoundPath = "/assets/audio/test_sound.mp3";
 
   slideOpts = {
     initialSlide: 0
