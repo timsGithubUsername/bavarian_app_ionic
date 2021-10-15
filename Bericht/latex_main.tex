@@ -1,0 +1,41 @@
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}			%Deutsche Wortrennung
+\usepackage[utf8]{inputenc}			%Umlaute! (ä, ö, ü)
+\usepackage[T1]{fontenc}		    %Technisch - Umlaute werden nicht zusammengesetzt sondern als echte unicode-Zeichen verwendet
+
+\usepackage{amsmath}				%Mathematische Befehle
+\usepackage{amsthm}					%logik
+\usepackage{amssymb}				%mathesymbole
+\usepackage{graphicx}				%Grafikeinbindung
+
+\usepackage{float}					%Da wir Grafiken mit figure einbinden, diese aber vermutlich nicht am Ende unseres Dokuments wiederfinden möchten. Mit diesem Paket können wir das große [H] benutzen welches dem Bild untersagt eine optimale Position zu finden
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}				%Weisen LaTeX an, Kopf und Fußzeilen im Dokumentstyle zu nutzen
+
+\setlength{\parindent}{0em}
+
+%Im folgendem definieren wir unsere eigenen Kopf- und Fußzeilen
+
+\lhead{Fortgeschrittenenpraktikum SoSe 21}							%Kopfzeile innen
+
+
+\begin{document}
+	\begin{titlepage}
+		\centering
+		{\scshape\Large Fortgeschrittenenpraktikum\par}
+		\vspace{1.5cm}
+		{\huge\bfseries Bavarian App\par}
+		\vspace{2cm}
+		{\Large\itshape Patrick Frömel, Tim Romonath\par}
+		\vfill
+		{\large \today\par}
+	\end{titlepage}
+   	
+   	\tableofcontents
+    \newpage
+	
+	\section{Kurzbeschreibung}
+	\input{kurzbeschreibung.tex}	
+\end{document}
