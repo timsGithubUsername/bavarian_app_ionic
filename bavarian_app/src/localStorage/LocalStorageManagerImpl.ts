@@ -63,4 +63,12 @@ export class LocalStorageManagerImpl implements LocalStorageManager{
     let prefix = this.getProgressPrefix(type);
     this.strg.removeItem(prefix+cat.id);
   }
+
+  clear():void{
+    let lang = this.loadLanguage();
+    let dial = this.loadDialect();
+    this.strg.clear();
+    this.saveLanguage(lang);
+    this.saveDialect(dial);
+  }
 }

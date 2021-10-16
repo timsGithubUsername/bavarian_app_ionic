@@ -117,6 +117,11 @@ export interface InteractorRequester {
    * @param id
    */
   checkAchievement(id: string): boolean
+
+  /**
+   * Deletes all user Data from storage
+   */
+  clearUserData():void;
 }
 
 

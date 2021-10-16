@@ -20,4 +20,6 @@ export interface LocalStorageManager{
   existProgress(type:ProgressType,cat:Category):boolean;
   deleteProgress(type:ProgressType,cat:Category):void;
 
+  clear():void;
+
 }

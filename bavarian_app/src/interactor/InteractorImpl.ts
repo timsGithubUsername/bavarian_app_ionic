@@ -190,4 +190,10 @@ export class InteractorImpl implements InteractorRequester {
   checkAchievement(id: string): boolean {
     return this.storage.testAchievement(id);
   }
+
+  clearUserData():void{
+
+    this.storage.clear();
+
+  }
 }
