@@ -14,6 +14,9 @@ import {QuizBuilder} from "./QuizBuilder";
  * If we build the app TestInteractor can be easily exchanged in app.component.ts, method buildProgrammTree()
  */
 export class TestInteractor implements Interactor {
+  clearUserData(): void {
+      throw new Error("Method not implemented.");
+  }
 
   startInteractor(response: () => void) {
       throw new Error("Method not implemented.");
