@@ -1,5 +1,5 @@
 import {LocalStorageManager} from "../interactor/LocalStorageManager";
-import {ProgressType} from "../interactor/InteractorRequester";
+import {ProgressType} from "../interactor/Interactor";
 import {Category} from "../entities/Category";
 
 export class LocalStorageManagerImpl implements LocalStorageManager{

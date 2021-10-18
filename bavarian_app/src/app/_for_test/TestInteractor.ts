@@ -1,4 +1,4 @@
-import {InteractorRequester, ProgressType} from "../../interactor/InteractorRequester";
+import {Interactor, ProgressType} from "../../interactor/Interactor";
 import {Category} from "../../entities/Category";
 import {Quiz} from "../../entities/Quiz";
 import {VocabularyWord} from "../../entities/VocabularyWord";
@@ -13,7 +13,7 @@ import {QuizBuilder} from "./QuizBuilder";
  * TestInteractor implements the InteractorRequester to prove functions of the app in system tests without the database mechanics.
  * If we build the app TestInteractor can be easily exchanged in app.component.ts, method buildProgrammTree()
  */
-export class TestInteractor implements InteractorRequester {
+export class TestInteractor implements Interactor {
 
   startInteractor(response: () => void) {
       throw new Error("Method not implemented.");

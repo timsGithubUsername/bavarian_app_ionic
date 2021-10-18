@@ -5,7 +5,7 @@ import {Level} from "../entities/Level";
 import {Language} from "../entities/Language";
 import {Dialect} from "../entities/Dialect";
 
-export interface InteractorRequester {
+export interface Interactor {
 
   /**
    * Requests the start of the database. Calls the response function when the start of the database is completed.

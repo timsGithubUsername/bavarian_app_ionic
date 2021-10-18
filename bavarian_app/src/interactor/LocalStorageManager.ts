@@ -1,6 +1,6 @@
 import {Language} from "../entities/Language";
 import {Dialect} from "../entities/Dialect";
-import {ProgressType} from "./InteractorRequester";
+import {ProgressType} from "./Interactor";
 import {Category} from "../entities/Category";
 
 export interface LocalStorageManager{

@@ -4,7 +4,7 @@ import { Language } from "src/entities/Language";
 import { Level } from "src/entities/Level";
 import { Quiz } from "src/entities/Quiz";
 import { VocabularyWord } from "src/entities/VocabularyWord";
-import {InteractorRequester, ProgressType} from "./InteractorRequester";
+import {Interactor, ProgressType} from "./Interactor";
 import {DatabaseRequester} from "./DatabaseRequester";
 import {ExcelManagerRequest} from "./ExcelManagerRequest";
 import {LocalStorageManager} from "./LocalStorageManager";
@@ -12,7 +12,7 @@ import {Table} from "./Table";
 import {QuizFactory} from "../entities/factory/QuizFactory";
 import {QuizWordFactory} from "../entities/factory/QuizWordFactory";
 
-export class InteractorImpl implements InteractorRequester {
+export class InteractorImpl implements Interactor {
 
 
   private database:DatabaseRequester;

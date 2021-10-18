@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {InteractorRequester, ProgressType} from "../../../interactor/InteractorRequester";
+import {Interactor, ProgressType} from "../../../interactor/Interactor";
 import {Category} from "../../../entities/Category";
 import {Level} from "../../../entities/Level";
 import {VocabularyWord} from "../../../entities/VocabularyWord";
@@ -17,13 +17,13 @@ import {ProgressService} from "../progress.service";
 })
 export class ControllerService {
   //Interactor Requester
-  private interactorRequester: InteractorRequester;
+  private interactorRequester: Interactor;
 
   /**
    * Set the requester
    * @param interactorRequester The interactor requester implemented all neccessary methods to accept inquiries
    */
-  public setInteractorRequester(interactorRequester: InteractorRequester) {
+  public setInteractorRequester(interactorRequester: Interactor) {
     this.interactorRequester = interactorRequester;
   }
 
