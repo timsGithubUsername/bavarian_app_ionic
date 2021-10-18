@@ -11,6 +11,7 @@ import {Dialect} from "../../../entities/Dialect";
 import {ConfigService} from "../config.service";
 import {Language} from "../../../entities/Language";
 import {ProgressService} from "../progress.service";
+//some changes to push merge repair
 
 @Injectable({
   providedIn: 'root'
@@ -30,73 +31,77 @@ export class ControllerService {
   /**
    * request all categories.
    */
-  public requestAllCategories(){
+  public requestAllCategories() {
     //the method we hand over should set the Level[] field in category service and redirect the app
-    this.interactorRequester.requestAllLevels((lvls:Level[]) => this.respondAllCategories(lvls));
+    this.interactorRequester.requestAllLevels((lvls: Level[]) => this.respondAllCategories(lvls));
   }
 
   /**
    * request the study (learning) for the given category.
    * @param cat the category from which we want the VocabularyWords as a request.
    */
-  public requestStudyAndRedirect(cat:Category){
+  public requestStudyAndRedirect(cat: Category) {
     //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
     AppInjector.get(CategoryService).setCategory(cat);
-    this.interactorRequester.requestStudy(cat, (vocWords:VocabularyWord[]) => this.respondStudyAndRedirect(vocWords));
+    this.interactorRequester.requestStudy(cat, (vocWords: VocabularyWord[]) => this.respondStudyAndRedirect(vocWords));
   }
+
   /**
    * request the study progress (learning) for the given category.
    * @param cat the category from which we want the VocabularyWords as a request.
    */
-  public requestStudyProgress(){
+  public requestStudyProgress() {
     //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
-    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Study, (sp:Map<Category,number>) => this.respondStudyProgress(sp));
+    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Study, (sp: Map<Category, number>) => this.respondStudyProgress(sp));
   }
+
   /**
    * request the quiz for a given category
    * @param cat the category from which we want the Quiz as a request
    */
-  public requestQuizAndRedirect(cat:Category){
+  public requestQuizAndRedirect(cat: Category) {
     //the method we hand over should set the Level[] field in category service and redirect the app
     AppInjector.get(CategoryService).setCategory(cat);
-    this.interactorRequester.requestQuiz(cat, (quiz:Quiz) => this.respondQuizAndRedirect(quiz));
+    this.interactorRequester.requestQuiz(cat, (quiz: Quiz) => this.respondQuizAndRedirect(quiz));
   }
+
   /**
    * request the study progress (learning) for the given category.
    * @param cat the category from which we want the VocabularyWords as a request.
    */
-  public requestQuizProgress(){
+  public requestQuizProgress() {
     //the method we hand over should set the VocabularyWord[] field in category service and redirect the app
-    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Quiz, (qp:Map<Category,number>) => this.respondQuizProgress(qp));
+    this.interactorRequester.requestProgressFromAllCategories(ProgressType.Quiz, (qp: Map<Category, number>) => this.respondQuizProgress(qp));
   }
 
   /**
    * request all Dialects
    */
-  public requestAllDialects(){
+  public requestAllDialects() {
     this.interactorRequester.requestAllDialects(dialects => this.respondAllDialects(dialects));
   }
 
   /**
    * request all Languages
    */
-  public requestAllLanguages(){
+  public requestAllLanguages() {
     this.interactorRequester.requestAllLanguages(langs => this.respondAllLanguages(langs));
   }
 
   /**
    * request the current Dialect
    */
-  public requestDialect(){
+  public requestDialect() {
     this.interactorRequester.requestDialect(dialect => this.respondDialect(dialect));
   }
 
   /**
    * request the current Language
    */
-  public requestLanguage(){
+  public requestLanguage() {
     this.interactorRequester.requestLanguage(lang => this.respondLanguage(lang));
   }
+
   /*
   RESPONSE METHODS
 
@@ -105,37 +110,40 @@ export class ControllerService {
    */
 
   //take the response of the levels which contains the categories, set them to the category service und redirect the app
-  private respondAllCategories(lvls: Level[]){
+  private respondAllCategories(lvls: Level[]) {
     AppInjector.get(CategoryService).setLevels(lvls);
     AppInjector.get(RoutingService).getRouter().navigate(['categories']);
   }
 
   //take the response of the quiz, set them to the category service and redirect the app
-  private respondQuizAndRedirect(quiz: Quiz){
+  private respondQuizAndRedirect(quiz: Quiz) {
     AppInjector.get(CategoryService).setQuiz(quiz);
     AppInjector.get(RoutingService).getRouter().navigate(['quiz']);
   }
+
   //take the response of the quiz, set them to the category service and redirect the app
-  private respondQuizProgress(qp:Map<Category,number>){
+  private respondQuizProgress(qp: Map<Category, number>) {
     AppInjector.get(ProgressService).setQuizProgress(qp);
   }
+
   //take the response of the study (learning), set them in category service and redirect the app
-  private respondStudyAndRedirect(vocWords: VocabularyWord[]){
+  private respondStudyAndRedirect(vocWords: VocabularyWord[]) {
     AppInjector.get(CategoryService).setVocabulayWords(vocWords);
     AppInjector.get(RoutingService).getRouter().navigate(['learning']);
   }
+
   //take the response of the quiz, set them to the category service and redirect the app
-  private respondStudyProgress(sp:Map<Category,number>){
+  private respondStudyProgress(sp: Map<Category, number>) {
     AppInjector.get(ProgressService).setStudyProgress(sp);
   }
 
   //respond all dialects in the DB
-  private respondAllDialects(dialects: Dialect[]){
+  private respondAllDialects(dialects: Dialect[]) {
     AppInjector.get(ConfigService).setDialects(dialects);
   }
 
   //respond all languages in the DB
-  private respondAllLanguages(languages: Language[]){
+  private respondAllLanguages(languages: Language[]) {
     AppInjector.get(ConfigService).setTranslations(languages);
   }
 
@@ -157,31 +165,36 @@ export class ControllerService {
    */
 
   //set the dialect
-  public setDialect(d:Dialect):void{
+  public setDialect(d: Dialect) {
     this.interactorRequester.setDialect(d);
-    this.interactorRequester.resetInteractor(()=>{ return;});
+    this.interactorRequester.resetInteractor(() => AppInjector.get(ConfigService).refresh());
   }
+
   //set the language
-  public setLanguage(l:Language):void{
+  public setLanguage(l: Language): void {
     this.interactorRequester.setLanguage(l);
-    this.interactorRequester.resetInteractor(()=>{ return;});
+    this.interactorRequester.resetInteractor(() => AppInjector.get(ConfigService).refresh());
   }
+
   //set Archivement
-  public setArchivement(a:string){
-    this.interactorRequester.saveAchievement(a,true);
+  public setArchivement(a: string) {
+    this.interactorRequester.saveAchievement(a, true);
   }
+
   //get Archivement
-  public getArchivement(a:string):boolean{
+  public getArchivement(a: string): boolean {
     return this.interactorRequester.checkAchievement(a);
   }
+
   //save learning Progress
-  public setProgressLearning(cat:Category){
+  public setProgressLearning(cat: Category) {
     this.interactorRequester.saveProgress(cat, ProgressType.Study, 1);
     //this.interactorRequester.resetInteractor(()=>{ return;});
     AppInjector.get(ProgressService).updateProgress();
   }
+
   //save qiuz progress
-  public setProgressQuiz(cat:Category, progress:number){
+  public setProgressQuiz(cat: Category, progress: number) {
     this.interactorRequester.saveProgress(cat, ProgressType.Quiz, progress);
     //this.interactorRequester.resetInteractor(()=>{ return;});
     AppInjector.get(ProgressService).updateProgress();

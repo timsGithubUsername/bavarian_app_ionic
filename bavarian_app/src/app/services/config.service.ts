@@ -3,6 +3,7 @@ import {Dialect} from "../../entities/Dialect";
 import {Language} from "../../entities/Language";
 import {AppInjector} from "../app.module";
 import {ControllerService} from "./controller/controller.service";
+import {delay} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ConfigService {
   /**
    * This method updates all fields of this service based on the database
    */
-  refresh(){
+  async refresh(){
     AppInjector.get(ControllerService).requestAllLanguages();
     AppInjector.get(ControllerService).requestAllDialects();
     AppInjector.get(ControllerService).requestDialect();

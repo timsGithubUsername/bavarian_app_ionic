@@ -5,6 +5,7 @@ import {ControllerService} from "../services/controller/controller.service";
 import {ConfigService} from "../services/config.service";
 import {AlertController, ToastController} from "@ionic/angular";
 import {TranslateService} from "@ngx-translate/core";
+import {RoutingService} from "../services/routing.service";
 
 @Component({
   selector: 'app-dialect',
@@ -18,7 +19,8 @@ export class DialectPage implements OnInit {
   constructor(private config:ConfigService,
               private controller:ControllerService,
               private translate: TranslateService,
-              private toast: ToastController) {
+              private toast: ToastController,
+              private router:RoutingService) {
     this.dialects = this.config.dialects;
   }
 
@@ -26,8 +28,7 @@ export class DialectPage implements OnInit {
   }
 
   async setDialect(d:Dialect){
-    this.controller.setDialect(d);
-    this.config.refresh();
+    this.controller.setDialect(d)
 
     //toast
     const t = await this.toast.create({
@@ -35,6 +36,8 @@ export class DialectPage implements OnInit {
       duration: 2000
     });
     t.present();
+
+    //this.router.getRouter().navigate(['home']);
   }
 
   isCurrentDialect(d:Dialect){

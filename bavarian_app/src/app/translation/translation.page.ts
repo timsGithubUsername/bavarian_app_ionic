@@ -5,6 +5,7 @@ import {ControllerService} from "../services/controller/controller.service";
 import {Dialect} from "../../entities/Dialect";
 import {ToastController} from "@ionic/angular";
 import {TranslateService} from "@ngx-translate/core";
+import {RoutingService} from "../services/routing.service";
 
 @Component({
   selector: 'app-translation',
@@ -17,7 +18,8 @@ export class TranslationPage implements OnInit {
   constructor(private config:ConfigService,
               private controller:ControllerService,
               private toast:ToastController,
-              private translate:TranslateService) {
+              private translate:TranslateService,
+              private router:RoutingService) {
     this.languages = config.translations;
   }
 
@@ -26,7 +28,6 @@ export class TranslationPage implements OnInit {
 
   async setLanguage(l:Language){
     this.controller.setLanguage(l);
-    this.config.refresh();
 
     //toast
     const t = await this.toast.create({
@@ -34,6 +35,8 @@ export class TranslationPage implements OnInit {
       duration: 2000
     });
     t.present();
+
+    //this.router.getRouter().navigate(['home']);
   }
 
   isCurrentLanguage(l:Language){
