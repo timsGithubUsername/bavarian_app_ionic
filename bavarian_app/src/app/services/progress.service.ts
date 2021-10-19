@@ -22,6 +22,11 @@ export class ProgressService {
     this.checkLevelProgress();
   }
 
+  resetProgress(){
+    this.currentLevel = 1;
+    this.updateQuizAndStudy();
+  }
+
   setQuizProgress(qp:Map<Category,number>){
     this.quizProgress = qp;
   }
@@ -29,6 +34,8 @@ export class ProgressService {
     this.studyProgress = sp;
   }
   private checkLevelProgress(){
+    this.currentLevel = 1;
+
     let allQuizesPassed = true;
 
     this.quizProgress.forEach((val:number, cat:Category) => {

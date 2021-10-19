@@ -56,9 +56,6 @@ export class QuizPage implements OnInit {
     //what a bummer... to find out how the buttons are colored we have to test the answers. but testing the answers also
     // triggers the result, so in the end we have to test again the really selected answer. :D
     currentQuizWord.testAnswer(currentQuizWord.answerOptions[indexOfAnswer]);
-    console.log("corr: "+this.quiz.getNumberOfCorrectAnswers());
-    console.log("wron: "+this.quiz.getNumberOfFalseAnswers());
-    console.log("perc: "+this.quiz.getPercentage());
   }
 
   nextSlide(slides){

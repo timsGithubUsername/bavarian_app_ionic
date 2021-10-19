@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {CategoryService} from "../services/category.service";
 import {RoutingService} from "../services/routing.service";
 import {ControllerService} from "../services/controller/controller.service";
+import {AlertController} from "@ionic/angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,9 @@ export class HomePage {
   constructor(private router: Router,
               private categoryService: CategoryService,
               private routingService: RoutingService,
-              private controller: ControllerService) {
+              private controller: ControllerService,
+              private alertCtrl:AlertController,
+              private translate:TranslateService) {
     this.routingService.setRouter(this.router);
   }
 
@@ -47,10 +51,25 @@ export class HomePage {
     this.routingService.getRouter().navigate(['achievments']);
   }
   /**
-   * direct to about us
+   * reset the settings and the archievments
    */
   resetApp(){
-    this.controller.resetInteractor();
+    this.alertCtrl.create({
+      header: this.translate.instant("HOME.MENU_RESET_ALRT_TITLE"),
+      message: this.translate.instant("HOME.MENU_RESET_ALRT_TEXT"),
+      buttons: [{
+        text: this.translate.instant("HOME.MENU_RESET_ALRT_NO"),
+        role: "cancel"
+      }, {
+        text: this.translate.instant("HOME.MENU_RESET_ALRT_YES"),
+        handler: () => {
+          this.controller.resetInteractor();
+        }
+      }]
+    }).then(alertEL => {
+      alertEL.present();
+    });
+
   }
   /**
    * direct to about us

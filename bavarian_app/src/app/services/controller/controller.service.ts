@@ -202,6 +202,7 @@ export class ControllerService {
 
   //reset the app
   resetInteractor():void{
-    this.interactorRequester.resetInteractor(()=>{AppInjector.get(RoutingService).getRouter().navigate(['home']);});
+    this.interactorRequester.clearUserData();
+    AppInjector.get(ProgressService).resetProgress();
   }
 }

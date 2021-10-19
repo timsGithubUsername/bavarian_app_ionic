@@ -10,7 +10,11 @@
     "MENU_RESET": "Zurücksetzen",
     "MENU_ABOUT": "Über uns",
     "MENU_REFERENCES": "Referenzen",
-    "MENU_SHARE": "Teilen"
+    "MENU_SHARE": "Teilen",
+    "MENU_RESET_ALRT_TITLE": "App zurücksetzen!",
+    "MENU_RESET_ALRT_TEXT": "Möchtest du die App wirklich zurücksetzen? Dein gesamter Fortschritt geht verloren!",
+    "MENU_RESET_ALRT_YES": "Ja",
+    "MENU_RESET_ALRT_NO": "Nein"
   },
   "TRANSLATION": {
     "TITLE": "Wähle deine Übersetzungssprache aus",
