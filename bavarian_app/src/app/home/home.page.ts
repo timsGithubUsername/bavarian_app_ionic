@@ -50,7 +50,7 @@ export class HomePage {
    * direct to about us
    */
   resetApp(){
-    console.log("TODO: APP RESET");
+    this.controller.resetInteractor();
   }
   /**
    * direct to about us

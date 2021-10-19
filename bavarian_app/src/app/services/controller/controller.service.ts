@@ -199,4 +199,9 @@ export class ControllerService {
     //this.interactorRequester.resetInteractor(()=>{ return;});
     AppInjector.get(ProgressService).updateProgress();
   }
+
+  //reset the app
+  resetInteractor():void{
+    this.interactorRequester.resetInteractor(()=>{AppInjector.get(RoutingService).getRouter().navigate(['home']);});
+  }
 }
