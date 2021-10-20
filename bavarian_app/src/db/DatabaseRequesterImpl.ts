@@ -210,12 +210,12 @@ export class DatabaseRequesterImpl implements DatabaseRequester{
     })
   }
 
-  public resetDatabase(response:(()=>void)) {
+  public resetAndCloseDatabase(response:(()=>void)) {
     let that = this;
     this.db.close();
     let req = indexedDB.deleteDatabase(this.dbName);
     req.onsuccess = function (event:any) {
-      that.startDatabase(response);
+      response();
     }
   }
 
