@@ -21,10 +21,10 @@ export interface DatabaseRequester{
   startDatabase(response:(()=>void)):void;
 
   /**
-   * Deletes each table in the database and then calls startDatabase
+   * Deletes each table in the database and then closes it
    * @param response Called after the resetDatabase request is completed
    */
-  resetDatabase(response:(()=>void)):void;
+  resetAndCloseDatabase(response:(()=>void)):void;
 
   requestAllLanguages(response:((langs:Language[])=>void)):void;
 

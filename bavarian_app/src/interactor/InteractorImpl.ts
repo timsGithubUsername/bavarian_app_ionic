@@ -89,7 +89,9 @@ export class InteractorImpl implements Interactor {
     this.langs = [];
     this.dialects = [];
     this.levels = [];
-    this.database.resetDatabase(response);
+    this.database.resetAndCloseDatabase(() =>{
+      this.startInteractor(response);
+    });
   }
 
 
