@@ -1,5 +1,6 @@
 % !TEX root = latex_main.tex 
 
+\section{Kurzbeschreibung}
 Die App \glqq Welcome to Bavaria\grqq{} in der Version 3.0 ist eine Portierung der gleichnamigen Version 2.0 auf das Ionic-Framework um diese auf verschiedenen Betriebssystemen - insbesondere iOS und Android - mit geringen Entwicklungsaufwand zur Verfügung zu stellen. Die App wurde dabei im Zeitraum von Juli bis Oktober 2021 Entwickelt.\\\\
 Die App beruht auf dem gedrucktem Heft \glqq Migraboarisch - Von uns fia eich. Ein Wegweiser durch den Dialekt\grqq{} welcher im Schuljahr 2016/17 von Kelheimer Schülern Entwickelt wurde. Ziel war es dabei Neuankömmlingen in Bayern den Bayrischen Dialekt näher zu bringen.\\\\
 Die App wurde in der Version 1.0 von Marburger Studenten 2019/20 entwickelt und um verschiedene Sprachaufnahmen ergänzt. Für die Version 2.0 wurden weitere Sprachaufnahmen und ein primitives Archivement-System eingebracht.
@@ -9,7 +10,6 @@ Es wurde sich für Ionic mit dem Angular-Framework entschieden um die Vorteile d
 Ionic mit Angular wird in dieser Kombination von quasi allen Seiten propagiert und wurde in unserer unbedarftheit dankend angenommen. Ionic stellt viele mehr oder minder komplexe Bausteine zur Webentwicklung bereit (von Textfeldern über Knöpfen bis hin zu Slidern mit Animation) während Angular zum einen HTML um viele nützliche \glqq Funktionen\grqq{} erweitert (Loops, If-Else,\dots) und zum anderen komplexe Mechanismen im Hintergrund verwaltet so dass beispielsweise eine Website mit verschiedenen wechselnden Komponenten hoch dynamisch gestaltet werden kann.\\\\
 In der Portierung wurde versucht sich an S.O.L.I.D-Prinzipien zu halten, auch wenn dies mit Type-Script als Programmiersprache bisweilen kompliziert gestaltete. Während die Datenbank-Mechanismen noch verhältnismäßig gut ohne Abhängigkeiten funktionieren und dank Schnittstellen (Interfaces) auch einfach ausgetauscht werden können sind die Seiten der UI sehr eng an verschiedene \glqq Services\grqq{} gebunden welche wiederum untereinander stark abhängig sind. Dies ist aber keine Notwendigkeit und das refactoren dieser kann Gegenstand eines Nachfolgeprojekts sein. Kern der Bemühungen ist ein \glqq Request-Response\grqq -Pattern in welchen ein Request über ein Interactor gestellt wird welcher wiederum von den Datenbankmechanismen eine Response-Methode aufrufen. Sehr großer Vorteil ist hier das sich die asynchrone Programmierung in Grenzen hält - eine Aufgabe kann und wird auch erst dann zuende gebracht wenn eine Antwort vorhanden ist.\\\\
 \textbf{TODO DATENBANKTECHNOLOGIE}
-Der Interactor
 \subsection{Das Team}
 \subsubsection*{Leitung}
 Hanna Fischer
