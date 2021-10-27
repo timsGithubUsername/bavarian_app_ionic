@@ -27,6 +27,7 @@ export class TranslationPage implements OnInit {
   }
 
   async setLanguage(l:Language){
+    this.config.setCurrentLanguage(l);
     this.controller.setLanguage(l);
 
     //toast

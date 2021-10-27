@@ -20,13 +20,16 @@ export class ConfigService {
   /**
    * This method updates all fields of this service based on the database
    */
-  async refresh(){
-    AppInjector.get(ControllerService).requestAllLanguages();
-    AppInjector.get(ControllerService).requestAllDialects();
-    AppInjector.get(ControllerService).requestDialect();
-    AppInjector.get(ControllerService).requestLanguage();
+  refresh(){
+    AppInjector.get(ControllerService).requestAllConfig();
   }
 
+  initConfig(){
+    if(this.getCurrentLanguage() === undefined || this.getCurrentDialect() === undefined){
+      this.setCurrentDialect(this.dialects[0]);
+      this.setCurrentLanguage(this.translations[0]);
+    }
+  }
   setDialects(d:Dialect[]):void{
     this.dialects = d;
   }

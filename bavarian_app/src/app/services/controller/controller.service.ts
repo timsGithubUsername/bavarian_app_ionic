@@ -82,10 +82,22 @@ export class ControllerService {
   }
 
   /**
-   * request all Languages
+   * request all configs - this is pretty ugly, but i dont wanted to write all methods again just for this usecase...
    */
-  public requestAllLanguages() {
-    this.interactorRequester.requestAllLanguages(langs => this.respondAllLanguages(langs));
+  public requestAllConfig() {
+    this.interactorRequester.requestAllLanguages(langs => {
+      AppInjector.get(ConfigService).setTranslations(langs);
+      this.interactorRequester.requestAllDialects(dialects => {
+        AppInjector.get(ConfigService).setDialects(dialects);
+        this.interactorRequester.requestDialect(dialect => {
+          AppInjector.get(ConfigService).setCurrentDialect(dialect);
+          this.interactorRequester.requestLanguage(lang => {
+            AppInjector.get(ConfigService).setCurrentLanguage(lang);
+            AppInjector.get(ConfigService).initConfig();
+          });
+        });
+      });
+    });
   }
 
   /**

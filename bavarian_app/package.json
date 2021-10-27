@@ -33,6 +33,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "bavarian_app-sample": "file:android",
+    "cordova-android": "9.1.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "6.2.0",
     "cordova-plugin-nativeaudio": "^3.0.9",
@@ -92,10 +93,12 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-nativeaudio": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

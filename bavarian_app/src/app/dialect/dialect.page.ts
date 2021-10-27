@@ -28,6 +28,7 @@ export class DialectPage implements OnInit {
   }
 
   async setDialect(d:Dialect){
+    this.config.setCurrentDialect(d);
     this.controller.setDialect(d)
 
     //toast

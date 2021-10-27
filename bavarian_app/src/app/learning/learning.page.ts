@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {AppInjector} from "../app.module";
 import {ProgressService} from "../services/progress.service";
 import {Category} from "../../entities/Category";
+import {ConfigService} from "../services/config.service";
 
 @Component({
   selector: 'app-learning',
@@ -19,6 +20,7 @@ export class LearningPage implements OnInit {
   numberOfVocabularyWords: number; //count of Vocabulary Words
   progressBarProgress: number; //Progress of.. the progress bar (from 0 to 1)
   vocabularyWords: VocabularyWord[] = []; //Vocabulary Words of this lecture
+  audioPath:string;
 
   slideOpts = {
     initialSlide: 0
@@ -28,7 +30,8 @@ export class LearningPage implements OnInit {
               private categoryService: CategoryService, //to get the VocabularyWord[]
               private routingService: RoutingService, //to redirect after the lesson
               private controller: ControllerService, //to redirect after the lesson
-              private router: Router) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
+              private router: Router,
+              private config: ConfigService) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
   }
 
   ngOnInit() {
@@ -40,8 +43,17 @@ export class LearningPage implements OnInit {
     this.vocabularyWords = this.categoryService.getVocabulayWords();
     //set the length
     this.numberOfVocabularyWords = this.vocabularyWords.length;
+    //set Audio Path
+    this.audioPath = 'assets/audio/' + this.config.getCurrentDialect().name + '/';
+    this.loadSounds();
   }
 
+  private loadSounds() {
+    for (let i = 0; i < this.numberOfVocabularyWords; i++) {
+      let path = this.audioPath + this.vocabularyWords[i].pronunciationPath + '.mp3';
+      this.nativeAudio.preloadSimple(this.vocabularyWords[i].pronunciationPath, path)
+    }
+  }
   /**
    * Plays a sound found on given path
    * @param pronunciationPath relative path to mp3 as string
@@ -49,11 +61,8 @@ export class LearningPage implements OnInit {
   playSound(pronunciationPath: string){
     //preload the sound. Im not sure this is necessary. Im sure this should be done when the page loads - if we find no
     //performance issues we just forget this ;)
-    //the path to the mp3 also works as id
-    //todo remove testsoundpath
-    this.nativeAudio.preloadSimple("/assets/audio/test_sound.mp3", "/assets/audio/test_sound.mp3");
-    //play the preloaded sound
-    this.nativeAudio.play("/assets/audio/test_sound.mp3");
+    //the path to the mp3 also works as id and play then
+    this.nativeAudio.play(pronunciationPath);
   }
 
   /**
@@ -173,4 +182,5 @@ export class LearningPage implements OnInit {
   directToHome(){
     this.router.navigate(['home'])
   }
+
 }

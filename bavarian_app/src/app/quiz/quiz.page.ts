@@ -8,6 +8,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {RoutingService} from "../services/routing.service";
 import {ControllerService} from "../services/controller/controller.service";
+import {NativeAudio} from "@ionic-native/native-audio/ngx";
+import {ConfigService} from "../services/config.service";
 
 @Component({
   selector: 'app-quiz',
@@ -25,6 +27,7 @@ export class QuizPage implements OnInit {
   quiz: Quiz = null; //the quiz
   quizWords: QuizWord[] = []; //the quiz words
   isProgressSaved:boolean = false;
+  audioPath:string;
 
   slideOpts = {
     initialSlide: 0
@@ -35,10 +38,49 @@ export class QuizPage implements OnInit {
               private translate: TranslateService,
               private router: Router,
               private routingService: RoutingService,
-              private controller: ControllerService) {
+              private controller: ControllerService,
+              private nativeAudio: NativeAudio,
+              private config: ConfigService) {
   }
 
   ngOnInit() {
+  }
+
+  //called every time this page is entered - even if it is already instantiated
+  ionViewWillEnter(){
+    //set quiz
+    this.quiz = this.categoryService.getQuiz();
+    this.isProgressSaved = false;
+    //set quizwords and number of quizwords. catch the case quiz is undefined which happens when the app gets instatiated in the quiz screen
+    try{
+      this.quizWords = this.quiz.quizWords;
+      this.numberOfQuizWords = this.quiz.quizWords.length;
+    } catch (e) {
+      //print stack trace and error message because its clear whats going wrong here
+      console.log(e);
+      console.log(this.translate.instant("ERROR.QUIZ_PAGE_QUIZ_UNDEFINED"));
+      return;
+    }
+    //set Audio Path
+    this.audioPath = 'assets/audio/' + this.config.getCurrentDialect().name + '/';
+    this.loadSounds();
+  }
+
+  private loadSounds(){
+    for(let i = 0; i < this.numberOfQuizWords; i++){
+      let path = this.audioPath + this.quizWords[i].word.pronunciationPath + '.mp3';
+      this.nativeAudio.preloadSimple(this.quizWords[i].word.pronunciationPath, path)
+    }
+  }
+  /**
+   * Plays a sound found on given path
+   * @param pronunciationPath relative path to mp3 as string
+   */
+  playSound(pronunciationPath: string){
+    //preload the sound. Im not sure this is necessary. Im sure this should be done when the page loads - if we find no
+    //performance issues we just forget this ;)
+    //the path to the mp3 also works as id and play then
+    this.nativeAudio.play(pronunciationPath);
   }
 
   submitAnswer(indexOfAnswer: number, currentQuizWord: QuizWord){
@@ -62,22 +104,6 @@ export class QuizPage implements OnInit {
     this.answerColorArray = ["primary", "primary", "primary", "primary"];
     this.buttonsActive = true;
     slides.slideNext();
-  }
-
-  //called every time this page is entered - even if it is already instantiated
-  ionViewWillEnter(){
-    //set quiz
-    this.quiz = this.categoryService.getQuiz();
-    this.isProgressSaved = false;
-    //set quizwords and number of quizwords. catch the case quiz is undefined which happens when the app gets instatiated in the quiz screen
-    try{
-      this.quizWords = this.quiz.quizWords;
-      this.numberOfQuizWords = this.quiz.quizWords.length;
-    } catch (e) {
-      //print stack trace and error message because its clear whats going wrong here
-      console.log(e);
-      console.log(this.translate.instant("ERROR.QUIZ_PAGE_QUIZ_UNDEFINED"));
-    }
   }
 
   /**
