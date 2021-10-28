@@ -20,14 +20,6 @@ export class EndCardPage implements OnInit {
   }
 
   /**
-   * navigate to first slide
-   * @param slide the slider element
-   */
-  slideToFirst(){
-    this.requestCategories(1)
-  }
-
-  /**
    * go to categories page.
    * @param mode the number wich representing the mode. 0 with learning entry, 1 with quiz entry
    */

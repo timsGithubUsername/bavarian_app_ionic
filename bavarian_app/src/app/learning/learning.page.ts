@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {VocabularyWord} from "../../entities/VocabularyWord";
 import {CategoryService} from "../services/category.service";
@@ -154,6 +154,6 @@ export class LearningPage implements OnInit {
   }
 
   directToHome(){
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
   }
 }

@@ -46,7 +46,6 @@ export class QuizPage implements OnInit {
 
   ngOnInit() {
   }
-
   //called every time this page is entered - even if it is already instantiated
   ionViewWillEnter(){
     //set quiz
