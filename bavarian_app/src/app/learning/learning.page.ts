@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {VocabularyWord} from "../../entities/VocabularyWord";
 import {CategoryService} from "../services/category.service";
 import {RoutingService} from "../services/routing.service";
 import {ControllerService} from "../services/controller/controller.service";
 import {Router} from "@angular/router";
-import {AppInjector} from "../app.module";
-import {ProgressService} from "../services/progress.service";
-import {Category} from "../../entities/Category";
 import {ConfigService} from "../services/config.service";
 
 @Component({
@@ -36,7 +33,6 @@ export class LearningPage implements OnInit {
 
   ngOnInit() {
   }
-
   //called every time this page is entered - even if it is already instantiated
   ionViewWillEnter(){
     //get vocabulary words
@@ -131,19 +127,21 @@ export class LearningPage implements OnInit {
     }
   }
 
-  lastSlide(slides){
-    slides.getActiveIndex().then(index => {
-      if(index === this.numberOfVocabularyWords) {
-        this.controller.setProgressLearning(this.categoryService.getCategory());
-      }
-    });
+  isLastSlide(index){
+    return index === this.numberOfVocabularyWords - 1;
   }
   /**
    * navigate to next slide
-   * @param slide the slider element
+   * @param index the slider element
    */
-  nextSlide(slide){
-    slide.slideNext();
+  nextSlide(slides){
+    slides.getActiveIndex().then(index =>{
+      if(!(index === this.numberOfVocabularyWords - 1)){
+        slides.slideNext();
+      } else {
+        this.router.navigate(['learning/end-card']);
+      }
+    });
   }
 
   /**
@@ -154,33 +152,7 @@ export class LearningPage implements OnInit {
     slide.slidePrev();
   }
 
-  /**
-   * navigate to first slide
-   * @param slide the slider element
-   */
-  slideToFirst(slide){
-    slide.slideTo(0, 2000);
-  }
-
-  /**
-   * go to categories page.
-   * @param mode the number wich representing the mode. 0 with learning entry, 1 with quiz entry
-   */
-  requestCategories(mode: number){
-    //set mode in category service
-    this.categoryService.setGamemode(mode);
-    //set router in router service
-    //not realy neccessary here, this should be set before - but we dont know what users do with this app
-    this.routingService.setRouter(this.router);
-    //send request
-    this.controller.requestAllCategories();
-  }
-
-  /**
-   * navigate to home page
-   */
   directToHome(){
     this.router.navigate(['home'])
   }
-
 }

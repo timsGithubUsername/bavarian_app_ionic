@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="directToHome()">
+        <ion-icon name="home-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'LEARNING.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1>{{ 'LEARNING.GRATULATION' | translate }}</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2>{{ 'LEARNING.GRATULATION_TEXT' | translate }}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" size="large" class="ion-text-wrap" (click)="again()">
+            <ion-icon slot="start" name="reload"></ion-icon>
+            {{ 'LEARNING.REPLAY_BTN' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(0)">
+            <ion-icon slot="start" name="school"></ion-icon>
+            {{ 'LEARNING.LEARNING_BTN' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(1)">
+            <ion-icon slot="start" name="ear"></ion-icon>
+            {{ 'LEARNING.QUIZ_BTN' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" size="large" class="ion-text-wrap" (click)="directToHome()">
+            <ion-icon slot="start" name="home"></ion-icon>
+            <span class="ion-text-left">{{ 'LEARNING.HOME_BTN' | translate }}</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
