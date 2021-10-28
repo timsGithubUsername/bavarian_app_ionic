@@ -30,7 +30,8 @@ export class QuizPage implements OnInit {
   audioPath:string;
 
   slideOpts = {
-    initialSlide: 0
+    initialSlide: 0,
+    allowTouchMove: false
   };
 
   constructor(private categoryService: CategoryService,
@@ -101,9 +102,17 @@ export class QuizPage implements OnInit {
   }
 
   nextSlide(slides){
-    this.answerColorArray = ["primary", "primary", "primary", "primary"];
-    this.buttonsActive = true;
-    slides.slideNext();
+    slides.getActiveIndex().then(index =>{
+      if(!(index === this.numberOfQuizWords - 1)){
+        this.answerColorArray = ["primary", "primary", "primary", "primary"];
+        this.buttonsActive = true;
+        slides.slideNext();
+      } else {
+        this.controller.setProgressQuiz(this.categoryService.getCategory(), this.quiz.getPercentage());
+        this.isProgressSaved = true;
+        this.router.navigate(['quiz/end-card']);
+      }
+    });
   }
 
   /**
@@ -144,15 +153,6 @@ export class QuizPage implements OnInit {
     return this.ngForIndex + "/" + this.numberOfQuizWords;
   }
 
-  lastSlide(slides){
-    slides.getActiveIndex().then(index => {
-      if(index === this.numberOfQuizWords) {
-        this.controller.setProgressQuiz(this.categoryService.getCategory(), this.quiz.getPercentage());
-        this.isProgressSaved = true;
-      }
-    });
-  }
-
   /**
    * Custom Back button for this game. the game is not counted if it has not been played through.
    *
@@ -180,32 +180,13 @@ export class QuizPage implements OnInit {
   }
 
   /**
-   * navigate to first slide
-   * @param slide the slider element
-   */
-  slideToFirst(slide){
-    this.isProgressSaved = false;
-    slide.slideTo(0);
-  }
-
-  /**
-   * go to categories page.
-   * @param mode the number wich representing the mode. 0 with learning entry, 1 with quiz entry
-   */
-  requestCategories(mode: number){
-    //set mode in category service
-    this.categoryService.setGamemode(mode);
-    //set router in router service
-    //not realy neccessary here, this should be set before - but we dont know what users do with this app
-    this.routingService.setRouter(this.router);
-    //send request
-    this.controller.requestAllCategories();
-  }
-
-  /**
    * navigate to home page
    */
   directToHome(){
     this.router.navigate(['home'])
+  }
+
+  isLastSlide(index){
+    return index === this.numberOfQuizWords - 1;
   }
 }

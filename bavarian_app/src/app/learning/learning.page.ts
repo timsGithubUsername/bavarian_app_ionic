@@ -139,6 +139,7 @@ export class LearningPage implements OnInit {
       if(!(index === this.numberOfVocabularyWords - 1)){
         slides.slideNext();
       } else {
+        this.controller.setProgressLearning(this.categoryService.getCategory());
         this.router.navigate(['learning/end-card']);
       }
     });

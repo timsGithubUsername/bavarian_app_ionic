@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" [options]="{allowTouchMove: false}" #slides (ionSlideDidChange)="lastSlide(slides)">
+  <ion-slides pager="false" [options]="{slideOpts}" #slides>
     <!-- CONTENT FOR EVERY WORD -->
     <!-- Slides with questions and play-button -->
     <ng-container *ngFor="let quizWord of quizWords; let i = index">
@@ -97,9 +97,16 @@
             </ion-col>
             <ion-col></ion-col>
             <ion-col>
+              <div *ngIf="!isLastSlide(i); else lastSlide">
               <ion-button [disabled]="buttonsActive" expand="block" shape="round" size="large" (click)="nextSlide(slides)">
                 <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
               </ion-button>
+              </div>
+              <ng-template #lastSlide>
+                <ion-button [disabled]="buttonsActive" expand="block" shape="round" size="large" (click)="nextSlide(slides)">
+                  <ion-icon name="ear" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ng-template>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -107,53 +114,5 @@
     </ng-container>
 
     <!-- END SLIDE -->
-    <ion-slide>
-      <div>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h1>{{ 'TEST.GRATULATION' | translate }}</h1>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <h2>{{ 'TEST.GRATULATION_TEXT' | translate }}</h2>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="slideToFirst(slides)">
-                <ion-icon slot="start" name="reload"></ion-icon>
-                {{ 'TEST.REPLAY_BTN' | translate }}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(0)">
-                <ion-icon slot="start" name="school"></ion-icon>
-                {{ 'TEST.LEARNING_BTN' | translate }}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="requestCategories(1)">
-                <ion-icon slot="start" name="ear"></ion-icon>
-                {{ 'TEST.QUIZ_BTN' | translate }}
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" size="large" class="ion-text-wrap" (click)="directToHome()">
-                <ion-icon slot="start" name="home"></ion-icon>
-                <span class="ion-text-left">{{ 'TEST.HOME_BTN' | translate }}</span>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </ion-slide>
   </ion-slides>
 </ion-content>

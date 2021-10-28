@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: QuizPage
+  },  {
+    path: 'end-card',
+    loadChildren: () => import('./end-card/end-card.module').then( m => m.EndCardPageModule)
   }
+
 ];
 
 @NgModule({
