@@ -182,15 +182,30 @@ export class VocabWordsTableManager extends TableManager<VocabWordsTableModel>{
 
     this.content.getTable().forEach((row:string[]) => {
       let rowObj = new VocabWordsTableModel();
-      rowObj.categories = parseInt(row[0]);
-      rowObj.german = row[1];
-      rowObj.pictureName = row[2];
+      rowObj.categories = parseInt(row[0]);//i
+      rowObj.german = row[1];//i
+      rowObj.pictureName = row[2];//i
       rowObj.comment = row[3]
-      rowObj.dialect = row[dialectColumn];
+      rowObj.dialect = row[dialectColumn];//i
       rowObj.dialectLiterally = row[dialectColumn+1];
-      rowObj.audioName = row[dialectColumn+2];
-      rowObj.translation = row[languageColumn];
-      this.createRow(rowObj);
+      rowObj.audioName = row[dialectColumn+2];//i
+      rowObj.translation = row[languageColumn];//i
+
+      //Checks if german and translation are the same
+      if(rowObj.german === rowObj.translation){
+        rowObj.translation = undefined;
+      }
+
+      //Checks if all necessary fields have been filled
+      if(rowObj.categories != undefined
+        && rowObj.german != undefined
+        && rowObj.pictureName != undefined
+        && rowObj.dialect != undefined
+        && rowObj.audioName != undefined
+        ){
+        this.createRow(rowObj);
+      }
+
     })
   }
 }
