@@ -6,6 +6,7 @@ import {RoutingService} from "../services/routing.service";
 import {ControllerService} from "../services/controller/controller.service";
 import {Router} from "@angular/router";
 import {ConfigService} from "../services/config.service";
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-learning',
@@ -28,7 +29,8 @@ export class LearningPage implements OnInit {
               private routingService: RoutingService, //to redirect after the lesson
               private controller: ControllerService, //to redirect after the lesson
               private router: Router,
-              private config: ConfigService) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
+              private config: ConfigService,
+              private navCtrl: NavController) { //to set the router. This is only necessary in case the user starts the app in this screen. this shouldnt possible, but you never know...
   }
 
   ngOnInit() {
@@ -140,6 +142,7 @@ export class LearningPage implements OnInit {
         slides.slideNext();
       } else {
         this.controller.setProgressLearning(this.categoryService.getCategory());
+        this.navCtrl.pop();
         this.router.navigate(['learning/end-card']);
       }
     });

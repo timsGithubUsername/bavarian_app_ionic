@@ -3,7 +3,7 @@ import {CategoryService} from "../services/category.service";
 import {Quiz} from "../../entities/Quiz";
 import {VocabularyWord} from "../../entities/VocabularyWord";
 import {QuizWord} from "../../entities/QuizWord";
-import {AlertController} from "@ionic/angular";
+import {AlertController, NavController} from "@ionic/angular";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {RoutingService} from "../services/routing.service";
@@ -41,7 +41,8 @@ export class QuizPage implements OnInit {
               private routingService: RoutingService,
               private controller: ControllerService,
               private nativeAudio: NativeAudio,
-              private config: ConfigService) {
+              private config: ConfigService,
+              private navCtrl: NavController) {
   }
 
   ngOnInit() {
@@ -109,6 +110,7 @@ export class QuizPage implements OnInit {
       } else {
         this.controller.setProgressQuiz(this.categoryService.getCategory(), this.quiz.getPercentage());
         this.isProgressSaved = true;
+        this.navCtrl.pop();
         this.router.navigate(['quiz/end-card']);
       }
     });
