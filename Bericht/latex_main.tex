@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper]{report}
 
 \usepackage[ngerman]{babel}			%Deutsche Wortrennung
 \usepackage[utf8]{inputenc}			%Umlaute! (ä, ö, ü)
@@ -19,7 +19,9 @@
 %Im folgendem definieren wir unsere eigenen Kopf- und Fußzeilen
 
 \lhead{Portierung der Bavarian App in Ionic}							%Kopfzeile innen
+\rhead{\begin{minipage}[b]{5cm}\nouppercase{\rightmark}\end{minipage}}
 
+\renewcommand{\thesection}{\arabic{section}}
 
 \begin{document}
 	\begin{titlepage}
@@ -29,6 +31,8 @@
 		{\huge\bfseries Portierung der Bavarian App in Ionic\par}
 		\vspace{2cm}
 		{\Large\itshape Patrick Frömel, Tim Romonath\par}
+		\vspace{2cm}
+		{\itshape Unter Anleitung von Prof. Christoph Bockisch und PD. Dr. Hanna Fischer \par}
 		\vfill
 		{\large \today\par}
 	\end{titlepage}
@@ -40,5 +44,16 @@
 	
 	\newpage
 	\input{entwicklungsprozess.tex}	
+		
+	\newpage
+	\input{verwendete_technologien.tex}		
+		
+	\newpage
+	\input{architektur.tex}
 	
+	\newpage
+	\input{bekannte_probleme_und_anregungen.tex}
+	
+	\newpage
+	\input{anhang.tex}
 \end{document}
