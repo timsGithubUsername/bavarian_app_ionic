@@ -22,3 +22,6 @@ Die Datenbank die wir verwendet haben um die Daten der Exceltabellen zu struktur
 
 \subsubsection*{LocalStorage}
 Um alle Benutzerdaten, wie Einstellungen und Fortschritt zu persistieren haben wir uns entschieden LocalStorage zu benutzen. Diese Datenbank, ist wesentlich simpler und einfacher zu benutzen als IndexedDB, allerdings kommt sie mit einigen Einschränkungen. Da aber unser zu Speichernden daten sowieso nicht kompliziert sind reicht diese vollkommen aus. Ein der größten Vorteile von LocalStorage ist, dass der Zugriff im Gegensatz zu IndexedDB, nicht in neuen Threads stattfindet und somit der Code leicht verständlich bleibt
+
+\subsubsection*{XLSX} 
+Die Node.js Bibliothek XLSX ist dafür zuständig Exceltabellen einzulesen und zu verarbeiten. Wir haben sie dafür benutzt um die Exceltabellen zu lesen und in unseren eigene Table-Datenstruktur zu überführen.
