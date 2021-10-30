@@ -1,16 +1,22 @@
 % !TEX root = latex_main.tex 
 
 \section{Architektur}
+In diesem Abschnitt wird die grundlegende Idee hinter den einzelnen, mehr oder weniger voneinander getrennten Teilen des Projekts beschrieben. Es handelt sich dabei nciht um eine Dokumentation im eigentlichen Sinne. Diese kann dem Wiki im Git-Repository und den Kommentaren im Code entnommen werden.
 
 \subsection{User-Interface}
+Das User-Interface also solches ist im Grunde nur eine HTML-Seite welche die Anordnung von Elementen bestimmt und eine dazugehörige TypeScript-klasse die unterschiedliche Events handelt. Die Datenmanipulation findet, bis auf einige Ausnahmen, findet in den Services statt. 
 
 \subsection{Services}
+Die Services sind einzelne Klassen (Intern vermutlich als eine Art JavaScript-Äquivalent zu Singletons implementiert) welche für bestimmte, komplexere Aufgaben zuständig sind. Am wichtigsten ist hier der Controller, welcher die Kommunikation mit der Datenbank übernimmt. Wenn eine Aufgabe kompliziertere Logik erfordert wurde dafür ein Service implementiert auf welchen vom TypeScript-Code der jeweiligen Seite zugegriffen wird.\\\\Zusätzlich zu den eigenen Services existieren einige Dienste Standardmäßig von Angular aus (bspw. Router) und können genau so auch mit Plugins nachinstalliert werden (in unserem Fall nativeAudio und ngx-language).
 
-\subsection{Interfaces der Datenobjekte}
-bisschen kram zu den Category, VocabularyWord usw. Interfaces
+\subsection{Strings}
+Die Strings der App sind in einem JSON-Objekt gespeichert auf welches mit ngx-language zugegriffen wird. Der bedachte Vorteil war hier dass mit dem Sprachpaket sehr einfach Übersetzungen als weitere JSON-Objekte hinzugefügt und einfach mit ngx-language eingebunden werden können. Die Übersetzungen beziehen sich im Moment lediglich auf die Sprachausgabe bzw. die Anzeige unterschiedlicher Vokabeln.
+
+\subsection{Datenstrukturen}
+Die Datenobjekte, die wir im Projekt auch als Entitäten beschreiben, sind die grundlegendsten Datenstrukturen die in der App verarbeitet werden. Da diese ganz unten in unserer Schichten-Architektur sind, dazu später mehr, sind fast alle anderen Module von diesen Abhängig. Daher können kleine Veränderungen an diesen sich durch das ganze Projekt ziehen. Um dies zu vermeiden und trotzdem noch flexibel zu sein haben wir uns hier für das bekannte Pattern der Abstract Factories entschieden. Daraus folgt, dass jeder Datentyp eine Abstrakte Fabrik für diesen besitzt und diese beim Aufbau des Programmbaums sehr leicht ausgetauscht werden kann. Daher können wir nun neue Funktionen einbauen ohne in den Datenstrukturen eine Zeile Code ändern zu müssen. Lediglich müssen wir beim Aufbau des Programmbaums eine neue Factory-Implementierung erzeugen. 
 
 \subsection{Datenbank und Excel}
-wie werden die exceltabellen asugelesen und in die datenbank gebracht
+Wie oben schon beschrieben liegen alle Daten der App als Exceltabellen vor. Somit müssen diese zuerst in eine Datenbank übertragen werden. Dies erfolgt zum einen mit der Bibliothek xlsx und der Datenbank IndexedDB. Wir haben darauf geachtet, dass so gut wie keine Abhängigkeiten zwischen dem einlesen der Exceltabellen und dem eintragen in die Datenbank bestehen, damit im Zweifel sehr einfach eine andere Datenbank oder wahrscheinlicher ein anderes Format für die Daten genutzt werden kann. Um die Daten aus dem Excel-Modul in das DB-Modul zu transferieren benutzen wir eine eigene Datenstruktur, die aber im Grunde nur ein 2-Dimensionales Array mit extra Kopfzeile ist. Die Zugriffe auf die Datenbank und das auslesen der Exceltabellen erfolgt größtenteils asynchron, was den Code zum Teilen aufgebläht wirken lässt. Wir haben trotzdem versucht durch zB einfache Interfaces den  Code übersichtlich zu behalten.
 
-\subsection{S.O.L.I.D und Interactor-Requester}
-dein sehnlichst erwarteter Architekturabschnitt
+\subsection{Interactor und grundlegende Architektur}
+Die grundlegende Architektur ist so aufgebaut, dass wir unsere App in Schichten aufgeteilt haben. Wobei ein Modul in einer Schicht nur von Modulen in den Schichten darunter abhängig ist (also es existieren Code-Abhängigkeiten) Dies führt dazu dass die App sehr Modular und leicht erweiterbar aufgebaut wird. Das Herzstück der App ist der Interactor, er verbindet alle Module miteinander.  Er ist dafür zuständig, dass alle Anfragen die der User über die UI erstellt, auf die dementsprechenden Module aufgeteilt werden um diese zu verarbeiten. Daraus folgt, dass die wichtigsten Proceduren der App in dieser Schicht stehen und diese keine Abhängigkeiten zu Ein- und Ausgabe haben. Zumindest war es so gedacht, in der Praxis sind leider momentan die Interfaces die im Interactor benutzt werden zu Anwendungsspezifisch als das sie leicht ausgetauscht werden könnten. Dieser Punkt ist uns aber erst später bewusst geworden und kann daher nur als Erkenntnis für zukünftige Projekte mitgenommen werden.

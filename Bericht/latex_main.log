@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.29)  29 OCT 2021 04:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.29)  30 OCT 2021 19:13
 entering extended mode
 **./latex_main.tex
 (latex_main.tex
@@ -308,8 +308,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--26
 
  []
 
-[6]) [7] (verwendete_technologien.tex) [8] (architektur.tex) [9]
-(bekannte_probleme_und_anregungen.tex)
+[6]) [7] (verwendete_technologien.tex) [8] [9] (architektur.tex
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
+ []
+
+[10]) [11] (bekannte_probleme_und_anregungen.tex
+Overfull \hbox (0.2621pt too wide) in paragraph at lines 3--3
+[]\T1/cmr/bx/n/14.4 Bekannte Pro-ble-me, An-re-gun-gen und Hil-fe-stel-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--15
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48724pt, for example:
@@ -318,7 +341,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48724pt}.
 
-[10] (anhang.tex)
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
+
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
+3.
+(C:\Users\timro\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+Underfull \hbox (badness 10000) in paragraph at lines 52--54
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48724pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48724pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48724pt}.
+
+[13])
+Underfull \hbox (badness 10000) in paragraph at lines 62--56
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48724pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48724pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48724pt}.
+
+[14] (anhang.tex)
 Underfull \hbox (badness 10000) in paragraph at lines 5--59
 
  []
@@ -338,30 +396,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--59
 
  []
 
-[11] [12] (latex_main.aux) ) 
+[15] [16] (latex_main.aux) ) 
 Here is how much of TeX's memory you used:
- 3959 strings out of 478927
- 57201 string characters out of 2852534
+ 3986 strings out of 478927
+ 57945 string characters out of 2852534
  370088 words of memory out of 3000000
- 21755 multiletter control sequences out of 15000+600000
- 415569 words of font info for 49 fonts, out of 8000000 for 9000
+ 21778 multiletter control sequences out of 15000+600000
+ 415882 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,13n,66p,1140b,346s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfo
-ur/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\timro\AppData\Local\MiKTeX\fonts/p
-k/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\timro\AppData\Local\MiKTeX\f
-onts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\timro\AppData\Local\Mi
-KTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\timro\AppData\Lo
-cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\timro\AppD
-ata\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\timr
-o\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\User
-s\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C
-:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.
-pk> <C:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecc
-c1440.pk>
-Output written on latex_main.pdf (13 pages, 134560 bytes).
+ur/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\timro\AppData\Local\MiKTeX\fonts/p
+k/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\timro\AppData\Local\MiKTeX\f
+onts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\timro\AppData\Local\Mi
+KTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\timro\AppData\Lo
+cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\timro\AppD
+ata\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\timr
+o\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\User
+s\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C
+:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.
+pk> <C:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecb
+x2074.pk> <C:\Users\timro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
+00\eccc1440.pk>
+Output written on latex_main.pdf (17 pages, 158576 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
+ 442 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

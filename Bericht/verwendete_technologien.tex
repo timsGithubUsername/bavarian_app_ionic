@@ -1,26 +1,24 @@
 % !TEX root = latex_main.tex
 
 \section{Verwendete Technologien}
-In diesem Projekt kamen eine Vielzahl an unterschiedlichen Tools zum Einsatz. Als IDE haben wir JetBrains WebStorm genutzt, eine zur Webentwicklung modifizierten Version von Intellij. Das Management der unterschiedlichen
+In diesem Projekt kamen einige unterschiedlichen Frameworks zum Einsatz, welche als npm-Pakete in Node.js installiert wurden. Als IDE haben wir JetBrains WebStorm genutzt, eine zur Webentwicklung modifizierten Version von Intellij. Das Management der Daten erfolgte in IndexedDB und LocalStorage.
 
 \subsection{Node.js}
+Node.js ist eine JavaScript-Laufzeitumgebung um JavaScript-Code außerhalb von Webbrowsern ausführen zu können. Durch die ereignisgesteuerte Struktur von JavaScript erwachsen einige Performancevorteile beispielsweise auf Webservern. Node.js benutzt den Paketmanager npm (Node Package Manager) um weitere Module zu installieren.
 
-\subsection{Ionic}
+\subsection{Wichtige Node.js Module}
+\subsubsection*{Ionic}
+Ionic ist ein Framework um Hybride Apps als Progressive Web App zu entwickeln. Es konzentriert sich auf das Front-End, welches wir hier im Bericht als User-Interface bezeichnen. Ionic stellt verschiedene interaktive Elemente wie beispielsweise Buttons, Slider, Grids usw. zur Verfügung.
 
-\subsection{Angular}
+\subsubsection*{Angular}
+Angular ist ein Framework um die Entwicklung des Front-Ends dynamischer, TypeScript basierter Webb Apps zu unterstützen. Es wird der HTML-Code mit direktiven erweitert um sich wiederholende Aufgaben optimiert zu implementieren (Schleifen, If-Else).
 
-\subsection{Cordova}
+\subsubsection*{Cordova}
+Cordova ist ein Framework welches aus JavaScript und HTML-Code äquivalenten, gerätespezifischen Code generiert (in unserem Fall Java und XCode).
 
-\subsection{Plugins}
+\subsection{Datenbanken}
+\subsubsection*{IndexedDB}
+Die Datenbank die wir verwendet haben um die Daten der Exceltabellen zu strukturieren heißt IndexedDB. Diese ist eine NoSQL-Datenbank, welche im Grunde eine Liste von javascript-Objekten indexieren kann. Wir haben hier aber im Falle der Vokabeln nicht alle Daten hineingeschrieben, sondern nur die momentan ausgewählte Sprache und Dialekt, damit die Datenbank nicht erweitert werden muss, wenn neue Sprachen und Dialekte hinzukommen.
 
-\subsubsection*{NativeAudio}
-
-\subsubsection*{sprachdings}
-
-\subsection{TODO}
-
-
-\subsection{TODO}
-
-
-\subsection{TODO}
+\subsubsection*{LocalStorage}
+Um alle Benutzerdaten, wie Einstellungen und Fortschritt zu persistieren haben wir uns entschieden LocalStorage zu benutzen. Diese Datenbank, ist wesentlich simpler und einfacher zu benutzen als IndexedDB, allerdings kommt sie mit einigen Einschränkungen. Da aber unser zu Speichernden daten sowieso nicht kompliziert sind reicht diese vollkommen aus. Ein der größten Vorteile von LocalStorage ist, dass der Zugriff im Gegensatz zu IndexedDB, nicht in neuen Threads stattfindet und somit der Code leicht verständlich bleibt

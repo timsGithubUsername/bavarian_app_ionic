@@ -1,3 +1,62 @@
 % !TEX root = latex_main.tex
 
-\section{Bekannte Probleme und Anregungen}
+\section{Bekannte Probleme, Anregungen und Hilfestellung}
+Im folgenden möchten wir auf fehlende Features und bekannte Probleme mit der App aufmerksam machen sowie einige Anregungen und Hilfestellungen bieten um die Qualität der App auf ein Niveau zu heben welches ein potentielles Deployment rechtfertigt.
+
+\subsection{Fehlende Features}
+\subsubsection*{Glückwunschtexte am Ende einer Lektion}
+Die Glückwunschtexte am Ende einer Lektion sollten sich im Falle der Quizes von der erreichten Punktzahl abhängig voneinander unterscheiden.
+
+\subsubsection*{Assets und Oberfläche}
+Die Assets der App sollten vor der Lektion vorgeladen werden während der User in einem Ladebildschirm wartet.\\\\
+Die Oberfläche der App sollte von Ihrer Größe her an die gängisten Smartphones angepasst werden so dass man möglichst nciht scrollen muss.\\\\
+Außerdem muss sichergestellt werden dass die Cards mit Bildern und Texten in Quiz immer die selbe Größe haben.\\\\
+Zudem sollte das Farbschema einmal passend zum Momentanen Blau überarbeitet werden.
+
+\subsubsection*{Nicht freigeschaltete Level}
+Im Moment werden nicht freigeschaltete Level einfach ausgeblendet. Es wäre schöner wenn diesen die Interaktivität genommen wird und die Level ausgegraut angezeigt werden.
+
+\subsubsection*{Karte für Dialekte}
+Es ist eine graphische Darstellung der Herkunft der unterschiedlichen Dialekte im Dialektauswahlmenü gewünscht. Schön wäre wenn diese Grafik interaktiv ist und die Dialektauswahl darüber funktioniert.
+
+\subsubsection*{Menü- und Glückwunschsounds}
+Die Sounds der Menüführung und der Gratulation sind nicht implementiert.
+
+\subsubsection*{Verschiedenfarbige Haken}
+Die Haken bei der Levelauswahl sollten aussagekräftiger sein - möglicherweise ist auch eine Darstellung des Fortschritts mit Zahlen o.ä. sinnvoll.
+
+\subsubsection*{Initiales Routing}
+Beim ersten Appstart sollte der Benutzer kurz durch die Sprach- und Dialektauswahl geführt werden um diese einzustellen. Ein kurzes "Tutorial" welches die unterschiedlichen Modi und die Funktionen kurz erklärt wäre auch vorteilhaft.
+
+\subsubsection*{Share-Button}
+Es sollte ein Share-Button welcher die App in social media teilt implementiert werden.
+
+\subsubsection*{Bugs}
+Wenn man ein Quiz erneut spielt wird der erreichte Fortschritt dieses Quizes überschrieben.\\\\
+Die Dialektauswahl funktioniert in Android- und iOS-Build nicht korrekt.
+
+\subsection{Anregungen}
+\subsubsection*{Improved Angular}
+Im Moment ist Angular nur sehr rudimentär genutzt. Die Möglichkeit mit unterschiedlichen Komponenten sich wiederholende Aufgabe mittels übergabe von Parametern zu regeln wurde quasi nciht genutzt. 
+
+\subsubsection*{Dienste}
+Außerdem sollten die Dienste umfangreich refactored werden - vorzugsweise dass TypeScript-Klassen der Seiten auf Dienste zugreifen und die Dienste auf den Controller. Im Moment greift das ein bisschen alles auf alles zu.
+
+\subsubsection*{TypeScript der Seiten}
+Die Klassen welche die Events der Seiten steuern sind zu umfangreich. Hier sollte wo möglich wirklich nur ein Event auf einen Service zeigen.
+
+\subsection{Hilfestellung}
+Die Webwelt ist anfangs durchaus sehr verwirrend, daher hier ein paar Worte die den Einstieg vereinfachen sollen.
+
+\subsubsection*{Node.js}
+Node.js ist der Kern dieses Projekts. Mit npm werden alle benötigten Pakete installiert. \glqq Pakete\grqq{} ist dabei eine sehr schöne Analogie, denn wenn man ein wenig wie Linux-Pakete betrachtet erscheint es garnicht mehr so verwirrend wie wenn man aus der IDE verzweifelt versucht dinge zu installieren und Konsolenbefehle aus Stack Overflow kopiert.\\\\
+Am Anfang steht die Installation von Node.js, alles andere kann dann mit dem Befehl \verb|npm install xxx| installiert werden.
+
+\subsubsection*{Ionic und Angular}
+Es ist Ratsam zunächst eines dieser 3 - 4 Stunden Tutorials von YouTube durchzuarbeiten um die Grundlagen von Ionic und insbesondere auch Angular zu lernen. Die Grenzen dieser beiden Frameworks verschwimmen sehr, da Ionic sich häufig direkt auf Angular bezieht. Das ist aber nicht weiter wild, im Grundsatz kann man sich erstmal denken: Ionic macht die Objekte und Angular macht die HTML-Seiten inklusive Routing und darunterliegender Struktur (auch wenn gerade beim Routing Ionic bei einigen Dinge mitredet).
+
+\subsubsection*{IDE}
+Wir haben Webstorm genutzt da dies eine modifizierte Version von Intellij ist. Es wird in Tutorials immer auf Visual Studio Code verwiesen - hier ist es wirklich einfach Geschmackssache. Wichtig in Windows ist das ausführen der IDE als Andministrator, damit man die Konsole in der IDE mangels \verb|sudo| trotzdem benutzen kann.
+
+\subsubsection*{Builden (oder auch: Umgebungsvariabelnhölle)}
+Für das Builden mit Android muss eine Java JDK 1.8.x und eine Android JDK installiert sein und von den Umgebungsvariabeln referenziert werden. Für die Android JDK am besten Android Studio isntallieren, da der entstehende \verb|platforms\android|-Ordner direkt als Android-Studio-Projekt geöffnet werden kann und dort dann auch der Emulator genutzt werdne kann. Gerade in Windows sind die Umgebungsvariabeln ein wenig... schwierig. Man bekommt es aber gegoogelt - ein kurzer Tipp gegen graue Haare: Die Variabeln werden erst nach dem Schließen des Einstellungsmenüs übernommen.\\Das Builden für iOS funktioniert ganz ähnlich, hier muss eine XCode-IDE installiert werden mit dem dann das entsprechende Projekt geöffnet werden kann. Bei Apple ist das setzen von Umgebungsvariabeln nciht notwendig.\\\\Es funktioniert eigentlich ganz gut sich von Fehler zu Fehler zu hangeln.

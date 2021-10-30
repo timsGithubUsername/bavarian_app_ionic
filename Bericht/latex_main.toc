@@ -9,19 +9,18 @@
 \contentsline {subsection}{\numberline {2.4}Fazit}{6}{}%
 \contentsline {section}{\numberline {3}Verwendete Technologien}{8}{}%
 \contentsline {subsection}{\numberline {3.1}Node.js}{8}{}%
-\contentsline {subsection}{\numberline {3.2}Ionic}{8}{}%
-\contentsline {subsection}{\numberline {3.3}Angular}{8}{}%
-\contentsline {subsection}{\numberline {3.4}Cordova}{8}{}%
-\contentsline {subsection}{\numberline {3.5}Plugins}{8}{}%
-\contentsline {subsection}{\numberline {3.6}TODO}{8}{}%
-\contentsline {subsection}{\numberline {3.7}TODO}{8}{}%
-\contentsline {subsection}{\numberline {3.8}TODO}{8}{}%
-\contentsline {section}{\numberline {4}Architektur}{9}{}%
-\contentsline {subsection}{\numberline {4.1}User-Interface}{9}{}%
-\contentsline {subsection}{\numberline {4.2}Services}{9}{}%
-\contentsline {subsection}{\numberline {4.3}Interfaces der Datenobjekte}{9}{}%
-\contentsline {subsection}{\numberline {4.4}Datenbank und Excel}{9}{}%
-\contentsline {subsection}{\numberline {4.5}S.O.L.I.D und Interactor-Requester}{9}{}%
-\contentsline {section}{\numberline {5}Bekannte Probleme und Anregungen}{10}{}%
-\contentsline {section}{\numberline {6}Anhang}{11}{}%
-\contentsline {subsection}{\numberline {6.1}Script der Vorstellung}{11}{}%
+\contentsline {subsection}{\numberline {3.2}Wichtige Node.js Module}{8}{}%
+\contentsline {subsection}{\numberline {3.3}Datenbanken}{8}{}%
+\contentsline {section}{\numberline {4}Architektur}{10}{}%
+\contentsline {subsection}{\numberline {4.1}User-Interface}{10}{}%
+\contentsline {subsection}{\numberline {4.2}Services}{10}{}%
+\contentsline {subsection}{\numberline {4.3}Strings}{10}{}%
+\contentsline {subsection}{\numberline {4.4}Datenstrukturen}{10}{}%
+\contentsline {subsection}{\numberline {4.5}Datenbank und Excel}{11}{}%
+\contentsline {subsection}{\numberline {4.6}Interactor und grundlegende Architektur}{11}{}%
+\contentsline {section}{\numberline {5}Bekannte Probleme, Anregungen und Hilfestellung}{12}{}%
+\contentsline {subsection}{\numberline {5.1}Fehlende Features}{12}{}%
+\contentsline {subsection}{\numberline {5.2}Anregungen}{13}{}%
+\contentsline {subsection}{\numberline {5.3}Hilfestellung}{13}{}%
+\contentsline {section}{\numberline {6}Anhang}{15}{}%
+\contentsline {subsection}{\numberline {6.1}Script der Vorstellung}{15}{}%
