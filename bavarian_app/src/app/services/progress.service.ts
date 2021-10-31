@@ -20,6 +20,7 @@ export class ProgressService {
   updateProgress(){
     this.updateQuizAndStudy();
     this.checkLevelProgress();
+    this.checkLevel();
   }
 
   resetProgress(){

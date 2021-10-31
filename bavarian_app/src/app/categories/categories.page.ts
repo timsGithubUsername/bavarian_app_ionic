@@ -24,11 +24,13 @@ export class CategoriesPage implements OnInit {
 
   ngOnInit() {
   }
-
   //called every time this page is entered - even if it is already instantiated
   ionViewWillEnter(){
+
     this.mode = this.categoryService.getGamemode();
     this.levels = this.categoryService.getLevels();
+    this.progressService.updateProgress();
+    console.log(this.progressService.currentLevel)
   }
 
   /**
